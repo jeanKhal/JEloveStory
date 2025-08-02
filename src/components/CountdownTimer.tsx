@@ -64,13 +64,6 @@ const CountdownTimer: React.FC<CountdownTimerProps> = React.memo(({ targetDate, 
     return num < 10 ? `0${num}` : `${num}`;
   }, []);
 
-  const countdownItems = useMemo(() => [
-    { value: timeLeft.days, label: 'Jours', icon: '📅' },
-    { value: timeLeft.hours, label: 'Heures', icon: '⏰' },
-    { value: timeLeft.minutes, label: 'Minutes', icon: '⏱️' },
-    { value: timeLeft.seconds, label: 'Secondes', icon: '⚡' }
-  ], [timeLeft]);
-
   const isComplete = useMemo(() => 
     timeLeft.days === 0 && timeLeft.hours === 0 && 
     timeLeft.minutes === 0 && timeLeft.seconds === 0, 
@@ -78,34 +71,35 @@ const CountdownTimer: React.FC<CountdownTimerProps> = React.memo(({ targetDate, 
   );
 
   return (
-    <div className={`countdown-timer ${className} ${isVisible ? 'animate-fade-in' : ''}`}>
-      <div className="countdown-grid">
-        {countdownItems.map((item, index) => (
-          <div 
-            key={item.label}
-            className="countdown-item"
-            style={{ 
-              animationDelay: `${index * 0.1}s`,
-              opacity: isVisible ? 1 : 0,
-              transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-              transition: `all 0.6s ease-out ${index * 0.1}s`
-            }}
-          >
-            <div className="countdown-icon">{item.icon}</div>
-            <div className="countdown-number">
-              {formatNumber(item.value)}
-            </div>
-            <div className="countdown-label">{item.label}</div>
-          </div>
-        ))}
-      </div>
-      
-      {isComplete && (
+    <div className={`countdown-timer-modern ${className} ${isVisible ? 'animate-fade-in' : ''}`}>
+      {isComplete ? (
         <div className="countdown-complete">
           <div className="complete-message">
             <span className="complete-icon">🎉</span>
             <h3>Le Grand Jour est arrivé !</h3>
-            <p>Joel & Eunice se marient aujourd'hui !</p>
+            <p>Joel & Eunice se marient aujourd&apos;hui !</p>
+          </div>
+        </div>
+      ) : (
+        <div className="countdown-line">
+          <div className="countdown-segment">
+            <span className="countdown-number">{formatNumber(timeLeft.days)}</span>
+            <span className="countdown-label">J</span>
+          </div>
+          <div className="countdown-separator">:</div>
+          <div className="countdown-segment">
+            <span className="countdown-number">{formatNumber(timeLeft.hours)}</span>
+            <span className="countdown-label">H</span>
+          </div>
+          <div className="countdown-separator">:</div>
+          <div className="countdown-segment">
+            <span className="countdown-number">{formatNumber(timeLeft.minutes)}</span>
+            <span className="countdown-label">M</span>
+          </div>
+          <div className="countdown-separator">:</div>
+          <div className="countdown-segment">
+            <span className="countdown-number pulse">{formatNumber(timeLeft.seconds)}</span>
+            <span className="countdown-label">S</span>
           </div>
         </div>
       )}

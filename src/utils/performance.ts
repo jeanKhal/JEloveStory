@@ -96,7 +96,7 @@ export class SimpleCache<T> {
   private cache = new Map<string, { value: T; timestamp: number }>();
   private maxAge: number;
 
-  constructor(maxAgeMs: number = 60000) {
+  constructor(maxAgeMs = 60000) {
     this.maxAge = maxAgeMs;
   }
 

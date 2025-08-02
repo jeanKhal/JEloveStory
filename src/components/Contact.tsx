@@ -86,7 +86,7 @@ const Contact: React.FC = () => {
       <div className="container">
         <div className="contact-header">
           <h1>Contactez-nous</h1>
-          <p>Une question ? Un message ? N'hésitez pas à nous contacter !</p>
+          <p>Une question ? Un message ? N&apos;hésitez pas à nous contacter !</p>
         </div>
 
         <div className="contact-content">
@@ -94,7 +94,7 @@ const Contact: React.FC = () => {
             <h2>Nos Coordonnées</h2>
             <div className="info-list">
               {contactInfo.map((info, index) => (
-                <div key={index} className="info-item">
+                <div key={`contact-info-${info.title.replace(/\s+/g, '-')}-${index}`} className="info-item">
                   <div className="info-icon">{info.icon}</div>
                   <div className="info-details">
                     <h3>{info.title}</h3>

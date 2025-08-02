@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, lazy, Suspense } from 'react';
+import React, { useEffect, useState, lazy, Suspense } from 'react';
 import './App.css';
 import Navbar from './components/Navbar';
 import ScrollProgress from './components/ScrollProgress';

@@ -1,128 +1,114 @@
 import React, { useState } from 'react';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { doc, setDoc } from 'firebase/firestore';
-import { auth, db } from '../firebase/config';
-import LoginAdmin from './LoginAdmin';
 
-const RegisterAdmin: React.FC = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [message, setMessage] = useState('');
-  const [success, setSuccess] = useState(false);
+interface RegisterAdminProps {
+  onRegisterSuccess: () => void;
+}
+
+const RegisterAdmin: React.FC<RegisterAdminProps> = ({ onRegisterSuccess }) => {
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+    confirmPassword: '',
+    nom: '',
+    prenom: ''
+  });
   const [loading, setLoading] = useState(false);
-  const [showLogin, setShowLogin] = useState(false);
 
-  const handleRegister = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
-    setMessage('');
-    setSuccess(false);
-    try {
-      // Crée l'utilisateur dans Firebase Auth
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      const user = userCredential.user;
-      // Ajoute le rôle admin dans Firestore
-      await setDoc(doc(db, 'users', user.uid), {
-        email: user.email,
-        role: 'admin',
-        createdAt: new Date()
-      });
-      setMessage('Administrateur créé avec succès !');
-      setSuccess(true);
-      setEmail('');
-      setPassword('');
-    } catch (error: any) {
-      setMessage(error.message);
-      setSuccess(false);
-    } finally {
-      setLoading(false);
+    
+    if (formData.password !== formData.confirmPassword) {
+      alert('Les mots de passe ne correspondent pas.');
+      return;
     }
+    
+    setLoading(true);
+    
+    // Simulation d'inscription admin
+    setTimeout(() => {
+      console.log('Tentative d\'inscription admin:', formData);
+      alert('Fonctionnalité d\'inscription admin temporairement désactivée.');
+      setLoading(false);
+    }, 1000);
   };
 
-  if (showLogin) {
-    return <LoginAdmin />;
-  }
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
 
   return (
-    <div style={{ maxWidth: 420, margin: '2.5rem auto', padding: 24, border: '1px solid #eee', borderRadius: 12, background: '#fff', boxShadow: '0 2px 12px rgba(229,57,53,0.07)' }}>
-      <h2 style={{ textAlign: 'center', color: '#e53935', marginBottom: 24 }}>Créer un administrateur</h2>
-      <form onSubmit={handleRegister}>
-        <div style={{ marginBottom: 18 }}>
-          <label htmlFor="admin-email" style={{ display: 'block', marginBottom: 6, fontWeight: 500 }}>Email</label>
+    <div className="register-admin">
+      <h2>Inscription Administrateur</h2>
+      <form onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="prenom">Prénom</label>
           <input
-            id="admin-email"
-            type="email"
-            placeholder="exemple@email.com"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
+            type="text"
+            id="prenom"
+            name="prenom"
+            value={formData.prenom}
+            onChange={handleChange}
             required
-            style={{ width: '100%', padding: 10, borderRadius: 6, border: '1px solid #ccc', fontSize: 16 }}
           />
         </div>
-        <div style={{ marginBottom: 22 }}>
-          <label htmlFor="admin-password" style={{ display: 'block', marginBottom: 6, fontWeight: 500 }}>Mot de passe</label>
+        
+        <div className="form-group">
+          <label htmlFor="nom">Nom</label>
           <input
-            id="admin-password"
+            type="text"
+            id="nom"
+            name="nom"
+            value={formData.nom}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        
+        <div className="form-group">
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        
+        <div className="form-group">
+          <label htmlFor="password">Mot de passe</label>
+          <input
             type="password"
-            placeholder="Mot de passe"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
+            id="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
             required
             minLength={6}
-            style={{ width: '100%', padding: 10, borderRadius: 6, border: '1px solid #ccc', fontSize: 16 }}
           />
         </div>
-        <button
-          type="submit"
-          disabled={loading}
-          style={{
-            width: '100%',
-            padding: '12px 0',
-            background: loading ? '#ccc' : '#e53935',
-            color: '#fff',
-            border: 'none',
-            borderRadius: 6,
-            fontWeight: 700,
-            fontSize: 17,
-            cursor: loading ? 'not-allowed' : 'pointer',
-            transition: 'background 0.2s',
-            marginBottom: 8
-          }}
-        >
-          {loading ? 'Création...' : "Créer l'admin"}
+        
+        <div className="form-group">
+          <label htmlFor="confirmPassword">Confirmer le mot de passe</label>
+          <input
+            type="password"
+            id="confirmPassword"
+            name="confirmPassword"
+            value={formData.confirmPassword}
+            onChange={handleChange}
+            required
+            minLength={6}
+          />
+        </div>
+        
+        <button type="submit" disabled={loading}>
+          {loading ? 'Inscription...' : 'S\'inscrire'}
         </button>
-        {message && (
-          <p style={{
-            marginTop: 12,
-            color: success ? '#388e3c' : '#d32f2f',
-            background: success ? '#e8f5e9' : '#ffebee',
-            border: `1px solid ${success ? '#388e3c' : '#d32f2f'}`,
-            borderRadius: 6,
-            padding: '10px 12px',
-            textAlign: 'center',
-            fontWeight: 500
-          }}>{message}</p>
-        )}
       </form>
-      <button
-        type="button"
-        onClick={() => setShowLogin(true)}
-        style={{
-          width: '100%',
-          padding: '10px 0',
-          background: '#fff',
-          color: '#e53935',
-          border: '1px solid #e53935',
-          borderRadius: 6,
-          fontWeight: 600,
-          fontSize: 16,
-          cursor: 'pointer',
-          marginTop: 10,
-          transition: 'background 0.2s, color 0.2s'
-        }}
-      >
-        Se connecter
-      </button>
     </div>
   );
 };

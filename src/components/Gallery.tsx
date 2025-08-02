@@ -18,10 +18,10 @@ const Gallery: React.FC = () => {
     { src: image2, alt: 'Photo romantique 2', category: 'romantic' },
     { src: image3, alt: 'Photo de couple 1', category: 'couple' },
     { src: image4, alt: 'Photo de couple 2', category: 'couple' },
-    { src: image5, alt: 'Photo d\'engagement 1', category: 'engagement' },
-    { src: image6, alt: 'Photo d\'engagement 2', category: 'engagement' },
-    { src: image7, alt: 'Photo de préparation 1', category: 'preparation' },
-    { src: image8, alt: 'Photo de préparation 2', category: 'preparation' }
+         { src: image5, alt: 'Photo d&apos;engagement 1', category: 'engagement' },
+     { src: image6, alt: 'Photo d&apos;engagement 2', category: 'engagement' },
+     { src: image7, alt: 'Photo de préparation 1', category: 'preparation' },
+     { src: image8, alt: 'Photo de préparation 2', category: 'preparation' }
   ];
 
   const categories = [
@@ -95,7 +95,7 @@ const Gallery: React.FC = () => {
         <div className="gallery-grid">
           {filteredImages.map((image, index) => (
             <div
-              key={index}
+              key={`gallery-item-${image.alt.replace(/\s+/g, '-')}-${index}`}
               className="gallery-item"
               onClick={() => openModal(image.src, index)}
             >
@@ -115,7 +115,7 @@ const Gallery: React.FC = () => {
         </div>
 
         {/* Modal pour l'aperçu des images */}
-        {selectedImage && (
+        {selectedImage ? (
           <div className="modal-overlay" onClick={closeModal}>
             <div className="modal-content" onClick={(e) => e.stopPropagation()}>
               <button className="modal-close" onClick={closeModal}>
@@ -142,9 +142,9 @@ const Gallery: React.FC = () => {
               </button>
               
               <div className="modal-indicators">
-                {filteredImages.map((_, index) => (
+                {filteredImages.map((image, index) => (
                   <button
-                    key={index}
+                    key={`indicator-${image.alt.replace(/\s+/g, '-')}-${index}`}
                     className={`indicator ${index === currentIndex ? 'active' : ''}`}
                     onClick={() => {
                       setCurrentIndex(index);
@@ -155,7 +155,7 @@ const Gallery: React.FC = () => {
               </div>
             </div>
           </div>
-        )}
+        ) : null}
 
         {/* Section statistiques */}
         <div className="gallery-stats">

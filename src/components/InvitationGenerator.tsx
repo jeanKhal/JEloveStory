@@ -114,7 +114,7 @@ const InvitationGenerator: React.FC = () => {
     <div className="invitation-generator">
       <div className="container">
         <div className="generator-header">
-          <h1>Générateur d'Invitations</h1>
+          <h1>Générateur d&apos;Invitations</h1>
           <p>Créez votre invitation personnalisée pour le grand jour</p>
         </div>
 
@@ -124,12 +124,12 @@ const InvitationGenerator: React.FC = () => {
             <h2>Personnalisation</h2>
             
             <div className="form-group">
-              <label>Nom de l'invité(e) :</label>
+              <label>Nom de l&apos;invité(e) :</label>
               <input
                 type="text"
                 value={invitationData.guestName}
                 onChange={(e) => handleInputChange('guestName', e.target.value)}
-                placeholder="Nom de l'invité(e)"
+                placeholder="Nom de l&apos;invité(e)"
               />
             </div>
 
@@ -239,7 +239,7 @@ const InvitationGenerator: React.FC = () => {
               className="btn-preview"
               onClick={() => setPreviewMode(!previewMode)}
             >
-              {previewMode ? 'Masquer l\'aperçu' : 'Voir l\'aperçu'}
+                             {previewMode ? 'Masquer l&apos;aperçu' : 'Voir l&apos;aperçu'}
             </button>
             
             <div className="action-buttons">
@@ -254,14 +254,14 @@ const InvitationGenerator: React.FC = () => {
         </div>
 
         {/* Aperçu */}
-        {previewMode && (
+        {previewMode ? (
           <div className="preview-section">
             <h2>Aperçu de votre invitation</h2>
             <div className="preview-container">
               {renderInvitation()}
             </div>
           </div>
-        )}
+        ) : null}
       </div>
     </div>
   );

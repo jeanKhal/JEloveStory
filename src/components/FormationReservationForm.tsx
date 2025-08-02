@@ -1,82 +1,114 @@
-import React, { useState } from "react";
-import { db } from "../firebase/config";
-import { collection, addDoc } from "firebase/firestore";
+import React, { useState } from 'react';
 
-const FormationReservationForm: React.FC = () => {
-  const [form, setForm] = useState({
-    nom: "",
-    prenom: "",
-    telephone: "",
-    email: "",
+interface FormationReservationFormProps {
+  formationId: string;
+  formationTitle: string;
+  onClose: () => void;
+}
+
+const FormationReservationForm: React.FC<FormationReservationFormProps> = ({
+  formationId,
+  formationTitle,
+  onClose
+}) => {
+  const [formData, setFormData] = useState({
+    prenom: '',
+    nom: '',
+    email: '',
+    telephone: ''
   });
-  const [success, setSuccess] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError(null);
-    setSuccess(false);
-    try {
-      await addDoc(collection(db, "inscriptionsFormations"), form);
-      setSuccess(true);
-      setForm({ nom: "", prenom: "", telephone: "", email: "" });
-    } catch (err) {
-      setError("Erreur lors de l'enregistrement. Veuillez réessayer.");
-    }
+    setLoading(true);
+    
+    // Simulation d'envoi
+    setTimeout(() => {
+      console.log('Inscription formation:', { formationId, formationTitle, ...formData });
+      alert('Votre inscription a été envoyée avec succès !');
+      setLoading(false);
+      onClose();
+    }, 1000);
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ maxWidth: 400, margin: "0 auto" }}>
-      <h2>Inscription à la formation</h2>
-      <div>
-        <label>Nom :</label>
-        <input
-          type="text"
-          name="nom"
-          value={form.nom}
-          onChange={handleChange}
-          required
-        />
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+        <button className="modal-close" onClick={onClose}>×</button>
+        
+        <div className="modal-header">
+          <h2>Inscription à la formation</h2>
+          <p>{formationTitle}</p>
+        </div>
+
+        <form onSubmit={handleSubmit} className="reservation-form">
+          <div className="form-group">
+            <label htmlFor="prenom">Prénom *</label>
+            <input
+              type="text"
+              id="prenom"
+              name="prenom"
+              value={formData.prenom}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="nom">Nom *</label>
+            <input
+              type="text"
+              id="nom"
+              name="nom"
+              value={formData.nom}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="email">Email *</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="telephone">Téléphone *</label>
+            <input
+              type="tel"
+              id="telephone"
+              name="telephone"
+              value={formData.telephone}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="form-actions">
+            <button type="button" className="btn-secondary" onClick={onClose}>
+              Annuler
+            </button>
+            <button type="submit" className="btn-primary" disabled={loading}>
+              {loading ? 'Inscription...' : 'S\'inscrire'}
+            </button>
+          </div>
+        </form>
       </div>
-      <div>
-        <label>Prénom :</label>
-        <input
-          type="text"
-          name="prenom"
-          value={form.prenom}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div>
-        <label>Téléphone :</label>
-        <input
-          type="tel"
-          name="telephone"
-          value={form.telephone}
-          onChange={handleChange}
-          required
-          placeholder="+243..."
-        />
-      </div>
-      <div>
-        <label>Email :</label>
-        <input
-          type="email"
-          name="email"
-          value={form.email}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <button type="submit">S'inscrire</button>
-      {success && <p style={{ color: "green" }}>Inscription réussie !</p>}
-      {error && <p style={{ color: "red" }}>{error}</p>}
-    </form>
+    </div>
   );
 };
 

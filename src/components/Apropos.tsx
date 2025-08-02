@@ -204,7 +204,7 @@ const Apropos: React.FC = () => {
                 <h4>Spécialités</h4>
                 <div className="member-modal-specialties">
                   {selectedMember.specialites.map((specialite: string, index: number) => (
-                    <span key={index} className="member-modal-specialty">
+                    <span key={`specialty-${specialite.replace(/\s+/g, '-')}-${index}`} className="member-modal-specialty">
                       {specialite}
                     </span>
                   ))}

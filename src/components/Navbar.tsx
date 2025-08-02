@@ -76,7 +76,7 @@ const Navbar: React.FC = React.memo(() => {
         <div className="nav-logo" onClick={scrollToHero}>
           <div className="logo-text">
             <span className="logo-names">Joel & Eunice</span>
-            <span className="logo-date">15.06.2024</span>
+            <span className="logo-date">29.08.2025</span>
           </div>
         </div>
 

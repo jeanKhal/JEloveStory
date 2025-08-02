@@ -19,7 +19,7 @@ const PartenairesSection: React.FC = () => (
     <h2>Nos partenaires</h2>
     <div className="partenaires-logos">
       {partenaires.map((p, idx) => (
-        <img key={idx} src={p.src} alt={p.alt} className="partenaire-logo" />
+        <img key={`partenaire-${p.alt.replace(/\s+/g, '-')}-${idx}`} src={p.src} alt={p.alt} className="partenaire-logo" />
       ))}
     </div>
   </section>

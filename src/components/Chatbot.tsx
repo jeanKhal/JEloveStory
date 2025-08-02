@@ -53,7 +53,7 @@ const Chatbot: React.FC = React.memo(() => {
     }
     
     if (lowerMessage.includes('lieu') || lowerMessage.includes('où') || lowerMessage.includes('adresse')) {
-      return 'La cérémonie se déroulera à l\'Église Saint-Pierre à 14h00, suivie de la réception au Château de Versailles à 18h00.';
+                return 'La cérémonie se déroulera à l&apos;Église Saint-Pierre à 14h00, suivie de la réception au Château de Versailles à 18h00.';
     }
     
     if (lowerMessage.includes('rsvp') || lowerMessage.includes('confirmer') || lowerMessage.includes('présence')) {
@@ -161,7 +161,7 @@ const Chatbot: React.FC = React.memo(() => {
       </button>
 
       {/* Fenêtre du chat */}
-      {isOpen && (
+      {isOpen ? (
         <div className="chatbot-window">
           {/* En-tête */}
           <div className="chatbot-header">
@@ -201,7 +201,7 @@ const Chatbot: React.FC = React.memo(() => {
             ))}
             
             {/* Indicateur de frappe */}
-            {isTyping && (
+            {isTyping ? (
               <div className="message bot">
                 <div className="message-content">
                   <div className="typing-indicator">
@@ -211,19 +211,19 @@ const Chatbot: React.FC = React.memo(() => {
                   </div>
                 </div>
               </div>
-            )}
+            ) : null}
             
             <div ref={messagesEndRef} />
           </div>
 
           {/* Questions rapides */}
-          {messages.length === 1 && (
+          {messages.length === 1 ? (
             <div className="quick-questions">
               <p>Questions fréquentes :</p>
               <div className="quick-questions-grid">
                 {quickQuestions.map((question, index) => (
                   <button
-                    key={index}
+                    key={`chatbot-question-${question.replace(/\s+/g, '-')}-${index}`}
                     className="quick-question-btn"
                     onClick={() => handleQuickQuestion(question)}
                   >
@@ -232,7 +232,7 @@ const Chatbot: React.FC = React.memo(() => {
                 ))}
               </div>
             </div>
-          )}
+          ) : null}
 
           {/* Formulaire d'envoi */}
           <form className="chatbot-input-form" onSubmit={handleSubmit}>
@@ -249,7 +249,7 @@ const Chatbot: React.FC = React.memo(() => {
             <button
               type="submit"
               className="chatbot-send"
-              disabled={!inputValue.trim() || isTyping}
+              disabled={inputValue.trim() === '' || isTyping}
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <line x1="22" y1="2" x2="11" y2="13"></line>
@@ -258,7 +258,7 @@ const Chatbot: React.FC = React.memo(() => {
             </button>
           </form>
         </div>
-      )}
+      ) : null}
     </div>
   );
 });

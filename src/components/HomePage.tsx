@@ -92,7 +92,7 @@ const HomePage: React.FC = React.memo(() => {
 
   return (
     <div className={`homepage ${isVisible ? 'animate-fade-in' : ''}`}>
-      {/* Section Hero */}
+      {/* Section Hero - Countdown uniquement */}
       <section className="hero-section">
         <div className="hero-background">
           <img
@@ -110,17 +110,7 @@ const HomePage: React.FC = React.memo(() => {
             <span className="date">29 Août 2025</span>
           </h1>
           <p className="hero-subtitle">Nous nous marions !</p>
-          <div className="hero-buttons">
-            <button
-              className="btn-primary"
-              onClick={() => scrollToSection('our-story')}
-            >
-              Notre Histoire
-            </button>
-            <Link to="/rsvp" className="btn-secondary">
-              Confirmer Présence
-            </Link>
-          </div>
+          <CountdownTimer targetDate={weddingDate} />
         </div>
 
         <div className="scroll-indicator animate-bounce">
@@ -135,12 +125,12 @@ const HomePage: React.FC = React.memo(() => {
           <div className="story-content">
             <div className="story-text animate-slide-in-left">
               <p>
-                Nous nous sommes rencontrés il y a 5 ans lors d'un événement professionnel.
-                Ce qui a commencé par une simple conversation s'est transformé en une belle
-                histoire d'amour qui nous mène aujourd'hui vers le mariage.
+                Nous nous sommes rencontrés il y a 5 ans lors d&apos;un événement professionnel.
+                Ce qui a commencé par une simple conversation s&apos;est transformé en une belle
+                histoire d&apos;amour qui nous mène aujourd&apos;hui vers le mariage.
               </p>
               <p>
-                Après des années de bonheur partagé, d'aventures et de découvertes mutuelles,
+                Après des années de bonheur partagé, d&apos;aventures et de découvertes mutuelles,
                 nous avons décidé de nous unir pour la vie. Nous sommes impatients de célébrer
                 ce moment spécial avec nos familles et amis.
               </p>
@@ -152,13 +142,7 @@ const HomePage: React.FC = React.memo(() => {
         </div>
       </section>
 
-      {/* Section Compteur */}
-      <section className="countdown-section">
-        <div className="container">
-          <h2 className="section-title text-center">Le Grand Jour</h2>
-          <CountdownTimer targetDate={weddingDate} />
-        </div>
-      </section>
+
 
       {/* Section Déroulement avec Photos */}
       <section className="timeline-section">
@@ -166,7 +150,7 @@ const HomePage: React.FC = React.memo(() => {
           <h2 className="section-title text-center">Déroulement de la Journée</h2>
           <div className="timeline">
             {timelinePhotos.map((item, index) => (
-              <div key={index} className={`timeline-item ${index % 2 === 0 ? 'left' : 'right'}`}>
+              <div key={`timeline-item-${item.title.replace(/\s+/g, '-')}-${index}`} className={`timeline-item ${index % 2 === 0 ? 'left' : 'right'}`}>
                 <div className="timeline-content">
                   <div className="timeline-photo">
                     <img src={item.image} alt={item.title} loading="lazy" />
@@ -226,7 +210,7 @@ const HomePage: React.FC = React.memo(() => {
             <div className="venue-map animate-slide-in-right">
               <div className="map-placeholder">
                 <p>Carte interactive</p>
-                <small>Cliquez pour voir l'itinéraire</small>
+                <small>Cliquez pour voir l&apos;itinéraire</small>
               </div>
             </div>
           </div>

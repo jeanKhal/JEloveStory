@@ -31,9 +31,9 @@ const Program: React.FC = () => {
       time: '22h00',
       title: 'Soirée Dansante',
       location: 'Terrasse du Château',
-      description: 'Musique, danse et festivités jusqu\'au bout de la nuit',
+             description: 'Musique, danse et festivités jusqu&apos;au bout de la nuit',
       icon: '💃',
-      duration: 'Jusqu\'au matin'
+             duration: 'Jusqu&apos;au matin'
     }
   ];
 
@@ -73,7 +73,7 @@ const Program: React.FC = () => {
           <h2>Déroulé de la Journée</h2>
           <div className="timeline">
             {timeline.map((event, index) => (
-              <div key={index} className={`timeline-item ${index % 2 === 0 ? 'left' : 'right'}`}>
+              <div key={`timeline-event-${event.title.replace(/\s+/g, '-')}-${index}`} className={`timeline-item ${index % 2 === 0 ? 'left' : 'right'}`}>
                 <div className="timeline-content">
                   <div className="timeline-icon">{event.icon}</div>
                   <div className="timeline-time">{event.time}</div>
@@ -92,7 +92,7 @@ const Program: React.FC = () => {
           <h2>Informations Pratiques</h2>
           <div className="info-grid">
             {importantInfo.map((info, index) => (
-              <div key={index} className="info-card">
+              <div key={`info-card-${info.title.replace(/\s+/g, '-')}-${index}`} className="info-card">
                 <div className="info-icon">{info.icon}</div>
                 <h3>{info.title}</h3>
                 <p>{info.content}</p>
@@ -120,7 +120,7 @@ const Program: React.FC = () => {
 
         {/* Contact d'urgence */}
         <div className="emergency-section">
-          <h2>Contact d'Urgence</h2>
+          <h2>Contact d&apos;Urgence</h2>
           <div className="emergency-contacts">
             <div className="contact-item">
               <div className="contact-icon">📞</div>
