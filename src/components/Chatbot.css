@@ -3,8 +3,8 @@
   position: fixed;
   bottom: 20px;
   right: 20px;
-  z-index: var(--z-modal);
-  font-family: var(--font-family-secondary);
+  z-index: 1000;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
 }
 
 /* Bouton du chatbot */
@@ -360,11 +360,11 @@
   transform: none;
 }
 
-/* Responsive Design */
+/* Responsive Design - Amélioré */
 @media (max-width: 768px) {
   .chatbot-container {
-    bottom: 10px;
-    right: 10px;
+    bottom: 15px;
+    right: 15px;
   }
   
   .chatbot-toggle {
@@ -378,32 +378,73 @@
   }
   
   .chatbot-window {
-    width: calc(100vw - 40px);
-    height: 60vh;
-    bottom: 80px;
-    right: 0;
+    position: fixed;
+    top: 0;
     left: 0;
-    margin: 0 auto;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+    margin: 0;
+    z-index: 9999;
+  }
+  
+  .chatbot-header {
+    border-radius: 0;
+    padding: var(--spacing-lg);
   }
   
   .quick-questions-grid {
     grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+  
+  .quick-question-btn {
+    padding: var(--spacing-md);
+    font-size: 0.9rem;
   }
   
   .message-content {
-    max-width: 90%;
+    max-width: 85%;
+  }
+  
+  .chatbot-messages {
+    padding: var(--spacing-lg);
+  }
+  
+  .chatbot-input-form {
+    padding: var(--spacing-lg);
   }
 }
 
 @media (max-width: 480px) {
-  .chatbot-window {
-    width: calc(100vw - 20px);
-    height: 70vh;
-    bottom: 75px;
+  .chatbot-container {
+    bottom: 10px;
+    right: 10px;
+  }
+  
+  .chatbot-toggle {
+    width: 55px;
+    height: 55px;
+  }
+  
+  .chatbot-icon {
+    width: 35px;
+    height: 35px;
   }
   
   .chatbot-header {
     padding: var(--spacing-md);
+  }
+  
+  .chatbot-header-info h3 {
+    font-size: 0.9rem;
+  }
+  
+  .chatbot-header-icon {
+    width: 35px;
+    height: 35px;
   }
   
   .chatbot-messages {
@@ -412,6 +453,30 @@
   
   .chatbot-input-form {
     padding: var(--spacing-md);
+  }
+  
+  .chatbot-input {
+    font-size: 16px; /* Évite le zoom sur iOS */
+    padding: var(--spacing-md);
+  }
+  
+  .chatbot-send {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .message-content {
+    max-width: 90%;
+    padding: var(--spacing-md);
+  }
+  
+  .quick-questions {
+    padding: var(--spacing-md);
+  }
+  
+  .quick-question-btn {
+    padding: var(--spacing-md);
+    font-size: 0.85rem;
   }
 }
 

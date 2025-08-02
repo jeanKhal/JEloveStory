@@ -60,6 +60,7 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  padding-top: 80px; /* Compensation pour la navbar fixe */
 }
 
 .hero-background {
@@ -223,6 +224,7 @@
   padding: var(--spacing-3xl) 0;
   background: var(--bg-secondary);
   position: relative;
+  padding-top: calc(var(--spacing-3xl) + 80px); /* Compensation pour la navbar fixe */
 }
 
 .story-section::before {
@@ -739,8 +741,16 @@
   }
   
   .timeline-photo {
-    min-height: 150px;
-    max-height: 300px;
+    min-height: 200px;
+    max-height: 350px;
+    width: 100%;
+  }
+  
+  .timeline-photo img {
+    width: 100%;
+    height: auto;
+    max-height: 350px;
+    object-fit: contain;
   }
   
   .timeline-content {
@@ -760,8 +770,16 @@
   }
   
   .timeline-photo {
-    min-height: 120px;
-    max-height: 250px;
+    min-height: 180px;
+    max-height: 300px;
+    width: 100%;
+  }
+  
+  .timeline-photo img {
+    width: 100%;
+    height: auto;
+    max-height: 300px;
+    object-fit: contain;
   }
   
   .timeline-title {

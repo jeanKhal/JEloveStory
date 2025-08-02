@@ -75,7 +75,7 @@ const RSVP: React.FC = () => {
       <div className="container">
         <div className="rsvp-header">
           <h1>Confirmez Votre Présence</h1>
-          <p>Merci de nous confirmer votre présence avant le 1er Juin 2024</p>
+          <p>Merci de nous confirmer votre présence avant le 1er Juillet 2025</p>
         </div>
 
         <div className="rsvp-content">
@@ -86,7 +86,7 @@ const RSVP: React.FC = () => {
                 <span className="info-icon">📅</span>
                 <div>
                   <h3>Date limite</h3>
-                  <p>1er Juin 2024</p>
+                  <p>1er Juillet 2025</p>
                 </div>
               </div>
               <div className="info-item">

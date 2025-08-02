@@ -1,6 +1,6 @@
 {
-  "short_name": "Joel & Eunice",
-  "name": "Joel & Eunice - Mariage 2024",
+  "short_name": "JoelEunice-LoveStory",
+  "name": "JoelEunice-LoveStory - Mariage 2025",
   "icons": [
     {
       "src": "favicon.ico",
@@ -22,7 +22,7 @@
   "display": "standalone",
   "theme_color": "#d4af37",
   "background_color": "#ffffff",
-  "description": "Site de mariage de Joel & Eunice - 15 Juin 2024",
+  "description": "Site de mariage de Joel & Eunice - 29 Août 2025",
   "orientation": "portrait-primary",
   "scope": "/",
   "lang": "fr"

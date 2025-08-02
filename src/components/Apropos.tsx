@@ -11,9 +11,9 @@ const Apropos: React.FC = () => {
       nom: 'Roger MULUNDA',
       poste: 'Gestionnaire Responsable',
       photo: require('../images/roger.jpg'),
-      description: 'Un monsieur très créatif et d\'une imagination débordante. Il a 1000 idées dans sa tête et dirige avec passion la Salle du Numérique.',
+      description: 'Un monsieur très créatif et d\'une imagination débordante. Il a 1000 idées dans sa tête et dirige avec passion JoelEunice LoveStory.',
       specialites: ['Gestion de projet', 'Innovation pédagogique', 'Développement numérique'],
-      email: 'roger.mulunda@unilu.ac.cd',
+      email: 'roger.mulunda@joel-eunice-lovestory.com',
       telephone: '+243 999 123 456',
       linkedin: '#'
     },
@@ -24,7 +24,7 @@ const Apropos: React.FC = () => {
       photo: require('../images/rachel.jpg'),
       description: 'Accueillante et organisée, Rachel gère l\'accueil des visiteurs et la programmation de toutes nos formations avec efficacité.',
       specialites: ['Accueil', 'Programmation des formations', 'Gestion administrative'],
-      email: 'rachel.nkulu@unilu.ac.cd',
+      email: 'rachel.nkulu@joel-eunice-lovestory.com',
       telephone: '+243 999 123 457',
       linkedin: '#'
     },
@@ -33,9 +33,9 @@ const Apropos: React.FC = () => {
       nom: 'John Legrand KUMWIMBA',
       poste: 'IT, Formateur et Webmaster',
       photo: require('../images/john.jpg'),
-      description: 'Polyvalent et passionné par le numérique, John assure la gestion IT, la formation et la maintenance du site web de la Salle du Numérique.',
+      description: 'Polyvalent et passionné par le numérique, John assure la gestion IT, la formation et la maintenance du site web de JoelEunice LoveStory.',
       specialites: ['IT', 'Formation', 'Webmastering'],
-      email: 'john.kumwimba@unilu.ac.cd',
+      email: 'john.kumwimba@joel-eunice-lovestory.com',
       telephone: '+243 999 123 458',
       linkedin: '#'
     },
@@ -44,9 +44,9 @@ const Apropos: React.FC = () => {
       nom: 'Denis MIKOBI',
       poste: 'Chargé de Logistique',
       photo: require('../images/denis.jpg'),
-      description: 'Denis veille à la bonne organisation matérielle et logistique de la Salle du Numérique, garantissant le bon déroulement de toutes les activités.',
+      description: 'Denis veille à la bonne organisation matérielle et logistique de JoelEunice LoveStory, garantissant le bon déroulement de toutes les activités.',
       specialites: ['Logistique', 'Organisation', 'Gestion du matériel'],
-      email: 'denis.mikobi@unilu.ac.cd',
+      email: 'denis.mikobi@joel-eunice-lovestory.com',
       telephone: '+243 999 123 459',
       linkedin: '#'
     },
@@ -55,9 +55,9 @@ const Apropos: React.FC = () => {
       nom: 'Lyna MULAND',
       poste: 'Personnel d\'Appoint',
       photo: require('../images/lina.jpg'),
-      description: 'Lyna apporte son soutien polyvalent à l\'équipe de la Salle du Numérique, contribuant au bon fonctionnement de nos activités.',
+      description: 'Lyna apporte son soutien polyvalent à l\'équipe de JoelEunice LoveStory, contribuant au bon fonctionnement de nos activités.',
       specialites: ['Support polyvalent', 'Assistance administrative', 'Accueil'],
-      email: 'lyna.muland@unilu.ac.cd',
+      email: 'lyna.muland@joel-eunice-lovestory.com',
       telephone: '+243 999 123 460',
       linkedin: '#'
     },
@@ -66,9 +66,9 @@ const Apropos: React.FC = () => {
       nom: 'Brigitte BUNDA',
       poste: 'Caissière',
       photo: require('../images/brigitte.jpg'),
-      description: 'Brigitte gère avec précision et professionnalisme les aspects financiers et comptables de la Salle du Numérique.',
+      description: 'Brigitte gère avec précision et professionnalisme les aspects financiers et comptables de JoelEunice LoveStory.',
       specialites: ['Gestion financière', 'Comptabilité', 'Service client'],
-      email: 'brigitte.bunda@unilu.ac.cd',
+      email: 'brigitte.bunda@joel-eunice-lovestory.com',
       telephone: '+243 999 123 461',
       linkedin: '#'
     },
@@ -77,9 +77,9 @@ const Apropos: React.FC = () => {
       nom: 'Yvette MWAPE',
       poste: 'Personnel d\'Appoint',
       photo: require('../images/yvette.jpg'),
-      description: 'Yvette apporte son soutien polyvalent à l\'équipe de la Salle du Numérique, contribuant au bon fonctionnement de nos activités.',
+      description: 'Yvette apporte son soutien polyvalent à l\'équipe de JoelEunice LoveStory, contribuant au bon fonctionnement de nos activités.',
       specialites: ['Support polyvalent', 'Assistance administrative', 'Accueil'],
-      email: 'yvette.mwape@unilu.ac.cd',
+      email: 'yvette.mwape@joel-eunice-lovestory.com',
       telephone: '+243 999 123 462',
       linkedin: '#'
     }
@@ -99,9 +99,9 @@ const Apropos: React.FC = () => {
     <div className="apropos-container">
       {/* Section À propos principale */}
       <div className="apropos-section">
-    <h2 className="apropos-title">À propos de la Salle du Numérique</h2>
+    <h2 className="apropos-title">À propos de JoelEunice LoveStory</h2>
     <p className="apropos-description">
-          La Salle du Numérique est un espace innovant dédié à la formation, à l'apprentissage et à la découverte des technologies numériques pour tous.
+          JoelEunice LoveStory est un espace innovant dédié à la formation, à l'apprentissage et à la découverte des technologies numériques pour tous.
     </p>
     <h3 className="apropos-subtitle">Notre mission</h3>
     <p className="apropos-text">

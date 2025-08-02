@@ -45,7 +45,7 @@ const Chatbot: React.FC = React.memo(() => {
     const lowerMessage = userMessage.toLowerCase();
     
     if (lowerMessage.includes('bonjour') || lowerMessage.includes('salut') || lowerMessage.includes('hello')) {
-      return 'Bonjour ! Je suis ravi de vous aider pour le mariage de Joel & Eunice !';
+      return 'Bonjour ! Je suis ravi de vous aider pour le mariage de Joel & Eunice ! Que souhaitez-vous savoir ?';
     }
     
     if (lowerMessage.includes('date') || lowerMessage.includes('quand')) {
@@ -53,7 +53,23 @@ const Chatbot: React.FC = React.memo(() => {
     }
     
     if (lowerMessage.includes('lieu') || lowerMessage.includes('où') || lowerMessage.includes('adresse')) {
-                return 'La cérémonie se déroulera à l&apos;Église Saint-Pierre à 14h00, suivie de la réception au Château de Versailles à 18h00.';
+      return 'La cérémonie se déroulera à l\'Église Saint-Pierre à 14h00, suivie de la réception au Château de Versailles à 18h00.';
+    }
+    
+    if (lowerMessage.includes('déroulement') || lowerMessage.includes('programme') || lowerMessage.includes('itinéraire')) {
+      return 'Voici le déroulement complet :\n\n🕐 14h00 - Cérémonie Religieuse (Église Saint-Pierre)\n🕐 14h30 - Échange des Vœux (Moment solennel)\n🕐 15h30 - Cocktail (Jardin de l\'église)\n🕐 16h00 - Photos de Groupe (Souvenirs immortels)\n🕐 18h00 - Réception (Château de Versailles)\n🕐 18h30 - Entrée des Mariés (Accueil festif)\n🕐 19h00 - Dîner (Salle des fêtes)\n🕐 20h00 - Discours (Mots d\'amour)\n🕐 21h00 - Première Danse (Ouverture du bal)\n🕐 21h30 - Ouverture du Bal (Première danse)\n🕐 22h00 - Soirée Dansante (Ambiance festive)\n🕐 23h00 - Ambiance Festive (Danse et joie)\n🕐 00h00 - Gâteau de Mariage (Cérémonie du gâteau)\n🕐 01h00 - Lancer du Bouquet (Traditions)\n🕐 01h30 - Dernière Danse (Moment romantique)\n🕐 02h00 - Fin de Soirée (Au revoir et merci)';
+    }
+    
+    if (lowerMessage.includes('logement') || lowerMessage.includes('hôtel') || lowerMessage.includes('dormir')) {
+      return 'Voici nos recommandations d\'hébergement près du mariage :\n\n🏨 Hôtel Royal Versailles (5 min du château) - Tarif préférentiel : 150€/nuit\n🏨 Hôtel Trianon Palace (10 min à pied) - 180€/nuit\n🏨 Hôtel Mercure Versailles (15 min) - 120€/nuit\n🏨 Hôtel Ibis Versailles (20 min) - 90€/nuit\n\nNous avons réservé un bloc de chambres à l\'Hôtel Royal Versailles. Contactez-nous pour réserver avec le code "JOEL-EUNICE" !';
+    }
+    
+    if (lowerMessage.includes('parking') || lowerMessage.includes('voiture') || lowerMessage.includes('stationnement')) {
+      return 'Parking gratuit disponible au Château de Versailles. Pour l\'église, parking municipal à 2€/heure. Nous recommandons le covoiturage !';
+    }
+    
+    if (lowerMessage.includes('location') || lowerMessage.includes('louer') || lowerMessage.includes('voiture')) {
+      return 'Location de voitures : Hertz Versailles (10 min du château) ou Europcar Paris. Réservation recommandée pour le 29 août.';
     }
     
     if (lowerMessage.includes('rsvp') || lowerMessage.includes('confirmer') || lowerMessage.includes('présence')) {
@@ -68,6 +84,22 @@ const Chatbot: React.FC = React.memo(() => {
       return 'Le code vestimentaire est élégant et chic. Tenue de soirée recommandée pour la réception !';
     }
     
+    if (lowerMessage.includes('transport') || lowerMessage.includes('se rendre') || lowerMessage.includes('comment aller')) {
+      return 'Pour l\'église : RER C station "Versailles-Rive-Gauche". Pour le château : RER C + navette gratuite ou taxi (5 min).';
+    }
+    
+    if (lowerMessage.includes('chambre') || lowerMessage.includes('réservation') || lowerMessage.includes('réserver')) {
+      return 'Pour réserver une chambre :\n\n📞 Contactez l\'Hôtel Royal Versailles au 01 30 84 50 00\n📧 Email : reservation@royalversailles.fr\n🔑 Code promo : "JOEL-EUNICE" pour le tarif préférentiel\n\nOu contactez-nous directement pour nous aider !';
+    }
+    
+    if (lowerMessage.includes('proche') || lowerMessage.includes('près') || lowerMessage.includes('distance')) {
+      return 'Les hôtels recommandés sont tous à proximité :\n\n📍 Hôtel Royal Versailles : 5 min du château (à pied)\n📍 Hôtel Trianon Palace : 10 min du château (à pied)\n📍 Hôtel Mercure : 15 min du château (voiture/taxi)\n📍 Hôtel Ibis : 20 min du château (voiture/taxi)\n\nTous sont facilement accessibles depuis l\'église et le château !';
+    }
+    
+    if (lowerMessage.includes('horaire') || lowerMessage.includes('heure') || lowerMessage.includes('timing')) {
+      return 'Voici les horaires principaux :\n\n⏰ 14h00 - Début de la cérémonie religieuse\n⏰ 15h30 - Cocktail et photos\n⏰ 18h00 - Début de la réception\n⏰ 19h00 - Dîner\n⏰ 21h00 - Première danse\n⏰ 02h00 - Fin de soirée\n\nLe programme complet est disponible sur le site !';
+    }
+    
     if (lowerMessage.includes('merci') || lowerMessage.includes('thanks')) {
       return 'De rien ! Je suis là pour vous aider. N\'hésitez pas si vous avez d\'autres questions !';
     }
@@ -78,10 +110,10 @@ const Chatbot: React.FC = React.memo(() => {
     
     // Réponses par défaut
     const defaultResponses = [
-      'Je ne suis pas sûr de comprendre. Pouvez-vous reformuler votre question ?',
-      'Je suis spécialement conçu pour répondre aux questions sur le mariage de Joel & Eunice. Essayez de me demander quelque chose sur la date, le lieu, ou le RSVP !',
-      'Désolé, je n\'ai pas la réponse à cette question. Mais je peux vous aider avec les informations sur le mariage !',
-      'Je suis là pour vous aider avec les détails du mariage. Que souhaitez-vous savoir ?'
+      'Je suis spécialement conçu pour répondre aux questions sur le mariage de Joel & Eunice. Essayez de me demander quelque chose sur la date, le lieu, le déroulement, le logement, le parking, ou les transports !',
+      'Je peux vous aider avec les informations sur le mariage : date, lieu, programme, logement, parking, location de voitures, etc. Que souhaitez-vous savoir ?',
+      'Désolé, je n\'ai pas la réponse à cette question. Mais je peux vous aider avec les détails du mariage de Joel & Eunice !',
+      'Je suis là pour vous aider avec tous les détails du mariage. Que souhaitez-vous savoir ?'
     ];
     
     return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
@@ -140,8 +172,11 @@ const Chatbot: React.FC = React.memo(() => {
   const quickQuestions = [
     'Quelle est la date ?',
     'Où se déroule le mariage ?',
-    'Comment confirmer ma présence ?',
-    'Quel est le code vestimentaire ?'
+    'Quel est le déroulement ?',
+    'Où puis-je dormir ?',
+    'Comment réserver une chambre ?',
+    'Y a-t-il un parking ?',
+    'Comment se rendre sur place ?'
   ];
 
   const handleQuickQuestion = useCallback((question: string) => {
