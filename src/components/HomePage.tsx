@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import './HomePage.css';
 import CountdownTimer from './CountdownTimer';
 import './CountdownTimer.css';
+import OptimizedImage from './OptimizedImage';
+import './OptimizedImage.css';
+import { optimizeImageLoading, preloadCriticalImages } from '../utils/imageOptimization';
 import image1 from '../images/1.jpeg';
 import image2 from '../images/_MT_0042.jpeg';
 import image3 from '../images/_MT_0117.jpeg';
@@ -11,35 +14,68 @@ import image5 from '../images/_MT_0194.jpeg';
 import image6 from '../images/_MT_0204.jpeg';
 import image7 from '../images/_MT_0221.jpeg';
 import image8 from '../images/_MT_0236.jpeg';
+import image9 from '../images/_MT_0021.jpeg';
+import image10 from '../images/_MT_0251.jpeg';
+import image11 from '../images/_MT_0320.jpeg';
+import image12 from '../images/_MT_0326.jpeg';
+import image13 from '../images/_MT_0336.jpeg';
+import image14 from '../images/_MT_0357.jpeg';
+import image15 from '../images/_MT_0389.jpeg';
+import image16 from '../images/_MT_0575.jpeg';
+import image17 from '../images/_MT_0581.jpeg';
+import image18 from '../images/_MT_0584.jpeg';
+import image19 from '../images/_MT_0592.jpeg';
+import image20 from '../images/_MT_0602.jpeg';
+import image21 from '../images/_MT_0606.jpeg';
+import image22 from '../images/_MT_0647.jpeg';
+import image23 from '../images/_MT_9965.jpeg';
 
 const HomePage: React.FC = React.memo(() => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [fade, setFade] = useState(true);
   const [isVisible, setIsVisible] = useState(false);
 
-  // Mémoriser les images pour éviter les re-renders
-  const heroImages = useMemo(() => [image1, image2, image3, image4], []);
+  // Mémoriser les images pour éviter les re-renders - Réduit à 2 images pour les performances
+  const heroImages = useMemo(() => [image1, image2], []);
 
   // Date du mariage (29 août 2025) - mémorisé
   const weddingDate = useMemo(() => new Date('2025-08-29T14:00:00'), []);
 
-  // Rotation automatique des images optimisée
+  // Rotation automatique des images optimisée - Désactivée pour les performances
   useEffect(() => {
-    const interval = setInterval(() => {
-      setFade(false);
-      setTimeout(() => {
-        setCurrentImageIndex((prev) => (prev + 1) % heroImages.length);
-        setFade(true);
-      }, 300); // Réduit de 500ms à 300ms
-    }, 5000);
+    // Désactivé temporairement pour améliorer les performances
+    // const interval = setInterval(() => {
+    //   setFade(false);
+    //   setTimeout(() => {
+    //     setCurrentImageIndex((prev) => (prev + 1) % heroImages.length);
+    //     setFade(true);
+    //   }, 300);
+    // }, 8000); // Augmenté à 8 secondes
 
-    return () => clearInterval(interval);
+    // return () => clearInterval(interval);
   }, [heroImages.length]);
 
   // Animation d'entrée
   useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), 50); // Réduit de 100ms à 50ms
     return () => clearTimeout(timer);
+  }, []);
+
+  // Optimisation du chargement des images
+  useEffect(() => {
+    const allImages = [
+      image1, image2, image3, image4, image5, image6, image7, image8,
+      image9, image10, image11, image12, image13, image14, image15, image16,
+      image17, image18, image19, image20, image21, image22, image23
+    ];
+    
+    // Précharger les images critiques en premier
+    preloadCriticalImages(allImages).then(() => {
+      console.log('Images critiques préchargées');
+    });
+    
+    // Optimiser le chargement de toutes les images
+    optimizeImageLoading(allImages);
   }, []);
 
   // Optimiser la fonction de scroll
@@ -87,7 +123,15 @@ const HomePage: React.FC = React.memo(() => {
     { image: image5, time: '21h00', title: 'Première Danse', description: 'Ouverture du bal' },
     { image: image6, time: '22h00', title: 'Soirée Dansante', description: 'Ambiance festive' },
     { image: image7, time: '00h00', title: 'Gâteau de Mariage', description: 'Cérémonie du gâteau' },
-    { image: image8, time: '02h00', title: 'Fin de Soirée', description: 'Au revoir et merci' }
+    { image: image8, time: '02h00', title: 'Fin de Soirée', description: 'Au revoir et merci' },
+    { image: image9, time: '14h30', title: 'Échange des Vœux', description: 'Moment solennel' },
+    { image: image10, time: '16h00', title: 'Photos de Groupe', description: 'Souvenirs immortels' },
+    { image: image11, time: '18h30', title: 'Entrée des Mariés', description: 'Accueil festif' },
+    { image: image12, time: '20h00', title: 'Discours', description: 'Mots d\'amour' },
+    { image: image13, time: '21h30', title: 'Ouverture du Bal', description: 'Première danse' },
+    { image: image14, time: '23h00', title: 'Ambiance Festive', description: 'Danse et joie' },
+    { image: image15, time: '01h00', title: 'Lancer du Bouquet', description: 'Traditions' },
+    { image: image16, time: '01h30', title: 'Dernière Danse', description: 'Moment romantique' }
   ], []);
 
   return (
@@ -100,6 +144,12 @@ const HomePage: React.FC = React.memo(() => {
             alt="Couple de mariés"
             className={`hero-image ${fade ? 'fade-in' : 'fade-out'}`}
             loading="eager"
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              display: 'block'
+            }}
           />
           <div className="hero-overlay"></div>
         </div>
@@ -136,7 +186,17 @@ const HomePage: React.FC = React.memo(() => {
               </p>
             </div>
             <div className="story-image animate-slide-in-right">
-              <img src={image2} alt="Notre histoire" loading="lazy" />
+              <img 
+                src={image2} 
+                alt="Notre histoire" 
+                loading="eager"
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  display: 'block'
+                }}
+              />
             </div>
           </div>
         </div>
@@ -152,9 +212,21 @@ const HomePage: React.FC = React.memo(() => {
             {timelinePhotos.map((item, index) => (
               <div key={`timeline-item-${item.title.replace(/\s+/g, '-')}-${index}`} className={`timeline-item ${index % 2 === 0 ? 'left' : 'right'}`}>
                 <div className="timeline-content">
-                  <div className="timeline-photo">
-                    <img src={item.image} alt={item.title} loading="lazy" />
-                  </div>
+                                  <div className="timeline-photo">
+                  <img 
+                    src={item.image} 
+                    alt={item.title} 
+                    loading={index < 4 ? "eager" : "lazy"}
+                    style={{
+                      width: '100%',
+                      height: 'auto',
+                      maxHeight: '400px',
+                      objectFit: 'contain',
+                      display: 'block',
+                      backgroundColor: 'transparent'
+                    }}
+                  />
+                </div>
                   <div className="timeline-info">
                     <div className="timeline-time">{item.time}</div>
                     <h3 className="timeline-title">{item.title}</h3>

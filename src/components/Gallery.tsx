@@ -8,6 +8,21 @@ import image5 from '../images/_MT_0194.jpeg';
 import image6 from '../images/_MT_0204.jpeg';
 import image7 from '../images/_MT_0221.jpeg';
 import image8 from '../images/_MT_0236.jpeg';
+import image9 from '../images/_MT_0021.jpeg';
+import image10 from '../images/_MT_0251.jpeg';
+import image11 from '../images/_MT_0320.jpeg';
+import image12 from '../images/_MT_0326.jpeg';
+import image13 from '../images/_MT_0336.jpeg';
+import image14 from '../images/_MT_0357.jpeg';
+import image15 from '../images/_MT_0389.jpeg';
+import image16 from '../images/_MT_0575.jpeg';
+import image17 from '../images/_MT_0581.jpeg';
+import image18 from '../images/_MT_0584.jpeg';
+import image19 from '../images/_MT_0592.jpeg';
+import image20 from '../images/_MT_0602.jpeg';
+import image21 from '../images/_MT_0606.jpeg';
+import image22 from '../images/_MT_0647.jpeg';
+import image23 from '../images/_MT_9965.jpeg';
 
 const Gallery: React.FC = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -18,10 +33,25 @@ const Gallery: React.FC = () => {
     { src: image2, alt: 'Photo romantique 2', category: 'romantic' },
     { src: image3, alt: 'Photo de couple 1', category: 'couple' },
     { src: image4, alt: 'Photo de couple 2', category: 'couple' },
-         { src: image5, alt: 'Photo d&apos;engagement 1', category: 'engagement' },
-     { src: image6, alt: 'Photo d&apos;engagement 2', category: 'engagement' },
-     { src: image7, alt: 'Photo de préparation 1', category: 'preparation' },
-     { src: image8, alt: 'Photo de préparation 2', category: 'preparation' }
+    { src: image5, alt: 'Photo d\'engagement 1', category: 'engagement' },
+    { src: image6, alt: 'Photo d\'engagement 2', category: 'engagement' },
+    { src: image7, alt: 'Photo de préparation 1', category: 'preparation' },
+    { src: image8, alt: 'Photo de préparation 2', category: 'preparation' },
+    { src: image9, alt: 'Photo romantique 3', category: 'romantic' },
+    { src: image10, alt: 'Photo de couple 3', category: 'couple' },
+    { src: image11, alt: 'Photo d\'engagement 3', category: 'engagement' },
+    { src: image12, alt: 'Photo de préparation 3', category: 'preparation' },
+    { src: image13, alt: 'Photo romantique 4', category: 'romantic' },
+    { src: image14, alt: 'Photo de couple 4', category: 'couple' },
+    { src: image15, alt: 'Photo d\'engagement 4', category: 'engagement' },
+    { src: image16, alt: 'Photo de préparation 4', category: 'preparation' },
+    { src: image17, alt: 'Photo romantique 5', category: 'romantic' },
+    { src: image18, alt: 'Photo de couple 5', category: 'couple' },
+    { src: image19, alt: 'Photo d\'engagement 5', category: 'engagement' },
+    { src: image20, alt: 'Photo de préparation 5', category: 'preparation' },
+    { src: image21, alt: 'Photo romantique 6', category: 'romantic' },
+    { src: image22, alt: 'Photo de couple 6', category: 'couple' },
+    { src: image23, alt: 'Photo d\'engagement 6', category: 'engagement' }
   ];
 
   const categories = [
