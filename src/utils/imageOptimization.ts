@@ -1,84 +1,55 @@
-// Utilitaires d'optimisation des images
-
-// Configuration pour l'optimisation des images
-export const IMAGE_CONFIG = {
-  // Qualité de compression pour les images
+// Configuration des images
+const IMAGE_CONFIG = {
   quality: 0.8,
-  
-  // Formats supportés
-  formats: ['webp', 'jpeg', 'png'],
-  
-  // Tailles d'images pour différentes résolutions
   sizes: {
-    thumbnail: 150,
-    small: 300,
-    medium: 600,
+    small: 480,
+    medium: 768,
     large: 1200,
     hero: 1920
   },
-  
-  // Lazy loading offset
-  lazyOffset: 50
+  lazyThreshold: 0.1
 };
 
-// Fonction pour créer des placeholders d'images
+// Cache pour éviter les rechargements multiples
+const preloadCache = new Set<string>();
+
+// Fonction pour créer un placeholder SVG
 export const createImagePlaceholder = (width: number, height: number, text: string = 'Loading...') => {
-  const canvas = document.createElement('canvas');
-  canvas.width = width;
-  canvas.height = height;
-  const ctx = canvas.getContext('2d');
-  
-  if (ctx) {
-    // Fond gris clair
-    ctx.fillStyle = '#f5f5f5';
-    ctx.fillRect(0, 0, width, height);
-    
-    // Texte de chargement
-    ctx.fillStyle = '#999';
-    ctx.font = '14px Arial, sans-serif';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText(text, width / 2, height / 2);
-  }
-  
-  return canvas.toDataURL();
+  return `data:image/svg+xml;base64,${btoa(`
+    <svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100%" height="100%" fill="#f0f0f0"/>
+      <text x="50%" y="50%" font-family="Arial, sans-serif" font-size="14" fill="#666" text-anchor="middle" dy=".3em">${text}</text>
+    </svg>
+  `)}`;
 };
 
-// Optimisation du chargement des images
+// Fonction optimisée pour le chargement d'images
 export const optimizeImageLoading = (images: string[]) => {
-  // Créer un pool de préchargement
-  const imagePool: HTMLImageElement[] = [];
-  
-  images.forEach((src, index) => {
-    const img = new Image();
-    
-    // Optimisations pour un chargement plus rapide
-    img.crossOrigin = 'anonymous';
-    img.decoding = 'async';
-    
-    img.onload = () => {
-      console.log(`Image ${index + 1} chargée avec succès`);
-      // Ajouter à la pool pour réutilisation
-      imagePool.push(img);
-    };
-    
-    img.onerror = () => {
-      console.warn(`Erreur de chargement pour l'image ${index + 1}: ${src}`);
-    };
-    
-    // Charger l'image
-    img.src = src;
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const img = entry.target as HTMLImageElement;
+        const src = img.dataset.src;
+        if (src) {
+          img.src = src;
+          img.removeAttribute('data-src');
+          observer.unobserve(img);
+        }
+      }
+    });
+  }, {
+    rootMargin: `${IMAGE_CONFIG.lazyThreshold * 100}%`
   });
-  
-  return imagePool;
+
+  return observer;
 };
 
-// Fonction pour précharger les images critiques
+// Fonction optimisée pour précharger les images critiques
 const preloadCriticalImages = (images: string[]): Promise<void> => {
-  return new Promise<void>((resolve, reject) => {
+  return new Promise<void>((resolve) => {
     try {
       let loadedCount = 0;
-      const criticalImages = images.slice(0, 4); // Les 4 premières images
+      const criticalImages = images.slice(0, 2); // Réduire à 2 images seulement
       
       if (criticalImages.length === 0) {
         resolve();
@@ -86,23 +57,39 @@ const preloadCriticalImages = (images: string[]): Promise<void> => {
       }
       
       criticalImages.forEach((src) => {
+        // Éviter les rechargements multiples
+        if (preloadCache.has(src)) {
+          loadedCount++;
+          if (loadedCount === criticalImages.length) {
+            resolve();
+          }
+          return;
+        }
+        
+        preloadCache.add(src);
         const img = new Image();
+        
         img.onload = () => {
           loadedCount++;
           if (loadedCount === criticalImages.length) {
             resolve();
           }
         };
+        
         img.onerror = () => {
           loadedCount++;
           if (loadedCount === criticalImages.length) {
             resolve();
           }
         };
+        
         img.src = src;
       });
     } catch (error) {
-      console.error('Error in preloadCriticalImages:', error);
+      // Supprimer les logs en production
+      if (process.env.NODE_ENV === 'development') {
+        console.warn('Error in preloadCriticalImages:', error);
+      }
       resolve(); // Resolve anyway to prevent blocking
     }
   });
@@ -170,6 +157,7 @@ export const cacheImage = (src: string): Promise<HTMLImageElement> => {
 // Fonction pour nettoyer le cache
 export const clearImageCache = () => {
   imageCache.clear();
+  preloadCache.clear();
 };
 
 // Fonction pour obtenir la taille optimale d'image selon l'écran

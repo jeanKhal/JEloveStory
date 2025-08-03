@@ -28,7 +28,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = React.memo(({
   const imgRef = useRef<HTMLImageElement>(null);
   const observerRef = useRef<IntersectionObserver | null>(null);
 
-  // Observer pour le lazy loading
+  // Observer pour le lazy loading - optimisé
   useEffect(() => {
     if (priority || loading === 'eager') {
       setIsInView(true);
@@ -47,7 +47,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = React.memo(({
         });
       },
       {
-        rootMargin: '50px', // Charger 50px avant que l'image soit visible
+        rootMargin: '50px',
         threshold: 0.1
       }
     );
@@ -61,21 +61,21 @@ const OptimizedImage: React.FC<OptimizedImageProps> = React.memo(({
     };
   }, [priority, loading]);
 
-  // Gérer le chargement de l'image
+  // Gérer le chargement de l'image - optimisé
   const handleLoad = useCallback(() => {
     setIsLoaded(true);
     setHasError(false);
     onLoad?.();
   }, [onLoad]);
 
-  // Gérer les erreurs de chargement
+  // Gérer les erreurs de chargement - optimisé
   const handleError = useCallback(() => {
     setHasError(true);
     setIsLoaded(false);
     onError?.();
   }, [onError]);
 
-  // Charger l'image quand elle est en vue
+  // Charger l'image quand elle est en vue - optimisé
   useEffect(() => {
     if (isInView && imgRef.current) {
       const img = imgRef.current;
@@ -101,7 +101,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = React.memo(({
         onLoad={handleLoad}
         onError={handleError}
         style={{
-          opacity: isLoaded ? 1 : 0.8, // Légère transparence pendant le chargement
+          opacity: isLoaded ? 1 : 0.8,
           transition: 'opacity 0.3s ease-in-out'
         }}
       />

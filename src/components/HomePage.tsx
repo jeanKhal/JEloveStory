@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import './HomePage.css';
 import CountdownTimer from './CountdownTimer';
@@ -11,24 +11,25 @@ import chatImage from '../images/chat.png';
 // Réduire drastiquement le nombre d'images importées pour améliorer les performances
 import image1 from '../images/1.jpeg';
 import image2 from '../images/_MT_0042.jpeg';
-// Supprimer les imports des autres images pour le moment
 
 const HomePage: React.FC = React.memo(() => {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [fade, setFade] = useState(true);
   const [isVisible, setIsVisible] = useState(false);
   const [imagesLoaded, setImagesLoaded] = useState(false);
+  const hasLoadedRef = useRef(false);
 
-  // Utiliser seulement 2 images pour la page d'accueil
+  // Utiliser seulement 2 images pour la page d'accueil - mémorisé avec dépendances stables
   const heroImages = useMemo(() => [image1, image2], []);
 
-  // Date du mariage (29 août 2025) - mémorisé
+  // Date du mariage (29 août 2025) - mémorisé avec dépendances stables
   const weddingDate = useMemo(() => new Date('2025-08-29T14:00:00'), []);
 
-  // Chargement optimisé des images critiques seulement
+  // Chargement optimisé des images critiques seulement - une seule fois
   useEffect(() => {
+    if (hasLoadedRef.current) return; // Éviter les rechargements multiples
+    
     const loadCriticalImages = async () => {
       try {
+        hasLoadedRef.current = true;
         // Précharger seulement les 2 images critiques
         await imageOptimization.preloadCriticalImages(heroImages);
         setImagesLoaded(true);
@@ -39,23 +40,15 @@ const HomePage: React.FC = React.memo(() => {
     };
 
     loadCriticalImages();
-  }, [heroImages]);
+  }, [heroImages]); // Ajouter heroImages comme dépendance
 
-  // Animation d'entrée
+  // Animation d'entrée - une seule fois
   useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), 50);
     return () => clearTimeout(timer);
-  }, []);
+  }, []); // Dépendances vides
 
-  // Optimiser la fonction de scroll
-  const scrollToSection = useCallback((sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  }, []);
-
-  // Mémoriser les actions rapides
+  // Mémoriser les actions rapides avec dépendances stables
   const quickActions = useMemo(() => [
     {
       to: '/invitations',
@@ -81,16 +74,16 @@ const HomePage: React.FC = React.memo(() => {
       title: 'Galerie Photos',
       description: 'Revivez nos moments'
     }
-  ], []);
+  ], []); // Dépendances vides
 
-  // Mémoriser les événements du programme
+  // Mémoriser les événements du programme avec dépendances stables
   const programEvents = useMemo(() => [
     { time: '14h00', title: 'Cérémonie Religieuse', description: 'Église Saint-Pierre' },
     { time: '15h30', title: 'Cocktail', description: 'Accueil festif' },
     { time: '18h30', title: 'Entrée des Mariés', description: 'Accueil festif' },
     { time: '19h00', title: 'Dîner', description: 'Réception' },
     { time: '22h00', title: 'Soirée Dansante', description: 'Ambiance festive' }
-  ], []);
+  ], []); // Dépendances vides
 
   if (!imagesLoaded) {
     return (
@@ -120,9 +113,9 @@ const HomePage: React.FC = React.memo(() => {
       <section className="hero-section" id="hero">
         <div className="hero-background">
           <OptimizedImage
-            src={heroImages[currentImageIndex]}
+            src={heroImages[0]} // Utiliser toujours la première image pour éviter les changements
             alt="Joel & Eunice"
-            className={`hero-image ${fade ? 'fade-in' : 'fade-out'}`}
+            className="hero-image fade-in"
             loading="eager"
             priority={true}
           />
@@ -156,7 +149,7 @@ const HomePage: React.FC = React.memo(() => {
           <h2 className="section-title">Actions Rapides</h2>
           <div className="quick-actions-grid">
             {quickActions.map((action, index) => (
-              <Link key={index} to={action.to} className="quick-action-card">
+              <Link key={`action-${index}`} to={action.to} className="quick-action-card">
                 <div className="action-icon">{action.icon}</div>
                 <h3 className="action-title">{action.title}</h3>
                 <p className="action-description">{action.description}</p>
@@ -172,7 +165,7 @@ const HomePage: React.FC = React.memo(() => {
           <h2 className="section-title">Programme de la Journée</h2>
           <div className="program-timeline">
             {programEvents.map((event, index) => (
-              <div key={index} className="program-event">
+              <div key={`event-${index}`} className="program-event">
                 <div className="event-time">{event.time}</div>
                 <div className="event-content">
                   <h3 className="event-title">{event.title}</h3>

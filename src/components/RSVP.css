@@ -404,6 +404,7 @@ body {
   .info-item {
     flex-direction: column;
     text-align: center;
+    gap: 0.5rem;
   }
 
   .info-item h3 {
@@ -418,21 +419,75 @@ body {
     flex-direction: column;
     text-align: center;
     gap: 0.5rem;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 2px solid rgba(212, 175, 55, 0.2);
+    margin-bottom: 0.8rem;
   }
 
   .radio-label {
     font-size: 0.95rem;
+    font-weight: 600;
   }
 
+  /* Améliorations des formulaires */
+  .form-group {
+    margin-bottom: 1.2rem;
+  }
+  
   .form-group label {
     font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+    display: block;
+    font-weight: 600;
   }
-
+  
   .form-group input,
   .form-group select,
   .form-group textarea {
     font-size: 16px; /* Évite le zoom sur iOS */
-    padding: 0.7rem;
+    padding: 0.8rem;
+    border-radius: 8px;
+    border: 2px solid rgba(212, 175, 55, 0.2);
+    width: 100%;
+    min-height: 44px; /* Taille minimale pour le tactile */
+  }
+  
+  .form-group textarea {
+    min-height: 100px;
+    resize: vertical;
+  }
+  
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+    outline: none;
+  }
+  
+  .btn-submit {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    min-height: 48px;
+    border-radius: 8px;
+  }
+  
+  /* Améliorations des options radio */
+  .radio-group {
+    gap: 0.8rem;
+  }
+  
+  .radio-option input[type="radio"] {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .radio-custom {
+    width: 20px;
+    height: 20px;
   }
 }
 
