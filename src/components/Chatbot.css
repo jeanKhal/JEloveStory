@@ -224,12 +224,14 @@
   animation: modalSlideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   box-shadow: 0 25px 80px rgba(0, 0, 0, 0.25);
   z-index: 9999;
+  /* Ajouter un écart avec la navbar */
+  margin-top: 60px;
 }
 
 .chatbot-window.active {
   opacity: 1;
   visibility: visible;
-  transform: translate(-50%, -50%) scale(1);
+  transform: translate(-50%, calc(-50% + 30px)) scale(1);
 }
 
 @keyframes modalSlideIn {
@@ -239,7 +241,7 @@
   }
   to {
     opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
+    transform: translate(-50%, calc(-50% + 30px)) scale(1);
   }
 }
 
@@ -624,6 +626,7 @@
     height: 70vh;
     max-height: 600px;
     border-radius: 20px;
+    margin-top: 50px; /* Réduire légèrement l'écart sur tablet */
   }
   
   .chatbot-header {
@@ -738,6 +741,7 @@
     height: 75vh;
     max-height: 550px;
     border-radius: 16px;
+    margin-top: 40px; /* Réduire encore plus l'écart sur mobile */
   }
   
   .chatbot-header {

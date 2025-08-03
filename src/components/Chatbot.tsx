@@ -73,7 +73,7 @@ const Chatbot: React.FC = React.memo(() => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 3000); // Animation de 3 secondes
+    }, 5000); // Animation de 5 secondes pour mieux apercevoir l'animation
 
     return () => clearTimeout(timer);
   }, []);
