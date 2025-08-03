@@ -177,22 +177,6 @@ const Chatbot: React.FC = React.memo(() => {
     }
   }, [inputValue, sendMessage]);
 
-  // Messages rapides suggérés
-  const quickQuestions = [
-    'Félicitations ! 🎉',
-    'Beaucoup de bonheur ! 💕',
-    'Que l\'amour vous guide ! 💖',
-    'Belle union ! 💒',
-    'Tous nos vœux ! ✨',
-    'Bonheur éternel ! 🌟',
-    'Amour et joie ! 💝',
-    'Vive les mariés ! 🥂'
-  ];
-
-  const handleQuickQuestion = useCallback((question: string) => {
-    sendMessage(question);
-  }, [sendMessage]);
-
   return (
     <div className="chatbot-container" ref={chatbotRef}>
       {/* Animation de chargement */}
@@ -289,24 +273,6 @@ const Chatbot: React.FC = React.memo(() => {
               
               <div ref={messagesEndRef} />
             </div>
-
-            {/* Messages rapides suggérés */}
-            {messages.length === 0 ? (
-              <div className="quick-questions">
-                <p>Messages suggérés :</p>
-                <div className="quick-questions-grid">
-                  {quickQuestions.map((question, index) => (
-                    <button
-                      key={`chatbot-question-${question.replace(/\s+/g, '-')}-${index}`}
-                      className="quick-question-btn"
-                      onClick={() => handleQuickQuestion(question)}
-                    >
-                      {question}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            ) : null}
 
             {/* Formulaire d'envoi */}
             <form className="chatbot-input-form" onSubmit={handleSubmit}>

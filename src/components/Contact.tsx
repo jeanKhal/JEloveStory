@@ -86,7 +86,7 @@ const Contact: React.FC = () => {
       <div className="container">
         <div className="contact-header">
           <h1>Contactez-nous</h1>
-          <p>Une question ? Un message ? N&apos;hésitez pas à nous contacter !</p>
+          <p>Un message ? N&apos;hésitez pas à nous contacter !</p>
         </div>
 
         <div className="contact-content">
@@ -149,7 +149,6 @@ const Contact: React.FC = () => {
                 required
               >
                 <option value="">Choisissez un sujet</option>
-                <option value="question">Question générale</option>
                 <option value="rsvp">Confirmation de présence</option>
                 <option value="logistics">Logistique</option>
                 <option value="other">Autre</option>

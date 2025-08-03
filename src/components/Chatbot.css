@@ -471,55 +471,6 @@
   }
 }
 
-/* Questions rapides */
-.quick-questions {
-  padding: 24px 28px;
-  border-top: 1px solid rgba(0, 0, 0, 0.08);
-  background: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(10px);
-}
-
-.quick-questions p {
-  margin: 0 0 16px 0;
-  font-size: 0.9rem;
-  color: var(--text-light);
-  font-weight: 600;
-  text-align: center;
-}
-
-.quick-questions-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-
-.quick-question-btn {
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(212, 175, 55, 0.2);
-  border-radius: 16px;
-  padding: 12px 16px;
-  font-size: 0.85rem;
-  color: var(--text-dark);
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  text-align: left;
-  line-height: 1.4;
-  font-weight: 500;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-.quick-question-btn:hover {
-  background: var(--primary-color);
-  color: var(--white);
-  border-color: var(--primary-color);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(212, 175, 55, 0.3);
-}
-
-.quick-question-btn:active {
-  transform: translateY(0);
-}
-
 /* Formulaire d'envoi */
 .chatbot-input-form {
   display: flex;
@@ -666,12 +617,12 @@
     height: 70px;
   }
   
-  /* Modal responsive */
+  /* Modal responsive - Garder une taille modérée */
   .chatbot-window {
-    width: 95%;
-    max-width: none;
-    height: 85vh;
-    max-height: none;
+    width: 90%;
+    max-width: 450px;
+    height: 70vh;
+    max-height: 600px;
     border-radius: 20px;
   }
   
@@ -697,17 +648,6 @@
   .chatbot-close svg {
     width: 18px;
     height: 18px;
-  }
-  
-  .quick-questions-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-  
-  .quick-question-btn {
-    padding: 16px 20px;
-    font-size: 0.9rem;
-    border-radius: 20px;
   }
   
   .message-content {
@@ -791,10 +731,12 @@
     height: 60px;
   }
   
-  /* Modal mobile */
+  /* Modal mobile - Taille modérée, pas plein écran */
   .chatbot-window {
-    width: 98%;
-    height: 90vh;
+    width: 95%;
+    max-width: 400px;
+    height: 75vh;
+    max-height: 550px;
     border-radius: 16px;
   }
   
@@ -845,16 +787,6 @@
     max-width: 90%;
     padding: 14px 18px;
     border-radius: 18px;
-  }
-  
-  .quick-questions {
-    padding: 16px 20px;
-  }
-  
-  .quick-question-btn {
-    padding: 14px 18px;
-    font-size: 0.85rem;
-    border-radius: 16px;
   }
   
   .typing-indicator {
