@@ -308,10 +308,23 @@ body {
   box-shadow: var(--shadow);
 }
 
-/* Responsive Design */
+/* Responsive Design - Amélioré */
+/* Large tablets and small desktops */
+@media (max-width: 1024px) {
+  .rsvp-content {
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+  }
+  
+  .rsvp-header h1 {
+    font-size: 2.8rem;
+  }
+}
+
+/* Tablets */
 @media (max-width: 768px) {
   .rsvp-page {
-    padding-top: calc(1.5rem + 80px); /* Ajustement pour mobile */
+    padding-top: calc(2rem + 80px);
   }
 
   .rsvp-content {
@@ -325,16 +338,14 @@ body {
 
   .rsvp-header h1 {
     font-size: 2.2rem;
-    line-height: 1.3;
   }
 
   .rsvp-header p {
     font-size: 1.1rem;
-    line-height: 1.5;
   }
 
   .rsvp-success h1 {
-    font-size: 2rem;
+    font-size: 2.2rem;
   }
 
   .rsvp-info,
@@ -348,17 +359,18 @@ body {
   }
 
   .info-item h3 {
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
 
   .info-item p {
-    font-size: 0.95rem;
+    font-size: 1rem;
   }
 }
 
-@media (max-width: 480px) {
+/* Mobile phones - Portrait */
+@media (max-width: 480px) and (orientation: portrait) {
   .rsvp-page {
-    padding-top: calc(1rem + 80px); /* Ajustement pour très petit écran */
+    padding-top: calc(1rem + 80px);
   }
 
   .container {
@@ -421,6 +433,67 @@ body {
   .form-group textarea {
     font-size: 16px; /* Évite le zoom sur iOS */
     padding: 0.7rem;
+  }
+}
+
+/* Mobile phones - Landscape */
+@media (max-width: 768px) and (orientation: landscape) {
+  .rsvp-header h1 {
+    font-size: 2rem;
+  }
+  
+  .rsvp-content {
+    gap: 1.5rem;
+  }
+  
+  .rsvp-info,
+  .rsvp-form {
+    padding: 1.2rem;
+  }
+  
+  .info-item {
+    padding: 1rem;
+  }
+  
+  .radio-option {
+    padding: 0.8rem;
+  }
+}
+
+/* Très petits écrans */
+@media (max-width: 320px) {
+  .rsvp-header h1 {
+    font-size: 1.6rem;
+  }
+  
+  .rsvp-success h1 {
+    font-size: 1.6rem;
+  }
+  
+  .rsvp-info,
+  .rsvp-form {
+    padding: 0.8rem;
+  }
+  
+  .rsvp-info h2,
+  .rsvp-form h2 {
+    font-size: 1.2rem;
+  }
+  
+  .info-item h3 {
+    font-size: 0.9rem;
+  }
+  
+  .info-item p {
+    font-size: 0.8rem;
+  }
+  
+  .radio-label {
+    font-size: 0.9rem;
+  }
+  
+  .form-group label {
+    font-size: 0.9rem;
   }
 }
 

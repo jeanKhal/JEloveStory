@@ -47,10 +47,10 @@ function AppContent() {
   }, []);
 
   useEffect(() => {
-    // Réduire le temps de chargement pour une meilleure UX
+    // Temps de chargement principal cohérent avec le reste de l'application
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 300); // Réduit de 500ms à 300ms
+    }, 2000); // 2 secondes pour bien voir l'animation et être cohérent
 
     return () => clearTimeout(timer);
   }, []);

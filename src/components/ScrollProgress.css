@@ -41,10 +41,39 @@
   }
 }
 
-/* Responsive adjustments */
+/* Responsive Design - Amélioré */
+/* Large tablets and small desktops */
+@media (max-width: 1024px) {
+  .scroll-progress-container {
+    height: 3px;
+  }
+}
+
+/* Tablets */
 @media (max-width: 768px) {
   .scroll-progress-container {
     height: 2px;
+  }
+}
+
+/* Mobile phones - Portrait */
+@media (max-width: 480px) and (orientation: portrait) {
+  .scroll-progress-container {
+    height: 2px;
+  }
+}
+
+/* Mobile phones - Landscape */
+@media (max-width: 768px) and (orientation: landscape) {
+  .scroll-progress-container {
+    height: 2px;
+  }
+}
+
+/* Très petits écrans */
+@media (max-width: 320px) {
+  .scroll-progress-container {
+    height: 1px;
   }
 }
 

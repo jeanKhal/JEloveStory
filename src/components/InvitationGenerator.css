@@ -403,7 +403,24 @@
   font-style: italic;
 }
 
-/* Responsive Design */
+/* Responsive Design - Amélioré */
+/* Large tablets and small desktops */
+@media (max-width: 1024px) {
+  .generator-content {
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+  }
+  
+  .generator-header h1 {
+    font-size: 2.8rem;
+  }
+  
+  .template-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Tablets */
 @media (max-width: 768px) {
   .generator-content {
     grid-template-columns: 1fr;
@@ -446,7 +463,8 @@
   }
 }
 
-@media (max-width: 480px) {
+/* Mobile phones - Portrait */
+@media (max-width: 480px) and (orientation: portrait) {
   .container {
     padding: 0 1rem;
   }
@@ -471,6 +489,74 @@
 
   .generator-header h1 {
     font-size: 1.8rem;
+  }
+  
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    font-size: 16px; /* Évite le zoom sur iOS */
+  }
+}
+
+/* Mobile phones - Landscape */
+@media (max-width: 768px) and (orientation: landscape) {
+  .generator-header h1 {
+    font-size: 1.8rem;
+  }
+  
+  .generator-content {
+    gap: 1.5rem;
+  }
+  
+  .form-section,
+  .template-section,
+  .preview-section {
+    padding: 1.2rem;
+  }
+  
+  .template-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .invitation-content {
+    padding: 1.5rem;
+  }
+  
+  .couple-names {
+    font-size: 1.6rem !important;
+  }
+}
+
+/* Très petits écrans */
+@media (max-width: 320px) {
+  .generator-header h1 {
+    font-size: 1.6rem;
+  }
+  
+  .form-section,
+  .template-section,
+  .preview-section {
+    padding: 1rem;
+  }
+  
+  .template-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .invitation-content {
+    padding: 1rem;
+  }
+  
+  .couple-names {
+    font-size: 1.5rem !important;
+  }
+  
+  .template-option {
+    padding: 1rem;
+  }
+  
+  .template-name {
+    font-size: 0.9rem;
   }
 }
 

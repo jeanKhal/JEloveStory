@@ -563,12 +563,36 @@
   position: relative;
 }
 
-/* Responsive Design - Amélioré */
-@media (max-width: 768px) {
+/* Responsive Design - Amélioré pour tous les navigateurs mobiles */
+/* Large tablets and small desktops */
+@media (max-width: 1024px) {
+  .chatbot-container {
+    bottom: 20px;
+    right: 20px;
+    margin-top: 80px;
+  }
+  
+  .loading-animation {
+    bottom: 20px;
+    right: 20px;
+    margin-top: 80px;
+  }
+  
+  .chatbot-window {
+    width: 85%;
+    max-width: 600px;
+    height: 75vh;
+    max-height: 650px;
+    margin-top: 60px;
+  }
+}
+
+/* Tablets */
+@media (max-width: 768px) and (min-width: 481px) {
   .chatbot-container {
     bottom: 15px;
     right: 15px;
-    margin-top: 70px; /* Réduire légèrement l'espace sur tablet */
+    margin-top: 70px;
   }
   
   .loading-animation {
@@ -626,7 +650,7 @@
     height: 70vh;
     max-height: 600px;
     border-radius: 20px;
-    margin-top: 50px; /* Réduire légèrement l'écart sur tablet */
+    margin-top: 50px;
   }
   
   .chatbot-header {
@@ -679,11 +703,12 @@
   }
 }
 
-@media (max-width: 480px) {
+/* Mobile phones - Portrait */
+@media (max-width: 480px) and (orientation: portrait) {
   .chatbot-container {
     bottom: 10px;
     right: 10px;
-    margin-top: 60px; /* Réduire encore plus l'espace sur mobile */
+    margin-top: 60px;
   }
   
   .loading-animation {
@@ -693,45 +718,45 @@
   }
   
   .loading-ring {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .loading-ring::before {
     width: 90px;
     height: 90px;
   }
   
-  .loading-ring::before {
+  .loading-ring::after {
     width: 110px;
     height: 110px;
   }
   
-  .loading-ring::after {
-    width: 130px;
-    height: 130px;
-  }
-  
   .loading-icon {
-    width: 60px;
-    height: 60px;
+    width: 45px;
+    height: 45px;
   }
   
   .wedding-date {
-    padding: 10px 14px;
+    padding: 8px 12px;
   }
   
   .date-text {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
   }
   
   .date-subtitle {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
   }
 
   .chatbot-toggle {
-    width: 90px;
-    height: 90px;
+    width: 70px;
+    height: 70px;
   }
 
   .chatbot-icon {
-    width: 60px;
-    height: 60px;
+    width: 45px;
+    height: 45px;
   }
   
   /* Modal mobile - Taille modérée, pas plein écran */
@@ -741,7 +766,7 @@
     height: 75vh;
     max-height: 550px;
     border-radius: 16px;
-    margin-top: 40px; /* Réduire encore plus l'écart sur mobile */
+    margin-top: 40px;
   }
   
   .chatbot-header {
@@ -796,6 +821,248 @@
   .typing-indicator {
     padding: 14px 18px;
     border-radius: 18px 18px 18px 4px;
+  }
+}
+
+/* Mobile phones - Landscape */
+@media (max-width: 768px) and (orientation: landscape) {
+  .chatbot-container {
+    bottom: 10px;
+    right: 10px;
+    margin-top: 50px;
+  }
+  
+  .loading-animation {
+    bottom: 10px;
+    right: 10px;
+    margin-top: 50px;
+  }
+  
+  .loading-ring {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .loading-ring::before {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .loading-ring::after {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .loading-icon {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .wedding-date {
+    padding: 6px 10px;
+  }
+  
+  .date-text {
+    font-size: 0.7rem;
+  }
+  
+  .date-subtitle {
+    font-size: 0.6rem;
+  }
+
+  .chatbot-toggle {
+    width: 60px;
+    height: 60px;
+  }
+
+  .chatbot-icon {
+    width: 40px;
+    height: 40px;
+  }
+  
+  /* Modal landscape - Plus petit */
+  .chatbot-window {
+    width: 90%;
+    max-width: 350px;
+    height: 80vh;
+    max-height: 400px;
+    border-radius: 16px;
+    margin-top: 30px;
+  }
+  
+  .chatbot-header {
+    border-radius: 16px 16px 0 0;
+    padding: 12px 16px;
+  }
+  
+  .chatbot-header-info h3 {
+    font-size: 0.85rem;
+  }
+  
+  .chatbot-header-icon {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .chatbot-close {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .chatbot-close svg {
+    width: 14px;
+    height: 14px;
+  }
+  
+  .chatbot-messages {
+    padding: 12px 16px;
+  }
+  
+  .chatbot-input-form {
+    padding: 12px 16px;
+  }
+  
+  .chatbot-input {
+    font-size: 16px;
+    padding: 12px 16px;
+    border-radius: 18px;
+  }
+  
+  .chatbot-send {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .message-content {
+    max-width: 90%;
+    padding: 12px 16px;
+    border-radius: 16px;
+  }
+  
+  .typing-indicator {
+    padding: 12px 16px;
+    border-radius: 16px 16px 16px 4px;
+  }
+}
+
+/* Très petits écrans */
+@media (max-width: 320px) {
+  .chatbot-container {
+    bottom: 8px;
+    right: 8px;
+    margin-top: 50px;
+  }
+  
+  .loading-animation {
+    bottom: 8px;
+    right: 8px;
+    margin-top: 50px;
+  }
+  
+  .loading-ring {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .loading-ring::before {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .loading-ring::after {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .loading-icon {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .wedding-date {
+    padding: 6px 8px;
+  }
+  
+  .date-text {
+    font-size: 0.7rem;
+  }
+  
+  .date-subtitle {
+    font-size: 0.6rem;
+  }
+
+  .chatbot-toggle {
+    width: 60px;
+    height: 60px;
+  }
+
+  .chatbot-icon {
+    width: 35px;
+    height: 35px;
+  }
+  
+  /* Modal très petit écran */
+  .chatbot-window {
+    width: 98%;
+    max-width: 300px;
+    height: 70vh;
+    max-height: 450px;
+    border-radius: 12px;
+    margin-top: 30px;
+  }
+  
+  .chatbot-header {
+    border-radius: 12px 12px 0 0;
+    padding: 12px 14px;
+  }
+  
+  .chatbot-header-info h3 {
+    font-size: 0.8rem;
+  }
+  
+  .chatbot-header-icon {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .chatbot-close {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .chatbot-close svg {
+    width: 12px;
+    height: 12px;
+  }
+  
+  .chatbot-messages {
+    padding: 10px 14px;
+  }
+  
+  .chatbot-input-form {
+    padding: 10px 14px;
+  }
+  
+  .chatbot-input {
+    font-size: 16px;
+    padding: 10px 14px;
+    border-radius: 16px;
+  }
+  
+  .chatbot-send {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .message-content {
+    max-width: 95%;
+    padding: 10px 14px;
+    border-radius: 14px;
+  }
+  
+  .typing-indicator {
+    padding: 10px 14px;
+    border-radius: 14px 14px 14px 4px;
   }
 }
 

@@ -347,7 +347,20 @@
 .gallery-item:nth-child(7) { animation-delay: 0.7s; }
 .gallery-item:nth-child(8) { animation-delay: 0.8s; }
 
-/* Responsive Design */
+/* Responsive Design - Amélioré */
+/* Large tablets and small desktops */
+@media (max-width: 1024px) {
+  .gallery-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .gallery-title {
+    font-size: 3rem;
+  }
+}
+
+/* Tablets */
 @media (max-width: 768px) {
   .gallery-title {
     font-size: 2.5rem;
@@ -383,7 +396,8 @@
   }
 }
 
-@media (max-width: 480px) {
+/* Mobile phones - Portrait */
+@media (max-width: 480px) and (orientation: portrait) {
   .container {
     padding: 0 1rem;
   }
@@ -425,5 +439,66 @@
   .stat-item {
     font-size: 0.8rem;
     padding: 0.4rem 0.8rem;
+  }
+}
+
+/* Mobile phones - Landscape */
+@media (max-width: 768px) and (orientation: landscape) {
+  .gallery-title {
+    font-size: 2.2rem;
+  }
+  
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+  }
+  
+  .category-filters {
+    gap: 0.4rem;
+  }
+  
+  .category-filter {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.8rem;
+  }
+  
+  .nav-button {
+    width: 35px;
+    height: 35px;
+    font-size: 1.2rem;
+  }
+}
+
+/* Très petits écrans */
+@media (max-width: 320px) {
+  .gallery-title {
+    font-size: 1.8rem;
+  }
+  
+  .gallery-grid {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+  
+  .category-filter {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.75rem;
+  }
+  
+  .modal-close {
+    width: 30px;
+    height: 30px;
+    font-size: 1rem;
+  }
+  
+  .nav-button {
+    width: 30px;
+    height: 30px;
+    font-size: 1rem;
+  }
+  
+  .stat-item {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.6rem;
   }
 } 

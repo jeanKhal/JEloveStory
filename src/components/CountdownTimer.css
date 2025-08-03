@@ -121,7 +121,33 @@
   line-height: 1.5;
 }
 
-/* Responsive Design */
+/* Responsive Design - Amélioré */
+/* Large tablets and small desktops */
+@media (max-width: 1024px) {
+  .countdown-line {
+    padding: 1.5rem 2rem;
+    gap: 0.5rem;
+  }
+  
+  .countdown-number {
+    font-size: 2.5rem;
+  }
+  
+  .countdown-label {
+    font-size: 0.8rem;
+  }
+  
+  .countdown-separator {
+    font-size: 2rem;
+    margin: 0 0.5rem;
+  }
+  
+  .countdown-segment {
+    min-width: 70px;
+  }
+}
+
+/* Tablets */
 @media (max-width: 768px) {
   .countdown-line {
     padding: 1rem 1.5rem;
@@ -146,7 +172,8 @@
   }
 }
 
-@media (max-width: 480px) {
+/* Mobile phones - Portrait */
+@media (max-width: 480px) and (orientation: portrait) {
   .countdown-line {
     padding: 0.75rem 1rem;
     gap: 0.2rem;
@@ -168,6 +195,57 @@
   
   .countdown-segment {
     min-width: 40px;
+  }
+}
+
+/* Mobile phones - Landscape */
+@media (max-width: 768px) and (orientation: landscape) {
+  .countdown-line {
+    padding: 0.8rem 1.2rem;
+    gap: 0.2rem;
+  }
+  
+  .countdown-number {
+    font-size: 1.8rem;
+  }
+  
+  .countdown-label {
+    font-size: 0.65rem;
+  }
+  
+  .countdown-separator {
+    font-size: 1.3rem;
+    margin: 0 0.2rem;
+  }
+  
+  .countdown-segment {
+    min-width: 45px;
+  }
+}
+
+/* Très petits écrans */
+@media (max-width: 320px) {
+  .countdown-line {
+    padding: 0.6rem 0.8rem;
+    gap: 0.15rem;
+    border-radius: 20px;
+  }
+  
+  .countdown-number {
+    font-size: 1.3rem;
+  }
+  
+  .countdown-label {
+    font-size: 0.55rem;
+  }
+  
+  .countdown-separator {
+    font-size: 1rem;
+    margin: 0 0.15rem;
+  }
+  
+  .countdown-segment {
+    min-width: 35px;
   }
 }
 
