@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import './Gallery.css';
+import OptimizedImage from './OptimizedImage';
+
+// Importer toutes les images du dossier images
 import image1 from '../images/1.jpeg';
 import image2 from '../images/_MT_0042.jpeg';
 import image3 from '../images/_MT_0117.jpeg';
@@ -27,8 +30,11 @@ import image23 from '../images/_MT_9965.jpeg';
 const Gallery: React.FC = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
 
-  const images = [
+  // Utiliser toutes les images disponibles avec des catégories
+  const images = useMemo(() => [
     { src: image1, alt: 'Photo romantique 1', category: 'romantic' },
     { src: image2, alt: 'Photo romantique 2', category: 'romantic' },
     { src: image3, alt: 'Photo de couple 1', category: 'couple' },
@@ -52,21 +58,27 @@ const Gallery: React.FC = () => {
     { src: image21, alt: 'Photo romantique 6', category: 'romantic' },
     { src: image22, alt: 'Photo de couple 6', category: 'couple' },
     { src: image23, alt: 'Photo d\'engagement 6', category: 'engagement' }
-  ];
+  ], []);
 
-  const categories = [
+  const categories = useMemo(() => [
     { id: 'all', name: 'Toutes', icon: '📸' },
     { id: 'romantic', name: 'Romantiques', icon: '💕' },
     { id: 'couple', name: 'Couple', icon: '👫' },
     { id: 'engagement', name: 'Fiançailles', icon: '💍' },
     { id: 'preparation', name: 'Préparation', icon: '🎀' }
-  ];
+  ], []);
 
-  const [selectedCategory, setSelectedCategory] = useState('all');
+  // Filtrer les images selon la catégorie
+  const filteredImages = useMemo(() => {
+    return selectedCategory === 'all' 
+      ? images 
+      : images.filter(img => img.category === selectedCategory);
+  }, [images, selectedCategory]);
 
-  const filteredImages = selectedCategory === 'all' 
-    ? images 
-    : images.filter(img => img.category === selectedCategory);
+  // Gérer le chargement des images
+  const handleImageLoad = (src: string) => {
+    setLoadedImages(prev => new Set(prev).add(src));
+  };
 
   const openModal = (imageSrc: string, index: number) => {
     setSelectedImage(imageSrc);
@@ -100,108 +112,108 @@ const Gallery: React.FC = () => {
   };
 
   return (
-    <div className="gallery-page" onKeyDown={handleKeyDown} tabIndex={0}>
-      <div className="container">
-        <div className="gallery-header">
-          <h1>Notre Galerie</h1>
-          <p>Revivez nos moments précieux ensemble</p>
+    <div className="gallery-container" onKeyDown={handleKeyDown} tabIndex={0}>
+      <div className="gallery-header">
+        <h1 className="gallery-title">Galerie Photos</h1>
+        <p className="gallery-subtitle">Revivez nos moments précieux</p>
+        <div className="gallery-stats">
+          <span className="stat-item">{images.length} photos</span>
+          <span className="stat-item">{categories.length - 1} catégories</span>
         </div>
+      </div>
 
-        {/* Filtres par catégorie */}
-        <div className="gallery-filters">
-          {categories.map(category => (
-            <button
-              key={category.id}
-              className={`filter-btn ${selectedCategory === category.id ? 'active' : ''}`}
-              onClick={() => setSelectedCategory(category.id)}
-            >
-              <span className="filter-icon">{category.icon}</span>
-              <span className="filter-name">{category.name}</span>
-            </button>
-          ))}
-        </div>
+      {/* Filtres de catégories */}
+      <div className="category-filters">
+        {categories.map((category) => (
+          <button
+            key={category.id}
+            className={`category-filter ${selectedCategory === category.id ? 'active' : ''}`}
+            onClick={() => setSelectedCategory(category.id)}
+          >
+            <span className="category-icon">{category.icon}</span>
+            <span className="category-name">{category.name}</span>
+            {category.id !== 'all' && (
+              <span className="category-count">
+                ({images.filter(img => img.category === category.id).length})
+              </span>
+            )}
+          </button>
+        ))}
+      </div>
 
-        {/* Grille de photos */}
-        <div className="gallery-grid">
-          {filteredImages.map((image, index) => (
-            <div
-              key={`gallery-item-${image.alt.replace(/\s+/g, '-')}-${index}`}
-              className="gallery-item"
-              onClick={() => openModal(image.src, index)}
-            >
-              <img
-                src={image.src}
-                alt={image.alt}
-                loading="lazy"
-              />
-              <div className="gallery-item-overlay">
-                <div className="overlay-content">
-                  <span className="zoom-icon">🔍</span>
-                  <p className="image-caption">{image.alt}</p>
-                </div>
-              </div>
+      {/* Grille d'images avec lazy loading optimisé */}
+      <div className="gallery-grid">
+        {filteredImages.map((image, index) => (
+          <div
+            key={`${image.src}-${index}`}
+            className={`gallery-item ${loadedImages.has(image.src) ? 'loaded' : 'loading'}`}
+            onClick={() => openModal(image.src, index)}
+          >
+            <OptimizedImage
+              src={image.src}
+              alt={image.alt}
+              className="gallery-image"
+              loading={index < 6 ? "eager" : "lazy"} // Charger les 6 premières images en priorité
+              onLoad={() => handleImageLoad(image.src)}
+              placeholder="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 200'%3E%3Crect width='300' height='200' fill='%23f0f0f0'/%3E%3Ctext x='150' y='100' text-anchor='middle' fill='%23999' font-family='Arial' font-size='14'%3EChargement...%3C/text%3E%3C/svg%3E"
+            />
+            <div className="image-overlay">
+              <span className="view-icon">👁️</span>
+              <span className="image-caption">{image.alt}</span>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
+      </div>
 
-        {/* Modal pour l'aperçu des images */}
-        {selectedImage ? (
-          <div className="modal-overlay" onClick={closeModal}>
-            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-              <button className="modal-close" onClick={closeModal}>
-                ×
-              </button>
-              
-              <button className="modal-nav prev" onClick={prevImage}>
+      {/* Modal pour afficher l'image en grand */}
+      {selectedImage && (
+        <div className="image-modal" onClick={closeModal}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={closeModal}>
+              ✕
+            </button>
+            
+            <div className="modal-image-container">
+              <OptimizedImage
+                src={selectedImage}
+                alt="Image en grand"
+                className="modal-image"
+                loading="eager"
+                priority={true}
+              />
+            </div>
+
+            <div className="modal-info">
+              <p className="image-caption">
+                {filteredImages[currentIndex]?.alt || 'Photo'}
+              </p>
+              <p className="image-counter">
+                {currentIndex + 1} / {filteredImages.length}
+              </p>
+            </div>
+
+            <div className="modal-navigation">
+              <button className="nav-button prev" onClick={prevImage}>
                 ‹
               </button>
-              
-              <div className="modal-image-container">
-                <img
-                  src={selectedImage}
-                  alt="Aperçu"
-                  className="modal-image"
-                />
-                <div className="modal-caption">
-                  {filteredImages[currentIndex]?.alt}
-                </div>
-              </div>
-              
-              <button className="modal-nav next" onClick={nextImage}>
+              <button className="nav-button next" onClick={nextImage}>
                 ›
               </button>
-              
-              <div className="modal-indicators">
-                {filteredImages.map((image, index) => (
-                  <button
-                    key={`indicator-${image.alt.replace(/\s+/g, '-')}-${index}`}
-                    className={`indicator ${index === currentIndex ? 'active' : ''}`}
-                    onClick={() => {
-                      setCurrentIndex(index);
-                      setSelectedImage(filteredImages[index].src);
-                    }}
-                  />
-                ))}
-              </div>
             </div>
           </div>
-        ) : null}
-
-        {/* Section statistiques */}
-        <div className="gallery-stats">
-          <div className="stat-item">
-            <div className="stat-number">{images.length}</div>
-            <div className="stat-label">Photos</div>
-          </div>
-          <div className="stat-item">
-            <div className="stat-number">{categories.length - 1}</div>
-            <div className="stat-label">Catégories</div>
-          </div>
-          <div className="stat-item">
-            <div className="stat-number">5</div>
-            <div className="stat-label">Années</div>
-          </div>
         </div>
+      )}
+
+      {/* Message si aucune image dans la catégorie */}
+      {filteredImages.length === 0 && (
+        <div className="no-images">
+          <p>Aucune image dans cette catégorie pour le moment.</p>
+        </div>
+      )}
+
+      {/* Statistiques de chargement */}
+      <div className="loading-stats">
+        <p>Images chargées : {loadedImages.size} / {filteredImages.length}</p>
       </div>
     </div>
   );

@@ -5,77 +5,46 @@ import CountdownTimer from './CountdownTimer';
 import './CountdownTimer.css';
 import OptimizedImage from './OptimizedImage';
 import './OptimizedImage.css';
-import { optimizeImageLoading, preloadCriticalImages } from '../utils/imageOptimization';
+import imageOptimization from '../utils/imageOptimization';
+import chatImage from '../images/chat.png';
+
+// Réduire drastiquement le nombre d'images importées pour améliorer les performances
 import image1 from '../images/1.jpeg';
 import image2 from '../images/_MT_0042.jpeg';
-import image3 from '../images/_MT_0117.jpeg';
-import image4 from '../images/_MT_0125.jpeg';
-import image5 from '../images/_MT_0194.jpeg';
-import image6 from '../images/_MT_0204.jpeg';
-import image7 from '../images/_MT_0221.jpeg';
-import image8 from '../images/_MT_0236.jpeg';
-import image9 from '../images/_MT_0021.jpeg';
-import image10 from '../images/_MT_0251.jpeg';
-import image11 from '../images/_MT_0320.jpeg';
-import image12 from '../images/_MT_0326.jpeg';
-import image13 from '../images/_MT_0336.jpeg';
-import image14 from '../images/_MT_0357.jpeg';
-import image15 from '../images/_MT_0389.jpeg';
-import image16 from '../images/_MT_0575.jpeg';
-import image17 from '../images/_MT_0581.jpeg';
-import image18 from '../images/_MT_0584.jpeg';
-import image19 from '../images/_MT_0592.jpeg';
-import image20 from '../images/_MT_0602.jpeg';
-import image21 from '../images/_MT_0606.jpeg';
-import image22 from '../images/_MT_0647.jpeg';
-import image23 from '../images/_MT_9965.jpeg';
+// Supprimer les imports des autres images pour le moment
 
 const HomePage: React.FC = React.memo(() => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [fade, setFade] = useState(true);
   const [isVisible, setIsVisible] = useState(false);
+  const [imagesLoaded, setImagesLoaded] = useState(false);
 
-  // Mémoriser les images pour éviter les re-renders - Réduit à 2 images pour les performances
+  // Utiliser seulement 2 images pour la page d'accueil
   const heroImages = useMemo(() => [image1, image2], []);
 
   // Date du mariage (29 août 2025) - mémorisé
   const weddingDate = useMemo(() => new Date('2025-08-29T14:00:00'), []);
 
-  // Rotation automatique des images optimisée - Désactivée pour les performances
+  // Chargement optimisé des images critiques seulement
   useEffect(() => {
-    // Désactivé temporairement pour améliorer les performances
-    // const interval = setInterval(() => {
-    //   setFade(false);
-    //   setTimeout(() => {
-    //     setCurrentImageIndex((prev) => (prev + 1) % heroImages.length);
-    //     setFade(true);
-    //   }, 300);
-    // }, 8000); // Augmenté à 8 secondes
+    const loadCriticalImages = async () => {
+      try {
+        // Précharger seulement les 2 images critiques
+        await imageOptimization.preloadCriticalImages(heroImages);
+        setImagesLoaded(true);
+      } catch (error) {
+        console.warn('Erreur lors du chargement des images critiques:', error);
+        setImagesLoaded(true); // Continuer même en cas d'erreur
+      }
+    };
 
-    // return () => clearInterval(interval);
-  }, [heroImages.length]);
+    loadCriticalImages();
+  }, [heroImages]);
 
   // Animation d'entrée
   useEffect(() => {
-    const timer = setTimeout(() => setIsVisible(true), 50); // Réduit de 100ms à 50ms
+    const timer = setTimeout(() => setIsVisible(true), 50);
     return () => clearTimeout(timer);
-  }, []);
-
-  // Optimisation du chargement des images
-  useEffect(() => {
-    const allImages = [
-      image1, image2, image3, image4, image5, image6, image7, image8,
-      image9, image10, image11, image12, image13, image14, image15, image16,
-      image17, image18, image19, image20, image21, image22, image23
-    ];
-    
-    // Précharger les images critiques en premier
-    preloadCriticalImages(allImages).then(() => {
-      console.log('Images critiques préchargées');
-    });
-    
-    // Optimiser le chargement de toutes les images
-    optimizeImageLoading(allImages);
   }, []);
 
   // Optimiser la fonction de scroll
@@ -101,189 +70,132 @@ const HomePage: React.FC = React.memo(() => {
       description: 'Découvrez le déroulé de la journée'
     },
     {
-      to: '/galerie',
-      icon: '📸',
-      title: 'Galerie',
-      description: 'Revivez nos moments précieux'
-    },
-    {
       to: '/rsvp',
       icon: '✅',
-      title: 'RSVP',
-      description: 'Confirmez votre présence'
+      title: 'Confirmer Présence',
+      description: 'Dites-nous si vous venez'
+    },
+    {
+      to: '/galerie',
+      icon: '📸',
+      title: 'Galerie Photos',
+      description: 'Revivez nos moments'
     }
   ], []);
 
-  // Photos pour le déroulement
-  const timelinePhotos = useMemo(() => [
-    { image: image1, time: '14h00', title: 'Cérémonie Religieuse', description: 'Église Saint-Pierre' },
-    { image: image2, time: '15h30', title: 'Cocktail', description: 'Jardin de l\'église' },
-    { image: image3, time: '18h00', title: 'Réception', description: 'Château de Versailles' },
-    { image: image4, time: '19h00', title: 'Dîner', description: 'Salle des fêtes' },
-    { image: image5, time: '21h00', title: 'Première Danse', description: 'Ouverture du bal' },
-    { image: image6, time: '22h00', title: 'Soirée Dansante', description: 'Ambiance festive' },
-    { image: image7, time: '00h00', title: 'Gâteau de Mariage', description: 'Cérémonie du gâteau' },
-    { image: image8, time: '02h00', title: 'Fin de Soirée', description: 'Au revoir et merci' },
-    { image: image9, time: '14h30', title: 'Échange des Vœux', description: 'Moment solennel' },
-    { image: image10, time: '16h00', title: 'Photos de Groupe', description: 'Souvenirs immortels' },
-    { image: image11, time: '18h30', title: 'Entrée des Mariés', description: 'Accueil festif' },
-    { image: image12, time: '20h00', title: 'Discours', description: 'Mots d\'amour' },
-    { image: image13, time: '21h30', title: 'Ouverture du Bal', description: 'Première danse' },
-    { image: image14, time: '23h00', title: 'Ambiance Festive', description: 'Danse et joie' },
-    { image: image15, time: '01h00', title: 'Lancer du Bouquet', description: 'Traditions' },
-    { image: image16, time: '01h30', title: 'Dernière Danse', description: 'Moment romantique' }
+  // Mémoriser les événements du programme
+  const programEvents = useMemo(() => [
+    { time: '14h00', title: 'Cérémonie Religieuse', description: 'Église Saint-Pierre' },
+    { time: '15h30', title: 'Cocktail', description: 'Accueil festif' },
+    { time: '18h30', title: 'Entrée des Mariés', description: 'Accueil festif' },
+    { time: '19h00', title: 'Dîner', description: 'Réception' },
+    { time: '22h00', title: 'Soirée Dansante', description: 'Ambiance festive' }
   ], []);
 
-  return (
-    <div className={`homepage ${isVisible ? 'animate-fade-in' : ''}`}>
-      {/* Section Hero - Countdown uniquement */}
-      <section className="hero-section">
-        <div className="hero-background">
-          <img
-            src={heroImages[currentImageIndex]}
-            alt="Couple de mariés"
-            className={`hero-image ${fade ? 'fade-in' : 'fade-out'}`}
-            loading="eager"
-            style={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              display: 'block'
-            }}
-          />
-          <div className="hero-overlay"></div>
-        </div>
-
-        <div className="hero-content">
-          <h1 className="hero-title">
-            <span className="names">Joel & Eunice</span>
-            <span className="date">29 Août 2025</span>
-          </h1>
-          <p className="hero-subtitle">Nous nous marions !</p>
-          <CountdownTimer targetDate={weddingDate} />
-        </div>
-
-        <div className="scroll-indicator animate-bounce">
-          <div className="scroll-arrow"></div>
-        </div>
-      </section>
-
-      {/* Section Notre Histoire */}
-      <section id="our-story" className="story-section">
-        <div className="container">
-          <h2 className="section-title animate-slide-in-left">Notre Histoire</h2>
-          <div className="story-content">
-            <div className="story-text animate-slide-in-left">
-              <p>
-                Nous nous sommes rencontrés il y a 5 ans lors d&apos;un événement professionnel.
-                Ce qui a commencé par une simple conversation s&apos;est transformé en une belle
-                histoire d&apos;amour qui nous mène aujourd&apos;hui vers le mariage.
-              </p>
-              <p>
-                Après des années de bonheur partagé, d&apos;aventures et de découvertes mutuelles,
-                nous avons décidé de nous unir pour la vie. Nous sommes impatients de célébrer
-                ce moment spécial avec nos familles et amis.
-              </p>
-            </div>
-            <div className="story-image animate-slide-in-right">
+  if (!imagesLoaded) {
+    return (
+      <div className="loading-screen">
+        <div className="loading-content">
+          <div className="chat-loading-container">
+            <div className="chat-loading-spinner"></div>
+            <div className="chat-loading-background">
               <img 
-                src={image2} 
-                alt="Notre histoire" 
-                loading="eager"
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                  display: 'block'
-                }}
+                src={chatImage} 
+                alt="Chat" 
+                className="chat-loading-image"
               />
             </div>
           </div>
+          <h2 className="loading-title">Joel & Eunice</h2>
+          <p className="loading-date">29 Août 2025</p>
+          <p className="loading-text">Chargement des images...</p>
         </div>
-      </section>
+      </div>
+    );
+  }
 
-
-
-      {/* Section Déroulement avec Photos */}
-      <section className="timeline-section">
-        <div className="container">
-          <h2 className="section-title text-center">Déroulement de la Journée</h2>
-          <div className="timeline">
-            {timelinePhotos.map((item, index) => (
-              <div key={`timeline-item-${item.title.replace(/\s+/g, '-')}-${index}`} className={`timeline-item ${index % 2 === 0 ? 'left' : 'right'}`}>
-                <div className="timeline-content">
-                                  <div className="timeline-photo">
-                  <img 
-                    src={item.image} 
-                    alt={item.title} 
-                    loading={index < 4 ? "eager" : "lazy"}
-                    style={{
-                      width: '100%',
-                      height: 'auto',
-                      maxHeight: '400px',
-                      objectFit: 'contain',
-                      display: 'block',
-                      backgroundColor: 'transparent'
-                    }}
-                  />
-                </div>
-                  <div className="timeline-info">
-                    <div className="timeline-time">{item.time}</div>
-                    <h3 className="timeline-title">{item.title}</h3>
-                    <p className="timeline-description">{item.description}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
+  return (
+    <div className={`homepage ${isVisible ? 'visible' : ''}`}>
+      {/* Section Hero avec image de fond optimisée */}
+      <section className="hero-section" id="hero">
+        <div className="hero-background">
+          <OptimizedImage
+            src={heroImages[currentImageIndex]}
+            alt="Joel & Eunice"
+            className={`hero-image ${fade ? 'fade-in' : 'fade-out'}`}
+            loading="eager"
+            priority={true}
+          />
+        </div>
+        
+        <div className="hero-content">
+          <div className="hero-text">
+            <h1 className="hero-title">
+              <span className="names">Joel & Eunice</span>
+            </h1>
+            <p className="hero-subtitle">Se marient</p>
+            <div className="hero-date">29 Août 2025</div>
+            
+            <CountdownTimer targetDate={weddingDate} />
+            
+            <div className="hero-actions">
+              <Link to="/rsvp" className="cta-button primary">
+                Confirmer ma présence
+              </Link>
+              <Link to="/programme" className="cta-button secondary">
+                Voir le programme
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Section Actions Rapides */}
-      <section className="quick-actions-section">
+      <section className="quick-actions-section" id="actions">
         <div className="container">
-          <h2 className="section-title text-center">Préparez-vous pour le Grand Jour</h2>
-          <div className="quick-actions">
+          <h2 className="section-title">Actions Rapides</h2>
+          <div className="quick-actions-grid">
             {quickActions.map((action, index) => (
-              <Link
-                key={action.to}
-                to={action.to}
-                className="action-card animate-scale-in"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
+              <Link key={index} to={action.to} className="quick-action-card">
                 <div className="action-icon">{action.icon}</div>
-                <h3>{action.title}</h3>
-                <p>{action.description}</p>
+                <h3 className="action-title">{action.title}</h3>
+                <p className="action-description">{action.description}</p>
               </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Section Lieu */}
-      <section className="venue-section">
+      {/* Section Programme */}
+      <section className="program-section" id="program">
         <div className="container">
-          <div className="venue-content">
-            <div className="venue-info animate-slide-in-left">
-              <h2>Le Lieu de la Célébration</h2>
-              <div className="venue-details">
-                <div className="venue-item">
-                  <h3>Église Saint-Pierre</h3>
-                  <p>123 Rue de la Paix<br />75001 Paris, France</p>
-                  <p className="venue-time">Cérémonie : 14h00</p>
-                </div>
-                <div className="venue-item">
-                  <h3>Château de Versailles</h3>
-                  <p>456 Avenue des Rois<br />78000 Versailles, France</p>
-                  <p className="venue-time">Réception : 18h00</p>
+          <h2 className="section-title">Programme de la Journée</h2>
+          <div className="program-timeline">
+            {programEvents.map((event, index) => (
+              <div key={index} className="program-event">
+                <div className="event-time">{event.time}</div>
+                <div className="event-content">
+                  <h3 className="event-title">{event.title}</h3>
+                  <p className="event-description">{event.description}</p>
                 </div>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Section Contact */}
+      <section className="contact-section" id="contact">
+        <div className="container">
+          <h2 className="section-title">Nous Contacter</h2>
+          <div className="contact-info">
+            <div className="contact-item">
+              <span className="contact-icon">📧</span>
+              <span className="contact-text">contact@joel-eunice.com</span>
             </div>
-            <div className="venue-map animate-slide-in-right">
-              <div className="map-placeholder">
-                <p>Carte interactive</p>
-                <small>Cliquez pour voir l&apos;itinéraire</small>
-              </div>
+            <div className="contact-item">
+              <span className="contact-icon">📱</span>
+              <span className="contact-text">+243 XXX XXX XXX</span>
             </div>
           </div>
         </div>

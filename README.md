@@ -1,4 +1,4 @@
-# Joel & Eunice - Mariage 2024 🎉
+# JOEL&EUNICE - Mariage 2024 🎉
 
 Site web moderne et responsive pour le mariage de Joel & Eunice, optimisé pour les performances et l'expérience utilisateur.
 

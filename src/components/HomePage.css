@@ -834,16 +834,13 @@
 /* Support pour les préférences de réduction de mouvement */
 @media (prefers-reduced-motion: reduce) {
   .hero-image,
-  .story-image img,
+  .timeline-photo img,
   .action-card,
-  .venue-item,
-  .venue-map,
-  .map-placeholder {
+  .venue-map {
     transition: none;
   }
   
   .action-card:hover,
-  .venue-item:hover,
   .venue-map:hover {
     transform: none;
   }
@@ -853,6 +850,8 @@
   .animate-slide-in-right,
   .animate-scale-in {
     animation: none;
+    opacity: 1;
+    transform: none;
   }
   
   .timeline-item {
@@ -871,5 +870,229 @@
   
   .timeline-content:hover .timeline-photo img {
     transform: none;
+  }
+}
+
+/* Styles de loading pour la section hero - Assurer la priorité */
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.loading-content {
+  text-align: center;
+  color: var(--text-dark);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-lg);
+}
+
+/* Container pour l'image chat avec spinner autour */
+.chat-loading-container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+/* Fond blanc circulaire pour l'image */
+.chat-loading-background {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: var(--white);
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+/* Image chat plus grande */
+.chat-loading-image {
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+  z-index: 3;
+  animation: chatBounce 2s ease-in-out infinite;
+}
+
+/* Spinner qui tourne autour de l'image */
+.chat-loading-spinner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 200px;
+  border: 4px solid rgba(212, 175, 55, 0.2);
+  border-top: 4px solid var(--primary-color);
+  border-radius: 50%;
+  animation: chatSpin 1.5s linear infinite;
+  z-index: 1;
+}
+
+/* Animation de rebond pour l'image */
+@keyframes chatBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Animation de rotation pour le spinner */
+@keyframes chatSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Titre de chargement */
+.loading-title {
+  font-family: var(--font-family-primary);
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  margin: 0;
+  animation: fadeInUp 0.8s ease-out 0.3s both;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Date du mariage */
+.loading-date {
+  font-family: var(--font-family-primary);
+  font-size: 1.2rem;
+  color: var(--text-light);
+  margin: 0;
+  animation: fadeInUp 0.8s ease-out 0.5s both;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+/* Texte de chargement */
+.loading-text {
+  color: var(--text-light);
+  font-size: 1rem;
+  margin: 0;
+  animation: fadeInUp 0.8s ease-out 0.7s both;
+  font-weight: 400;
+}
+
+/* Animation d'apparition depuis le bas */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive loading screen */
+@media (max-width: 768px) {
+  .chat-loading-container {
+    width: 160px;
+    height: 160px;
+  }
+  
+  .chat-loading-background {
+    width: 140px;
+    height: 140px;
+  }
+  
+  .chat-loading-image {
+    width: 110px;
+    height: 110px;
+  }
+  
+  .chat-loading-spinner {
+    width: 160px;
+    height: 160px;
+    border-width: 3px;
+  }
+  
+  .loading-title {
+    font-size: 2rem;
+  }
+  
+  .loading-date {
+    font-size: 1rem;
+  }
+  
+  .loading-text {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .chat-loading-container {
+    width: 140px;
+    height: 140px;
+  }
+  
+  .chat-loading-background {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .chat-loading-image {
+    width: 90px;
+    height: 90px;
+  }
+  
+  .chat-loading-spinner {
+    width: 140px;
+    height: 140px;
+    border-width: 3px;
+  }
+  
+  .loading-title {
+    font-size: 1.5rem;
+  }
+  
+  .loading-date {
+    font-size: 0.9rem;
+  }
+  
+  .loading-text {
+    font-size: 0.8rem;
+  }
+}
+
+/* Support pour les préférences de réduction de mouvement */
+@media (prefers-reduced-motion: reduce) {
+  .chat-loading-spinner {
+    animation: none;
+  }
+  
+  .chat-loading-image {
+    animation: none;
+  }
+  
+  .loading-title,
+  .loading-date,
+  .loading-text {
+    animation: none;
+    opacity: 1;
   }
 }

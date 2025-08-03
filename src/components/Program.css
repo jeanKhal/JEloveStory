@@ -115,6 +115,7 @@
   box-shadow: var(--shadow);
   position: relative;
   transition: var(--transition);
+  border: 1px solid rgba(212, 175, 55, 0.1);
 }
 
 .timeline-content:hover {
@@ -280,13 +281,22 @@
   font-weight: 600;
   cursor: pointer;
   transition: var(--transition);
+  font-size: 1rem;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn-directions:hover,
-.btn-parking:hover {
+.btn-parking:hover,
+.btn-directions:focus,
+.btn-parking:focus {
   background: var(--primary-color);
   color: var(--white);
   transform: translateY(-2px);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.3);
 }
 
 /* Contact d'urgence */
@@ -345,6 +355,10 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  .container {
+    padding: 0 1rem;
+  }
+  
   .timeline::before {
     left: 20px;
   }
@@ -353,6 +367,7 @@
     width: 100%;
     left: 0 !important;
     padding-left: 60px;
+    margin-bottom: 2rem;
   }
 
   .timeline-item::before {
@@ -387,6 +402,14 @@
   .map-section h2,
   .emergency-section h2 {
     font-size: 2rem;
+  }
+  
+  .map-placeholder {
+    height: 250px;
+  }
+  
+  .map-content {
+    padding: 1.5rem;
   }
 }
 
@@ -442,26 +465,28 @@
   }
 }
 
-/* Animation d'entrée */
-.timeline-item {
-  animation: fadeInUp 0.6s ease-out;
-  animation-fill-mode: both;
+/* Animation d'entrée - Optimisée pour les performances */
+@media (prefers-reduced-motion: no-preference) {
+  .timeline-item {
+    animation: fadeInUp 0.6s ease-out;
+    animation-fill-mode: both;
+  }
+
+  .timeline-item:nth-child(1) { animation-delay: 0.1s; }
+  .timeline-item:nth-child(2) { animation-delay: 0.2s; }
+  .timeline-item:nth-child(3) { animation-delay: 0.3s; }
+  .timeline-item:nth-child(4) { animation-delay: 0.4s; }
+
+  .info-card {
+    animation: fadeInUp 0.6s ease-out;
+    animation-fill-mode: both;
+  }
+
+  .info-card:nth-child(1) { animation-delay: 0.5s; }
+  .info-card:nth-child(2) { animation-delay: 0.6s; }
+  .info-card:nth-child(3) { animation-delay: 0.7s; }
+  .info-card:nth-child(4) { animation-delay: 0.8s; }
 }
-
-.timeline-item:nth-child(1) { animation-delay: 0.1s; }
-.timeline-item:nth-child(2) { animation-delay: 0.2s; }
-.timeline-item:nth-child(3) { animation-delay: 0.3s; }
-.timeline-item:nth-child(4) { animation-delay: 0.4s; }
-
-.info-card {
-  animation: fadeInUp 0.6s ease-out;
-  animation-fill-mode: both;
-}
-
-.info-card:nth-child(1) { animation-delay: 0.5s; }
-.info-card:nth-child(2) { animation-delay: 0.6s; }
-.info-card:nth-child(3) { animation-delay: 0.7s; }
-.info-card:nth-child(4) { animation-delay: 0.8s; }
 
 @keyframes fadeInUp {
   from {

@@ -74,34 +74,41 @@ export const optimizeImageLoading = (images: string[]) => {
 };
 
 // Fonction pour précharger les images critiques
-export const preloadCriticalImages = (images: string[]) => {
-  return new Promise<void>((resolve) => {
-    let loadedCount = 0;
-    const criticalImages = images.slice(0, 4); // Les 4 premières images
-    
-    if (criticalImages.length === 0) {
-      resolve();
-      return;
+const preloadCriticalImages = (images: string[]): Promise<void> => {
+  return new Promise<void>((resolve, reject) => {
+    try {
+      let loadedCount = 0;
+      const criticalImages = images.slice(0, 4); // Les 4 premières images
+      
+      if (criticalImages.length === 0) {
+        resolve();
+        return;
+      }
+      
+      criticalImages.forEach((src) => {
+        const img = new Image();
+        img.onload = () => {
+          loadedCount++;
+          if (loadedCount === criticalImages.length) {
+            resolve();
+          }
+        };
+        img.onerror = () => {
+          loadedCount++;
+          if (loadedCount === criticalImages.length) {
+            resolve();
+          }
+        };
+        img.src = src;
+      });
+    } catch (error) {
+      console.error('Error in preloadCriticalImages:', error);
+      resolve(); // Resolve anyway to prevent blocking
     }
-    
-    criticalImages.forEach((src) => {
-      const img = new Image();
-      img.onload = () => {
-        loadedCount++;
-        if (loadedCount === criticalImages.length) {
-          resolve();
-        }
-      };
-      img.onerror = () => {
-        loadedCount++;
-        if (loadedCount === criticalImages.length) {
-          resolve();
-        }
-      };
-      img.src = src;
-    });
   });
 };
+
+export { preloadCriticalImages };
 
 // Fonction pour détecter la connexion réseau
 export const getNetworkInfo = () => {
@@ -174,4 +181,17 @@ export const getOptimalImageSize = () => {
   if (width <= 1200) return IMAGE_CONFIG.sizes.large;
   
   return IMAGE_CONFIG.sizes.hero;
+};
+
+// Export par défaut pour compatibilité
+export default {
+  preloadCriticalImages,
+  optimizeImageLoading,
+  createImagePlaceholder,
+  getNetworkInfo,
+  getOptimalImageQuality,
+  createOptimizedImageUrl,
+  cacheImage,
+  clearImageCache,
+  getOptimalImageSize
 }; 

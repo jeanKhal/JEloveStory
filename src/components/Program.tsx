@@ -73,7 +73,7 @@ const Program: React.FC = () => {
           <h2>Déroulé de la Journée</h2>
           <div className="timeline">
             {timeline.map((event, index) => (
-              <div key={`timeline-event-${event.title.replace(/\s+/g, '-')}-${index}`} className={`timeline-item ${index % 2 === 0 ? 'left' : 'right'}`}>
+              <div key={`timeline-event-${event.title.replace(/\s+/g, '-')}`} className={`timeline-item ${index % 2 === 0 ? 'left' : 'right'}`}>
                 <div className="timeline-content">
                   <div className="timeline-icon">{event.icon}</div>
                   <div className="timeline-time">{event.time}</div>
@@ -92,7 +92,7 @@ const Program: React.FC = () => {
           <h2>Informations Pratiques</h2>
           <div className="info-grid">
             {importantInfo.map((info, index) => (
-              <div key={`info-card-${info.title.replace(/\s+/g, '-')}-${index}`} className="info-card">
+              <div key={`info-card-${info.title.replace(/\s+/g, '-')}`} className="info-card">
                 <div className="info-icon">{info.icon}</div>
                 <h3>{info.title}</h3>
                 <p>{info.content}</p>
@@ -110,8 +110,20 @@ const Program: React.FC = () => {
                 <h3>Château de Versailles</h3>
                 <p>456 Avenue des Rois<br />78000 Versailles, France</p>
                 <div className="map-actions">
-                  <button className="btn-directions">Itinéraire</button>
-                  <button className="btn-parking">Parking</button>
+                  <button 
+                    className="btn-directions"
+                    onClick={() => window.open('https://maps.google.com/?q=Château+de+Versailles', '_blank')}
+                    aria-label="Ouvrir l'itinéraire sur Google Maps"
+                  >
+                    Itinéraire
+                  </button>
+                  <button 
+                    className="btn-parking"
+                    onClick={() => window.open('https://maps.google.com/?q=Parking+Château+de+Versailles', '_blank')}
+                    aria-label="Voir les parkings près du Château de Versailles"
+                  >
+                    Parking
+                  </button>
                 </div>
               </div>
             </div>
