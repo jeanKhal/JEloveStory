@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import './RSVP.css';
 import { loadGuestListFromFile, findGuest, generateGuestCode, Guest } from '../utils/excelReader';
 import { generateInvitationPDF } from '../utils/pdfGenerator';
-const image1 = '/images/_MT_0194.jpeg';
-const image2 = '/images/_MT_0204.jpeg';
-const image3 = '/images/_MT_0221.jpeg';
-const image4 = '/images/_MT_0236.jpeg';
+import image1 from '../assets/_MT_0194.jpeg';
+import image2 from '../assets/_MT_0204.jpeg';
+import image3 from '../assets/_MT_0221.jpeg';
+import image4 from '../assets/_MT_0236.jpeg';
 
 
 const RSVP: React.FC = () => {
