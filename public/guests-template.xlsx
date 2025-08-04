@@ -1,0 +1,23 @@
+# Template Excel pour la liste des invités
+# Format attendu:
+# A1: Prénom
+# B1: Nom  
+# C1: Email
+# D1: Téléphone
+# E1: Plus One
+# F1: Restrictions alimentaires
+
+# Exemples de données:
+# A2: Jean
+# B2: Dupont
+# C2: jean.dupont@email.com
+# D2: +243 123 456 789
+# E2: TRUE
+# F2: Aucune
+
+# A3: Marie
+# B3: Martin
+# C3: marie.martin@email.com
+# D3: +243 234 567 890
+# E3: FALSE
+# F3: Végétarien 

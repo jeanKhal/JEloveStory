@@ -1,141 +1,43 @@
-/* Variables CSS pour le thème mariage */
-:root {
-  --primary-color: #d4af37;
-  --secondary-color: #f8f4e6;
-  --accent-color: #e8c39e;
-  --text-dark: #2c2c2c;
-  --text-light: #5a5a5a;
-  --white: #ffffff;
-  --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  --border-radius: 12px;
-  --transition: all 0.3s ease;
-}
-
-/* Amélioration de la lisibilité globale */
-* {
-  box-sizing: border-box;
-}
-
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* Page principale */
-.rsvp-page {
-  padding: 2rem 0;
-  padding-top: calc(2rem + 80px); /* Compensation pour la navbar fixe */
-  background: var(--secondary-color);
-  min-height: 100vh;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
-
-/* Header */
-.rsvp-header {
-  text-align: center;
-  margin-bottom: 3rem;
-}
-
-.rsvp-header h1 {
-  font-size: 3rem;
-  color: var(--text-dark);
-  margin-bottom: 1rem;
-  font-family: 'Playfair Display', serif;
-  font-weight: 700;
-  line-height: 1.2;
-}
-
-.rsvp-header p {
-  font-size: 1.2rem;
-  color: var(--text-light);
-  max-width: 600px;
-  margin: 0 auto;
-  line-height: 1.6;
-  font-weight: 400;
-}
-
-/* Contenu principal */
-.rsvp-content {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 3rem;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-/* Section informations */
-.rsvp-info {
+.rsvp {
+  padding: 5rem 0;
   background: var(--white);
-  padding: 2rem;
+}
+
+.rsvp-content {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+.rsvp-form {
+  background: var(--secondary-color);
+  padding: 2.5rem;
   border-radius: var(--border-radius);
   box-shadow: var(--shadow);
-  height: fit-content;
+  max-width: 500px;
+  width: 100%;
 }
 
-.rsvp-info h2 {
-  font-size: 1.8rem;
-  color: var(--text-dark);
-  margin-bottom: 2rem;
-  font-family: 'Playfair Display', serif;
-  font-weight: 600;
-  line-height: 1.3;
+.guest-check-section {
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
-.info-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.info-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 1rem;
-}
-
-.info-icon {
-  font-size: 2rem;
-  flex-shrink: 0;
-}
-
-.info-item h3 {
-  font-size: 1.1rem;
+.guest-check-section h3 {
+  font-family: var(--font-family-elegant);
+  font-size: 1.3rem;
   color: var(--text-dark);
   margin-bottom: 0.5rem;
   font-weight: 600;
-  line-height: 1.3;
 }
 
-.info-item p {
-  font-size: 1rem;
+.guest-check-section p {
   color: var(--text-light);
-  line-height: 1.6;
-  margin: 0;
-  font-weight: 400;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
 }
 
-/* Formulaire */
-.rsvp-form {
-  background: var(--white);
-  padding: 2rem;
-  border-radius: var(--border-radius);
-  box-shadow: var(--shadow);
-}
 
-.rsvp-form h2 {
-  font-size: 1.8rem;
-  color: var(--text-dark);
-  margin-bottom: 2rem;
-  font-family: 'Playfair Display', serif;
-  font-weight: 600;
-  line-height: 1.3;
-}
 
 .form-group {
   margin-bottom: 1.5rem;
@@ -143,430 +45,573 @@ body {
 
 .form-group label {
   display: block;
-  margin-bottom: 0.5rem;
+  font-family: var(--font-family-modern);
+  font-size: 0.9rem;
   font-weight: 600;
   color: var(--text-dark);
-  font-size: 1rem;
-  line-height: 1.4;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
-.form-group input,
-.form-group select,
-.form-group textarea {
+.form-group input {
   width: 100%;
-  padding: 0.8rem;
-  border: 2px solid #e0e0e0;
-  border-radius: var(--border-radius);
+  padding: 1rem;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  font-family: var(--font-family-modern);
   font-size: 1rem;
-  transition: var(--transition);
-  font-family: inherit;
-  line-height: 1.5;
+  background: var(--white);
   color: var(--text-dark);
+  transition: var(--transition);
+  box-sizing: border-box;
 }
 
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
+.form-group input:focus {
   outline: none;
   border-color: var(--primary-color);
   box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
 }
 
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
+.form-group input.error {
+  border-color: #e74c3c;
+  box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
 }
 
-/* Radio buttons */
-.radio-group {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+.form-group input::placeholder {
+  color: var(--text-light);
+  opacity: 0.7;
 }
 
-.radio-option {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  cursor: pointer;
+.form-group input:disabled {
+  background: #f5f5f5;
+  color: #999;
+  cursor: not-allowed;
+  border-color: #ddd;
+}
+
+.form-group input:disabled::placeholder {
+  color: #999;
+}
+
+.check-btn {
+  width: 100%;
+  margin-top: 1rem;
+  font-size: 1rem;
   padding: 1rem;
-  border: 2px solid #e0e0e0;
-  border-radius: var(--border-radius);
-  transition: var(--transition);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
-.radio-option:hover {
-  border-color: var(--primary-color);
-  background: rgba(212, 175, 55, 0.05);
+.error-message {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: rgba(231, 76, 60, 0.1);
+  border: 1px solid rgba(231, 76, 60, 0.3);
+  border-radius: 8px;
+  color: #e74c3c;
+  font-weight: 500;
+  text-align: center;
 }
 
-.radio-option input[type="radio"] {
-  display: none;
+.contact-info {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: rgba(212, 175, 55, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 8px;
+  text-align: left;
 }
 
-.radio-custom {
-  width: 20px;
-  height: 20px;
-  border: 2px solid #e0e0e0;
-  border-radius: 50%;
+.contact-info p {
+  margin: 0.5rem 0;
+  color: var(--text-dark);
+  font-size: 0.9rem;
+}
+
+.contact-info strong {
+  color: var(--primary-color);
+}
+
+.success-message {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: rgba(46, 204, 113, 0.1);
+  border: 1px solid rgba(46, 204, 113, 0.3);
+  border-radius: 8px;
+  color: #27ae60;
+  font-weight: 600;
+  text-align: center;
+}
+
+.guest-found {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 2px solid rgba(212, 175, 55, 0.2);
+}
+
+.guest-info h3 {
+  font-family: var(--font-family-elegant);
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.guest-info p {
+  color: var(--text-light);
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+.action-buttons .btn {
+  flex: 1;
+  min-width: 200px;
+  font-size: 0.9rem;
+  padding: 0.8rem 1.5rem;
+}
+
+/* Section Logement et Itinéraire */
+.accommodation-section {
+  margin-top: 5rem;
+  padding-top: 3rem;
+  border-top: 2px solid rgba(212, 175, 55, 0.1);
+}
+
+.accommodation-section .section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.accommodation-section .section-header h2 {
+  font-family: var(--font-family-elegant);
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
   position: relative;
-  transition: var(--transition);
+  display: inline-block;
 }
 
-.radio-option input[type="radio"]:checked + .radio-custom {
-  border-color: var(--primary-color);
-  background: var(--primary-color);
-}
-
-.radio-option input[type="radio"]:checked + .radio-custom::after {
+.accommodation-section .section-header h2::after {
   content: '';
   position: absolute;
-  top: 50%;
+  bottom: -10px;
   left: 50%;
-  transform: translate(-50%, -50%);
-  width: 8px;
-  height: 8px;
-  background: var(--white);
-  border-radius: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  border-radius: 2px;
 }
 
-.radio-label {
-  font-weight: 500;
-  color: var(--text-dark);
-  font-size: 1rem;
-  line-height: 1.4;
-}
-
-/* Bouton de soumission */
-.btn-submit {
-  width: 100%;
-  background: var(--primary-color);
-  color: var(--white);
-  border: none;
-  padding: 1rem 2rem;
-  border-radius: var(--border-radius);
-  font-size: 1.1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: var(--transition);
-  margin-top: 1rem;
-}
-
-.btn-submit:hover {
-  background: #c19b2e;
-  transform: translateY(-2px);
-  box-shadow: var(--shadow);
-}
-
-/* Page de succès */
-.rsvp-success {
-  text-align: center;
-  background: var(--white);
-  padding: 4rem 2rem;
-  border-radius: var(--border-radius);
-  box-shadow: var(--shadow);
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.success-icon {
-  font-size: 4rem;
-  margin-bottom: 2rem;
-}
-
-.rsvp-success h1 {
-  font-size: 2.5rem;
-  color: var(--text-dark);
-  margin-bottom: 1rem;
-  font-family: 'Playfair Display', serif;
-}
-
-.rsvp-success p {
+.accommodation-section .section-header p {
+  font-family: var(--font-family-modern);
   font-size: 1.1rem;
   color: var(--text-light);
+  margin-top: 1.5rem;
+  line-height: 1.6;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.accommodation-content {
+  margin-top: 3rem;
+}
+
+ /* Lieu du Mariage */
+ .wedding-venue {
+   background: var(--secondary-color);
+   padding: 2.5rem;
+   border-radius: var(--border-radius);
+   box-shadow: var(--shadow);
+   margin-bottom: 3rem;
+   border-left: 4px solid var(--primary-color);
+   text-align: center;
+ }
+
+ .wedding-venue h3 {
+   font-family: var(--font-family-elegant);
+   font-size: 1.8rem;
+   color: var(--primary-color);
+   margin-bottom: 1.5rem;
+   font-weight: 600;
+ }
+
+ .venue-simple {
+   max-width: 500px;
+   margin: 0 auto;
+ }
+
+ .venue-simple h4 {
+   font-family: var(--font-family-elegant);
+   font-size: 1.4rem;
+   color: var(--text-dark);
+   margin-bottom: 1rem;
+   font-weight: 600;
+ }
+
+ .venue-address {
+   font-size: 1.1rem;
+   color: var(--text-dark);
+   margin-bottom: 2rem;
+   line-height: 1.6;
+ }
+
+ .venue-address strong {
+   color: var(--primary-color);
+ }
+
+ .venue-directions-btn {
+   font-size: 1rem;
+   padding: 1rem 2rem;
+   font-weight: 600;
+   text-transform: uppercase;
+   letter-spacing: 0.05em;
+   transition: all 0.3s ease;
+ }
+
+ .venue-directions-btn:hover {
+   transform: translateY(-2px);
+   box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+ }
+
+/* Hôtels Recommandés */
+.recommended-hotels {
+  margin-bottom: 3rem;
+}
+
+.recommended-hotels h3 {
+  font-family: var(--font-family-elegant);
+  font-size: 1.6rem;
+  color: var(--text-dark);
   margin-bottom: 1rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.recommendation-intro {
+  text-align: center;
+  color: var(--text-light);
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
   line-height: 1.6;
 }
 
-.btn-new-rsvp {
-  background: var(--primary-color);
-  color: var(--white);
-  border: none;
-  padding: 1rem 2rem;
-  border-radius: var(--border-radius);
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: var(--transition);
-  margin-top: 2rem;
+.hotels-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
 }
 
-.btn-new-rsvp:hover {
-  background: #c19b2e;
+.hotel-card {
+  background: var(--white);
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.hotel-card:hover {
   transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  border-color: var(--primary-color);
+}
+
+.hotel-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: var(--primary-color);
+  color: var(--white);
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: 0 var(--border-radius) 0 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.hotel-card.premium .hotel-badge {
+  background: linear-gradient(135deg, #d4af37, #e8c39e);
+}
+
+.hotel-card.comfort .hotel-badge {
+  background: linear-gradient(135deg, #6b6b6b, #8a8a8a);
+}
+
+ .hotel-card.budget .hotel-badge {
+   background: linear-gradient(135deg, #27ae60, #2ecc71);
+ }
+
+ .hotel-card.simple {
+   text-align: center;
+   padding: 1.5rem;
+ }
+
+ .hotel-card.simple h4 {
+   font-family: var(--font-family-elegant);
+   font-size: 1.2rem;
+   color: var(--primary-color);
+   margin-bottom: 0.8rem;
+   font-weight: 600;
+   padding-right: 0;
+ }
+
+ .hotel-card.simple p {
+   margin-bottom: 1rem;
+   color: var(--text-light);
+   font-size: 0.9rem;
+ }
+
+ .hotel-directions-btn {
+   font-size: 0.9rem;
+   padding: 0.6rem 1.2rem;
+   font-weight: 600;
+   text-transform: uppercase;
+   letter-spacing: 0.05em;
+   transition: all 0.3s ease;
+   width: 100%;
+ }
+
+ .hotel-directions-btn:hover {
+   transform: translateY(-2px);
+   box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+ }
+
+ .hotel-card h4 {
+   font-family: var(--font-family-elegant);
+   font-size: 1.2rem;
+   color: var(--primary-color);
+   margin-bottom: 1rem;
+   font-weight: 600;
+   padding-right: 80px;
+ }
+
+.hotel-card p {
+  margin-bottom: 0.5rem;
+  color: var(--text-light);
+  font-size: 0.9rem;
+}
+
+.hotel-card strong {
+  color: var(--text-dark);
+}
+
+.hotel-highlights {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.hotel-highlights span {
+  background: rgba(212, 175, 55, 0.1);
+  color: var(--primary-color);
+  padding: 0.3rem 0.6rem;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+/* Informations pour Invités Étrangers */
+.international-guests-info {
+  background: var(--secondary-color);
+  padding: 2.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 3rem;
+}
+
+.international-guests-info h3 {
+  font-family: var(--font-family-elegant);
+  font-size: 1.6rem;
+  color: var(--text-dark);
+  margin-bottom: 2rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.info-item {
+  text-align: left;
+}
+
+.info-item h4 {
+  font-family: var(--font-family-elegant);
+  font-size: 1.2rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.info-item p {
+  margin-bottom: 0.5rem;
+  color: var(--text-light);
+  font-size: 0.95rem;
+}
+
+.info-item strong {
+  color: var(--text-dark);
+}
+
+/* Section Carte */
+.map-section {
+  margin-bottom: 3rem;
+}
+
+.map-section h3 {
+  font-family: var(--font-family-elegant);
+  font-size: 1.6rem;
+  color: var(--text-dark);
+  margin-bottom: 2rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.map-container {
+  background: var(--secondary-color);
+  border-radius: var(--border-radius);
+  overflow: hidden;
   box-shadow: var(--shadow);
 }
 
-/* Responsive Design - Amélioré */
-/* Large tablets and small desktops */
-@media (max-width: 1024px) {
-  .rsvp-content {
-    grid-template-columns: 1fr 1fr;
-    gap: 2.5rem;
-  }
-  
-  .rsvp-header h1 {
-    font-size: 2.8rem;
-  }
+.map-placeholder {
+  background: linear-gradient(135deg, #f8f4e6 0%, #ffffff 100%);
+  padding: 2rem;
+  text-align: center;
 }
 
-/* Tablets */
-@media (max-width: 768px) {
-  .rsvp-page {
-    padding-top: calc(2rem + 80px);
-  }
-
-  .rsvp-content {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-
-  .form-row {
-    grid-template-columns: 1fr;
-  }
-
-  .rsvp-header h1 {
-    font-size: 2.2rem;
-  }
-
-  .rsvp-header p {
-    font-size: 1.1rem;
-  }
-
-  .rsvp-success h1 {
-    font-size: 2.2rem;
-  }
-
-  .rsvp-info,
-  .rsvp-form {
-    padding: 1.5rem;
-  }
-
-  .rsvp-info h2,
-  .rsvp-form h2 {
-    font-size: 1.6rem;
-  }
-
-  .info-item h3 {
-    font-size: 1.1rem;
-  }
-
-  .info-item p {
-    font-size: 1rem;
-  }
+.map-content h4 {
+  font-family: var(--font-family-elegant);
+  font-size: 1.3rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  font-weight: 600;
 }
 
-/* Mobile phones - Portrait */
-@media (max-width: 480px) and (orientation: portrait) {
-  .rsvp-page {
-    padding-top: calc(1rem + 80px);
-  }
-
-  .container {
-    padding: 0 1rem;
-  }
-
-  .rsvp-header h1 {
-    font-size: 1.8rem;
-    line-height: 1.3;
-  }
-
-  .rsvp-header p {
-    font-size: 1rem;
-    line-height: 1.5;
-  }
-
-  .rsvp-success h1 {
-    font-size: 1.8rem;
-  }
-
-  .rsvp-info,
-  .rsvp-form {
-    padding: 1rem;
-  }
-
-  .rsvp-info h2,
-  .rsvp-form h2 {
-    font-size: 1.4rem;
-  }
-
-  .info-item {
-    flex-direction: column;
-    text-align: center;
-    gap: 0.5rem;
-  }
-
-  .info-item h3 {
-    font-size: 0.95rem;
-  }
-
-  .info-item p {
-    font-size: 0.9rem;
-  }
-
-  .radio-option {
-    flex-direction: column;
-    text-align: center;
-    gap: 0.5rem;
-    padding: 1rem;
-    border-radius: 8px;
-    border: 2px solid rgba(212, 175, 55, 0.2);
-    margin-bottom: 0.8rem;
-  }
-
-  .radio-label {
-    font-size: 0.95rem;
-    font-weight: 600;
-  }
-
-  /* Améliorations des formulaires */
-  .form-group {
-    margin-bottom: 1.2rem;
-  }
-  
-  .form-group label {
-    font-size: 0.95rem;
-    margin-bottom: 0.5rem;
-    display: block;
-    font-weight: 600;
-  }
-  
-  .form-group input,
-  .form-group select,
-  .form-group textarea {
-    font-size: 16px; /* Évite le zoom sur iOS */
-    padding: 0.8rem;
-    border-radius: 8px;
-    border: 2px solid rgba(212, 175, 55, 0.2);
-    width: 100%;
-    min-height: 44px; /* Taille minimale pour le tactile */
-  }
-  
-  .form-group textarea {
-    min-height: 100px;
-    resize: vertical;
-  }
-  
-  .form-group input:focus,
-  .form-group select:focus,
-  .form-group textarea:focus {
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
-    outline: none;
-  }
-  
-  .btn-submit {
-    width: 100%;
-    padding: 1rem;
-    font-size: 1rem;
-    font-weight: 600;
-    min-height: 48px;
-    border-radius: 8px;
-  }
-  
-  /* Améliorations des options radio */
-  .radio-group {
-    gap: 0.8rem;
-  }
-  
-  .radio-option input[type="radio"] {
-    width: 20px;
-    height: 20px;
-  }
-  
-  .radio-custom {
-    width: 20px;
-    height: 20px;
-  }
+.map-content p {
+  margin-bottom: 0.8rem;
+  color: var(--text-dark);
+  font-size: 1rem;
 }
 
-/* Mobile phones - Landscape */
-@media (max-width: 768px) and (orientation: landscape) {
-  .rsvp-header h1 {
-    font-size: 2rem;
-  }
-  
-  .rsvp-content {
-    gap: 1.5rem;
-  }
-  
-  .rsvp-info,
-  .rsvp-form {
-    padding: 1.2rem;
-  }
-  
-  .info-item {
-    padding: 1rem;
-  }
-  
-  .radio-option {
-    padding: 0.8rem;
-  }
+.transport-info {
+  background: rgba(212, 175, 55, 0.1);
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+  text-align: left;
 }
 
-/* Très petits écrans */
-@media (max-width: 320px) {
-  .rsvp-header h1 {
-    font-size: 1.6rem;
-  }
-  
-  .rsvp-success h1 {
-    font-size: 1.6rem;
-  }
-  
-  .rsvp-info,
-  .rsvp-form {
-    padding: 0.8rem;
-  }
-  
-  .rsvp-info h2,
-  .rsvp-form h2 {
-    font-size: 1.2rem;
-  }
-  
-  .info-item h3 {
-    font-size: 0.9rem;
-  }
-  
-  .info-item p {
-    font-size: 0.8rem;
-  }
-  
-  .radio-label {
-    font-size: 0.9rem;
-  }
-  
-  .form-group label {
-    font-size: 0.9rem;
-  }
+.transport-info h5 {
+  font-family: var(--font-family-elegant);
+  font-size: 1.1rem;
+  color: var(--text-dark);
+  margin-bottom: 1rem;
+  font-weight: 600;
 }
 
-/* Animation d'entrée */
-.rsvp-info,
+.transport-info ul {
+  list-style: none;
+  padding: 0;
+}
+
+.transport-info li {
+  margin-bottom: 0.5rem;
+  color: var(--text-light);
+  font-size: 0.95rem;
+}
+
+.map-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.map-actions .btn {
+  min-width: 180px;
+  font-size: 0.9rem;
+  padding: 0.8rem 1.5rem;
+}
+
+/* Conseils de Voyage */
+.travel-tips {
+  background: var(--secondary-color);
+  padding: 2.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+}
+
+.travel-tips h3 {
+  font-family: var(--font-family-elegant);
+  font-size: 1.6rem;
+  color: var(--text-dark);
+  margin-bottom: 2rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.tips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.tip-item {
+  text-align: center;
+  background: var(--white);
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.tip-item h4 {
+  font-family: var(--font-family-elegant);
+  font-size: 1.2rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.tip-item p {
+  margin-bottom: 0.5rem;
+  color: var(--text-light);
+  font-size: 0.95rem;
+}
+
+/* Animations */
 .rsvp-form {
-  animation: fadeInUp 0.6s ease-out;
+  animation: slideInUp 0.8s ease-out;
 }
 
-.rsvp-info {
-  animation-delay: 0.1s;
+.accommodation-section {
+  animation: slideInUp 1s ease-out 0.2s both;
 }
 
-.rsvp-form {
-  animation-delay: 0.2s;
-}
-
-@keyframes fadeInUp {
+@keyframes slideInUp {
   from {
     opacity: 0;
     transform: translateY(30px);
@@ -575,4 +620,425 @@ body {
     opacity: 1;
     transform: translateY(0);
   }
-} 
+}
+
+/* États de chargement */
+.check-btn:disabled,
+.action-buttons .btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .rsvp-form {
+    padding: 2rem;
+  }
+  
+     .venue-simple {
+     max-width: 100%;
+     padding: 0 1rem;
+   }
+  
+  .hotels-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .rsvp {
+    padding: 3rem 0;
+  }
+  
+  .rsvp-form {
+    padding: 1.5rem;
+    margin: 0 1rem;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+  }
+  
+  .action-buttons .btn {
+    min-width: auto;
+    width: 100%;
+  }
+  
+  .accommodation-section {
+    margin-top: 3rem;
+    padding-top: 2rem;
+  }
+  
+  .accommodation-section .section-header h2 {
+    font-size: 2rem;
+    letter-spacing: 0.05em;
+  }
+  
+  .accommodation-section .section-header p {
+    font-size: 1rem;
+    max-width: 100%;
+    padding: 0 1rem;
+  }
+  
+  .wedding-venue {
+    padding: 1.5rem;
+  }
+  
+  .hotels-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .map-actions {
+    flex-direction: column;
+  }
+  
+  .map-actions .btn {
+    width: 100%;
+  }
+  
+  .info-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .tips-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .rsvp-form {
+    padding: 1rem;
+    margin: 0 0.5rem;
+  }
+  
+  .form-group input {
+    padding: 0.8rem;
+    font-size: 0.9rem;
+  }
+  
+  .check-btn {
+    padding: 0.8rem;
+    font-size: 0.9rem;
+  }
+  
+  .guest-info h3 {
+    font-size: 1.3rem;
+  }
+  
+  .accommodation-section .section-header h2 {
+    font-size: 1.8rem;
+    letter-spacing: 0.03em;
+  }
+  
+  .accommodation-section .section-header p {
+    font-size: 0.95rem;
+    padding: 0 0.5rem;
+  }
+  
+     .wedding-venue {
+     padding: 1rem;
+   }
+   
+   .wedding-venue h3 {
+     font-size: 1.5rem;
+   }
+   
+   .venue-simple {
+     padding: 0 0.5rem;
+   }
+   
+   .venue-directions-btn {
+     padding: 0.8rem 1.5rem;
+     font-size: 0.9rem;
+   }
+  
+  .hotel-card {
+    padding: 1rem;
+  }
+  
+  .hotel-card h4 {
+    padding-right: 60px;
+    font-size: 1.1rem;
+  }
+  
+  .hotel-badge {
+    font-size: 0.7rem;
+    padding: 0.4rem 0.8rem;
+  }
+  
+  .map-placeholder {
+    padding: 1rem;
+  }
+  
+  .international-guests-info {
+    padding: 1.5rem;
+  }
+  
+  .travel-tips {
+    padding: 1.5rem;
+  }
+  
+  .tip-item {
+    padding: 1rem;
+  }
+}
+
+/* Spinner de chargement */
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  text-align: center;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--secondary-color);
+  border-top: 3px solid var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+.loading-spinner p {
+  color: var(--text-light);
+  font-size: 1rem;
+  margin: 0;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+ /* Support pour les écrans tactiles */
+ @media (hover: none) and (pointer: coarse) {
+   .form-group input:focus {
+     box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+   }
+   
+   .action-buttons .btn {
+     min-height: 44px;
+   }
+   
+   .hotel-card:hover {
+     transform: none;
+   }
+ }
+
+ /* Section Programme */
+ .program-section {
+   margin-top: 5rem;
+   padding-top: 3rem;
+   border-top: 2px solid rgba(212, 175, 55, 0.1);
+ }
+
+ .program-section .section-header {
+   text-align: center;
+   margin-bottom: 4rem;
+ }
+
+ .program-section .section-header h2 {
+   font-family: var(--font-family-elegant);
+   font-size: 2.5rem;
+   color: var(--primary-color);
+   margin-bottom: 1rem;
+   font-weight: 700;
+   text-transform: uppercase;
+   letter-spacing: 0.1em;
+   position: relative;
+   display: inline-block;
+ }
+
+ .program-section .section-header h2::after {
+   content: '';
+   position: absolute;
+   bottom: -10px;
+   left: 50%;
+   transform: translateX(-50%);
+   width: 80px;
+   height: 3px;
+   background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+   border-radius: 2px;
+ }
+
+ .program-timeline {
+   max-width: 1000px;
+   margin: 0 auto;
+   position: relative;
+ }
+
+ .program-timeline::before {
+   content: '';
+   position: absolute;
+   left: 50%;
+   top: 0;
+   bottom: 0;
+   width: 3px;
+   background: linear-gradient(180deg, var(--primary-color), var(--secondary-color));
+   transform: translateX(-50%);
+   border-radius: 2px;
+ }
+
+ .timeline-item {
+   display: flex;
+   align-items: center;
+   margin-bottom: 3rem;
+   opacity: 0;
+   transform: translateY(30px);
+   animation: slideInUp 0.8s ease-out forwards;
+ }
+
+ .timeline-item:nth-child(odd) {
+   flex-direction: row;
+ }
+
+ .timeline-item:nth-child(even) {
+   flex-direction: row-reverse;
+ }
+
+ .timeline-item:nth-child(1) { animation-delay: 0.1s; }
+ .timeline-item:nth-child(2) { animation-delay: 0.3s; }
+ .timeline-item:nth-child(3) { animation-delay: 0.5s; }
+ .timeline-item:nth-child(4) { animation-delay: 0.7s; }
+
+ .timeline-image {
+   flex: 0 0 200px;
+   height: 200px;
+   border-radius: 15px;
+   overflow: hidden;
+   position: relative;
+   z-index: 2;
+   transition: all 0.3s ease;
+ }
+
+ .timeline-image:hover {
+   transform: scale(1.05);
+ }
+
+ .timeline-image img {
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+   transition: transform 0.3s ease;
+ }
+
+ .timeline-image:hover img {
+   transform: scale(1.1);
+ }
+
+ .timeline-content {
+   flex: 1;
+   background: transparent;
+   padding: 2rem;
+   margin: 0 2rem;
+   position: relative;
+   transition: all 0.3s ease;
+ }
+
+ .timeline-content:hover {
+   transform: translateY(-5px);
+ }
+
+ .timeline-time {
+   position: absolute;
+   top: -15px;
+   left: 2rem;
+   background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+   color: var(--white);
+   padding: 0.5rem 1rem;
+   border-radius: 20px;
+   font-family: var(--font-family-modern);
+   font-weight: 600;
+   font-size: 0.9rem;
+   box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+ }
+
+ .timeline-content h3 {
+   font-family: var(--font-family-elegant);
+   font-size: 1.4rem;
+   color: var(--primary-color);
+   margin: 1rem 0 0.5rem 0;
+   font-weight: 600;
+ }
+
+ .timeline-content p {
+   color: var(--text-light);
+   font-size: 1rem;
+   margin-bottom: 1rem;
+   font-family: var(--font-family-modern);
+ }
+
+ .timeline-details {
+   display: flex;
+   gap: 1rem;
+   flex-wrap: wrap;
+ }
+
+ .timeline-details span {
+   background: rgba(212, 175, 55, 0.1);
+   color: var(--primary-color);
+   padding: 0.4rem 0.8rem;
+   border-radius: 15px;
+   font-size: 0.85rem;
+   font-weight: 500;
+   border: 1px solid rgba(212, 175, 55, 0.2);
+ }
+
+ /* Responsive pour la timeline */
+ @media (max-width: 768px) {
+   .program-timeline::before {
+     left: 30px;
+   }
+
+   .timeline-item {
+     flex-direction: column !important;
+     align-items: flex-start;
+     margin-left: 60px;
+   }
+
+   .timeline-image {
+     flex: 0 0 150px;
+     height: 150px;
+     margin-bottom: 1rem;
+   }
+
+   .timeline-content {
+     margin: 0;
+     width: 100%;
+   }
+
+   .timeline-time {
+     left: 1rem;
+   }
+ }
+
+ @media (max-width: 480px) {
+   .program-section .section-header h2 {
+     font-size: 2rem;
+   }
+
+   .timeline-image {
+     flex: 0 0 120px;
+     height: 120px;
+   }
+
+   .timeline-content {
+     padding: 1.5rem;
+   }
+
+   .timeline-content h3 {
+     font-size: 1.2rem;
+   }
+
+   .timeline-details {
+     flex-direction: column;
+     gap: 0.5rem;
+   }
+ } 
