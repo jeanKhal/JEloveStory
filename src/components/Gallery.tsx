@@ -2,16 +2,16 @@ import React, { useState } from 'react';
 import './Gallery.css';
 
 // Import des images (sélection de 10 photos)
-import image1 from '../IMAGES/_MT_0021.jpeg';
-import image2 from '../IMAGES/_MT_0042.jpeg';
-import image3 from '../IMAGES/_MT_0117.jpeg';
-import image4 from '../IMAGES/_MT_0125.jpeg';
-import image5 from '../IMAGES/_MT_0194.jpeg';
-import image6 from '../IMAGES/_MT_0204.jpeg';
-import image7 from '../IMAGES/_MT_0221.jpeg';
-import image8 from '../IMAGES/_MT_0236.jpeg';
-import image9 from '../IMAGES/_MT_0251.jpeg';
-import image10 from '../IMAGES/_MT_0320.jpeg';
+const image1 = '/images/_MT_0021.jpeg';
+const image2 = '/images/_MT_0042.jpeg';
+const image3 = '/images/_MT_0117.jpeg';
+const image4 = '/images/_MT_0125.jpeg';
+const image5 = '/images/_MT_0194.jpeg';
+const image6 = '/images/_MT_0204.jpeg';
+const image7 = '/images/_MT_0221.jpeg';
+const image8 = '/images/_MT_0236.jpeg';
+const image9 = '/images/_MT_0251.jpeg';
+const image10 = '/images/_MT_0320.jpeg';
 
 interface ImageItem {
   id: number;

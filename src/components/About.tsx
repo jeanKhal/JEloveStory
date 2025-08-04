@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import './About.css';
 
 // Import des images pour le slider
-import slideImage1 from '../IMAGES/_MT_0194.jpeg';
-import slideImage2 from '../IMAGES/_MT_0204.jpeg';
-import slideImage3 from '../IMAGES/_MT_0221.jpeg';
+const slideImage1 = '/images/_MT_0194.jpeg';
+const slideImage2 = '/images/_MT_0204.jpeg';
+const slideImage3 = '/images/_MT_0221.jpeg';
 
 const About: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);

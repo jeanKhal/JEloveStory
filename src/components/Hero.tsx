@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Hero.css';
-import heroImage from '../IMAGES/1.jpeg';
+const heroImage = '/images/1.jpeg';
 import Countdown from './Countdown';
 
 const Hero: React.FC = () => {
