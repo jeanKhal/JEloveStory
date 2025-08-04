@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import './Gallery.css';
 
-// Import des images (sélection de 10 photos)
-const image1 = '/images/_MT_0021.jpeg';
-const image2 = '/images/_MT_0042.jpeg';
-const image3 = '/images/_MT_0117.jpeg';
-const image4 = '/images/_MT_0125.jpeg';
-const image5 = '/images/_MT_0194.jpeg';
-const image6 = '/images/_MT_0204.jpeg';
-const image7 = '/images/_MT_0221.jpeg';
-const image8 = '/images/_MT_0236.jpeg';
-const image9 = '/images/_MT_0251.jpeg';
-const image10 = '/images/_MT_0320.jpeg';
+// Import des images (sélection de 10 photos) - Utilisation d'URLs absolues
+const image1 = 'https://j-elove-story.vercel.app/images/_MT_0021.jpeg';
+const image2 = 'https://j-elove-story.vercel.app/images/_MT_0042.jpeg';
+const image3 = 'https://j-elove-story.vercel.app/images/_MT_0117.jpeg';
+const image4 = 'https://j-elove-story.vercel.app/images/_MT_0125.jpeg';
+const image5 = 'https://j-elove-story.vercel.app/images/_MT_0194.jpeg';
+const image6 = 'https://j-elove-story.vercel.app/images/_MT_0204.jpeg';
+const image7 = 'https://j-elove-story.vercel.app/images/_MT_0221.jpeg';
+const image8 = 'https://j-elove-story.vercel.app/images/_MT_0236.jpeg';
+const image9 = 'https://j-elove-story.vercel.app/images/_MT_0251.jpeg';
+const image10 = 'https://j-elove-story.vercel.app/images/_MT_0320.jpeg';
 
 interface ImageItem {
   id: number;
