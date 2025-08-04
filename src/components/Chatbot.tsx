@@ -11,10 +11,7 @@ interface Message {
   timestamp: Date;
 }
 
-interface Guest {
-  firstName: string;
-  lastName: string;
-}
+
 
 const Chatbot: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,7 +27,6 @@ const Chatbot: React.FC = () => {
   const [isTyping, setIsTyping] = useState(false);
   const [currentStep, setCurrentStep] = useState<'name' | 'message'>('name');
   const [userName, setUserName] = useState('');
-  const [userMessage, setUserMessage] = useState('');
   const [isVerified, setIsVerified] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -58,7 +54,6 @@ const Chatbot: React.FC = () => {
     // Reset state when closing
     setCurrentStep('name');
     setUserName('');
-    setUserMessage('');
     setIsVerified(false);
     setMessages([
       {
@@ -132,7 +127,7 @@ const Chatbot: React.FC = () => {
         // Convert back to binary
         const newWorkbook = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(newWorkbook, worksheet, sheetName);
-        const newArrayBuffer = XLSX.write(newWorkbook, { bookType: 'xlsx', type: 'array' });
+        XLSX.write(newWorkbook, { bookType: 'xlsx', type: 'array' });
         
         // Note: In a real application, you would send this to a server
         // For now, we'll just simulate success
@@ -207,8 +202,6 @@ const Chatbot: React.FC = () => {
           setMessages(prev => [...prev, botMessage]);
         }
       } else if (currentStep === 'message') {
-        setUserMessage(currentInput);
-        
         // Save message
         const nameParts = userName.split(' ');
         const firstName = nameParts[0];
@@ -229,7 +222,6 @@ const Chatbot: React.FC = () => {
           setTimeout(() => {
             setCurrentStep('name');
             setUserName('');
-            setUserMessage('');
             setIsVerified(false);
             setMessages([
               {
