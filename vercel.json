@@ -9,22 +9,10 @@
       }
     }
   ],
-  "routes": [
+  "rewrites": [
     {
-      "src": "/images/(.*)",
-      "dest": "/images/$1"
-    },
-    {
-      "src": "/IMAGES/(.*)",
-      "dest": "/images/$1"
-    },
-    {
-      "src": "/static/(.*)",
-      "dest": "/static/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ],
   "env": {
