@@ -27,6 +27,7 @@ const Chatbot: React.FC = () => {
   const [isTyping, setIsTyping] = useState(false);
   const [currentStep, setCurrentStep] = useState<'name' | 'message'>('name');
   const [userName, setUserName] = useState('');
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isVerified, setIsVerified] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
