@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import './Gallery.css';
 
-// Import des images (sélection de 10 photos) - Utilisation d'URLs absolues
-const image1 = 'https://j-elove-story.vercel.app/images/_MT_0021.jpeg';
-const image2 = 'https://j-elove-story.vercel.app/images/_MT_0042.jpeg';
-const image3 = 'https://j-elove-story.vercel.app/images/_MT_0117.jpeg';
-const image4 = 'https://j-elove-story.vercel.app/images/_MT_0125.jpeg';
-const image5 = 'https://j-elove-story.vercel.app/images/_MT_0194.jpeg';
-const image6 = 'https://j-elove-story.vercel.app/images/_MT_0204.jpeg';
-const image7 = 'https://j-elove-story.vercel.app/images/_MT_0221.jpeg';
-const image8 = 'https://j-elove-story.vercel.app/images/_MT_0236.jpeg';
-const image9 = 'https://j-elove-story.vercel.app/images/_MT_0251.jpeg';
-const image10 = 'https://j-elove-story.vercel.app/images/_MT_0320.jpeg';
+// Import des images depuis src/assets
+import image1 from '../assets/_MT_0021.jpeg';
+import image2 from '../assets/_MT_0042.jpeg';
+import image3 from '../assets/_MT_0117.jpeg';
+import image4 from '../assets/_MT_0125.jpeg';
+import image5 from '../assets/_MT_0194.jpeg';
+import image6 from '../assets/_MT_0204.jpeg';
+import image7 from '../assets/_MT_0221.jpeg';
+import image8 from '../assets/_MT_0236.jpeg';
+import image9 from '../assets/_MT_0251.jpeg';
+import image10 from '../assets/_MT_0320.jpeg';
 
 interface ImageItem {
   id: number;
