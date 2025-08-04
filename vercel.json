@@ -9,38 +9,22 @@
       }
     }
   ],
-  "rewrites": [
+  "routes": [
     {
-      "source": "/images/(.*)",
-      "destination": "/images/$1"
+      "src": "/images/(.*)",
+      "dest": "/images/$1"
     },
     {
-      "source": "/static/(.*)",
-      "destination": "/static/$1"
+      "src": "/IMAGES/(.*)",
+      "dest": "/images/$1"
     },
     {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
-  ],
-  "headers": [
-    {
-      "source": "/static/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
+      "src": "/static/(.*)",
+      "dest": "/static/$1"
     },
     {
-      "source": "/images/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
+      "src": "/(.*)",
+      "dest": "/index.html"
     }
   ],
   "env": {
