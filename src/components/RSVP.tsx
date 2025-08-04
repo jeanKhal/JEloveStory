@@ -5,7 +5,6 @@ import { generateInvitationPDF } from '../utils/pdfGenerator';
 import image1 from '../assets/_MT_0194.jpeg';
 import image2 from '../assets/_MT_0204.jpeg';
 import image3 from '../assets/_MT_0221.jpeg';
-import image4 from '../assets/_MT_0236.jpeg';
 
 
 const RSVP: React.FC = () => {
@@ -457,20 +456,7 @@ const RSVP: React.FC = () => {
                </div>
              </div>
 
-             <div className="timeline-item">
-               <div className="timeline-image">
-                 <img src={image4} alt="Soirée dansante" />
-               </div>
-               <div className="timeline-content">
-                 <div className="timeline-time">22:00</div>
-                 <h3>💃 Soirée Dansante</h3>
-                 <p>Hôtel Rotana - Terrasse</p>
-                 <div className="timeline-details">
-                   <span>⏰ Jusqu'à 02:00</span>
-                   <span>🎶 DJ et ambiance festive</span>
-                 </div>
-               </div>
-             </div>
+
            </div>
          </div>
        </div>
