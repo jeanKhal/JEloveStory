@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './Chatbot.css';
-const chatbotIcon = '/images/icon.png';
 import * as XLSX from 'xlsx';
+
+const chatbotIcon = '/images/icon.png';
 
 interface Message {
   id: number;

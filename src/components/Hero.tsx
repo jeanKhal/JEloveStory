@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './Hero.css';
-const heroImage = '/images/1.jpeg';
 import Countdown from './Countdown';
+
+const heroImage = '/images/1.jpeg';
 
 const Hero: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
