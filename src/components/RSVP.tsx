@@ -262,147 +262,30 @@ const RSVP: React.FC = () => {
              </div>
 
                          {/* Logements Recommandés */}
-             <div className="recommended-hotels">
-               <h3>🏨 Logement à proximité recommandé</h3>
-               
-                               <div className="hotels-grid">
-                                     <div className="hotel-card simple">
-                     <h4>🏨 Grand Hôtel Kinshasa</h4>
-                     <p><strong>📍 Distance :</strong> 0.5 km de KEMESHA</p>
-                    <button 
-                      className="btn btn-secondary hotel-directions-btn"
-                      onClick={() => {
-                        const destination = "-4.4419,15.2663";
-                        const destinationName = "Grand Hôtel Kinshasa";
-                        
-                        if (navigator.geolocation) {
-                          navigator.geolocation.getCurrentPosition(
-                            (position) => {
-                              const userLat = position.coords.latitude;
-                              const userLng = position.coords.longitude;
-                              const origin = `${userLat},${userLng}`;
-                              
-                              const mapsUrl = `https://www.google.com/maps/dir/${origin}/${destinationName},+Kinshasa,+RDC/@${destination},15z/`;
-                              window.open(mapsUrl, '_blank');
-                            },
-                            (error) => {
-                              const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${destinationName},+Kinshasa,+RDC`;
-                              window.open(mapsUrl, '_blank');
-                            }
-                          );
-                        } else {
-                          const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${destinationName},+Kinshasa,+RDC`;
-                          window.open(mapsUrl, '_blank');
-                        }
-                      }}
-                    >
-                      🚗 Itinéraire
-                    </button>
-                  </div>
-
-                                     <div className="hotel-card simple">
-                     <h4>🏨 Hotel Memling</h4>
-                     <p><strong>📍 Distance :</strong> 1.2 km de KEMESHA</p>
-                    <button 
-                      className="btn btn-secondary hotel-directions-btn"
-                      onClick={() => {
-                        const destination = "-4.4419,15.2663";
-                        const destinationName = "Hotel Memling Kinshasa";
-                        
-                        if (navigator.geolocation) {
-                          navigator.geolocation.getCurrentPosition(
-                            (position) => {
-                              const userLat = position.coords.latitude;
-                              const userLng = position.coords.longitude;
-                              const origin = `${userLat},${userLng}`;
-                              
-                              const mapsUrl = `https://www.google.com/maps/dir/${origin}/${destinationName},+Kinshasa,+RDC/@${destination},15z/`;
-                              window.open(mapsUrl, '_blank');
-                            },
-                            (error) => {
-                              const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${destinationName},+Kinshasa,+RDC`;
-                              window.open(mapsUrl, '_blank');
-                            }
-                          );
-                        } else {
-                          const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${destinationName},+Kinshasa,+RDC`;
-                          window.open(mapsUrl, '_blank');
-                        }
-                      }}
-                    >
-                      🚗 Itinéraire
-                    </button>
-                  </div>
-
-                                     <div className="hotel-card simple">
-                     <h4>🏨 Hotel Royal</h4>
-                     <p><strong>📍 Distance :</strong> 0.8 km de KEMESHA</p>
-                    <button 
-                      className="btn btn-secondary hotel-directions-btn"
-                      onClick={() => {
-                        const destination = "-4.4419,15.2663";
-                        const destinationName = "Hotel Royal Kinshasa";
-                        
-                        if (navigator.geolocation) {
-                          navigator.geolocation.getCurrentPosition(
-                            (position) => {
-                              const userLat = position.coords.latitude;
-                              const userLng = position.coords.longitude;
-                              const origin = `${userLat},${userLng}`;
-                              
-                              const mapsUrl = `https://www.google.com/maps/dir/${origin}/${destinationName},+Kinshasa,+RDC/@${destination},15z/`;
-                              window.open(mapsUrl, '_blank');
-                            },
-                            (error) => {
-                              const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${destinationName},+Kinshasa,+RDC`;
-                              window.open(mapsUrl, '_blank');
-                            }
-                          );
-                        } else {
-                          const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${destinationName},+Kinshasa,+RDC`;
-                          window.open(mapsUrl, '_blank');
-                        }
-                      }}
-                    >
-                      🚗 Itinéraire
-                    </button>
-                  </div>
-
-                                     <div className="hotel-card simple">
-                     <h4>🏨 Hotel Sultani</h4>
-                     <p><strong>📍 Distance :</strong> 1.5 km de KEMESHA</p>
-                    <button 
-                      className="btn btn-secondary hotel-directions-btn"
-                      onClick={() => {
-                        const destination = "-4.4419,15.2663";
-                        const destinationName = "Hotel Sultani Kinshasa";
-                        
-                        if (navigator.geolocation) {
-                          navigator.geolocation.getCurrentPosition(
-                            (position) => {
-                              const userLat = position.coords.latitude;
-                              const userLng = position.coords.longitude;
-                              const origin = `${userLat},${userLng}`;
-                              
-                              const mapsUrl = `https://www.google.com/maps/dir/${origin}/${destinationName},+Kinshasa,+RDC/@${destination},15z/`;
-                              window.open(mapsUrl, '_blank');
-                            },
-                            (error) => {
-                              const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${destinationName},+Kinshasa,+RDC`;
-                              window.open(mapsUrl, '_blank');
-                            }
-                          );
-                        } else {
-                          const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${destinationName},+Kinshasa,+RDC`;
-                          window.open(mapsUrl, '_blank');
-                        }
-                      }}
-                    >
-                      🚗 Itinéraire
-                    </button>
-                  </div>
+                           <div className="recommended-hotels">
+                <h3>🏨 Logement à proximité recommandé</h3>
+                
+                <div className="hotels-intro">
+                  <p>Pour vous aider à organiser votre séjour, voici quelques suggestions de logements situés à proximité du lieu de la cérémonie/réception.</p>
+                  <p>Ces hébergements sont donnés à titre indicatif, et nous vous invitons à réserver dès que possible, car les disponibilités peuvent varier rapidement.</p>
                 </div>
-             </div>
+
+                <div className="hotels-list">
+                  <h4>Options dans les environs :</h4>
+                  <ul>
+                    <li><strong>SANAM</strong> – à (minutes) [Lien / contact]</li>
+                    <li><strong>Sultani hôtel</strong> – à (minutes) [Lien / contact]</li>
+                    <li><strong>Novotel</strong> à [X] minutes – [Lien / contact]</li>
+                    <li><strong>Rotana</strong> à [X] minutes – [Lien / contact]</li>
+                    <li><strong>Hilton</strong> à [X] minutes – [Lien / contact]</li>
+                    <li><strong>Pullman</strong> à [X] minutes – [Lien / contact]</li>
+                  </ul>
+                </div>
+
+                <div className="hotels-contact">
+                  <p>Si vous avez besoin d'un petit coup de main pour trouver un logement ou poser une question, contactez-nous directement. Nous serons ravis de vous aider !</p>
+                </div>
+              </div>
 
             
 

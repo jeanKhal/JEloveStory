@@ -314,15 +314,86 @@
 /* Hôtels Recommandés */
 .recommended-hotels {
   margin-bottom: 3rem;
+  background: var(--white);
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
 }
 
 .recommended-hotels h3 {
   font-family: var(--font-family-elegant);
   font-size: 1.6rem;
   color: var(--text-dark);
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.hotels-intro {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.hotels-intro p {
+  font-family: var(--font-family-modern);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-light);
+  margin-bottom: 1rem;
+}
+
+.hotels-list {
+  margin-bottom: 2rem;
+}
+
+.hotels-list h4 {
+  font-family: var(--font-family-elegant);
+  font-size: 1.3rem;
+  color: var(--primary-color);
   margin-bottom: 1rem;
   font-weight: 600;
   text-align: center;
+}
+
+.hotels-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.hotels-list li {
+  font-family: var(--font-family-modern);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-dark);
+  margin-bottom: 0.8rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+}
+
+.hotels-list li:last-child {
+  border-bottom: none;
+}
+
+.hotels-list li strong {
+  color: var(--primary-color);
+}
+
+.hotels-contact {
+  text-align: center;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.05) 0%, rgba(232, 195, 158, 0.05) 100%);
+  border-radius: 10px;
+  border: 1px solid rgba(212, 175, 55, 0.1);
+}
+
+.hotels-contact p {
+  font-family: var(--font-family-modern);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-dark);
+  margin: 0;
+  font-style: italic;
 }
 
 .recommendation-intro {
@@ -718,9 +789,33 @@
     padding: 1.5rem;
   }
   
-  .hotels-grid {
-    grid-template-columns: 1fr;
-  }
+     .hotels-grid {
+     grid-template-columns: 1fr;
+   }
+   
+   .recommended-hotels {
+     padding: 1.5rem;
+   }
+   
+   .hotels-intro p {
+     font-size: 0.95rem;
+   }
+   
+   .hotels-list h4 {
+     font-size: 1.2rem;
+   }
+   
+   .hotels-list li {
+     font-size: 0.95rem;
+   }
+   
+   .hotels-contact {
+     padding: 1rem;
+   }
+   
+   .hotels-contact p {
+     font-size: 0.95rem;
+   }
   
   .map-actions {
     flex-direction: column;
