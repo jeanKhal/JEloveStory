@@ -118,6 +118,32 @@
   color: var(--white);
 }
 
+.hero-welcome-text {
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  padding: 0 1rem;
+  text-align: center;
+}
+
+.hero-welcome-text p {
+  font-family: var(--font-family-modern);
+  font-size: clamp(0.95rem, 1.6vw, 1.1rem);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  opacity: 0.95;
+  font-weight: 300;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  color: var(--white);
+  letter-spacing: 0.02em;
+}
+
+.hero-welcome-text p:last-child {
+  margin-bottom: 0;
+  font-style: italic;
+  opacity: 0.9;
+  color: var(--secondary-color);
+}
+
 .hero-actions {
   display: flex;
   gap: clamp(0.8rem, 2.5vw, 1.5rem);
@@ -194,6 +220,17 @@
   
   .hero-location {
     margin-bottom: 1.2rem;
+  }
+  
+  .hero-welcome-text {
+    max-width: 100%;
+    margin-bottom: 1.5rem;
+    padding: 0 0.5rem;
+  }
+  
+  .hero-welcome-text p {
+    font-size: clamp(0.9rem, 1.4vw, 1rem);
+    margin-bottom: 0.8rem;
   }
   
   .hero-actions {
