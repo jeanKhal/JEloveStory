@@ -22,15 +22,25 @@ const RSVP: React.FC = () => {
         setIsLoading(true);
         setError('');
         
-        const guests = await loadGuestListFromFile();
-        setInvitedGuests(guests);
-        setIsExcelLoaded(true);
+        // Vérifier si nous sommes en production (Vercel)
+        const isProduction = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
         
-        console.log(`✅ Liste des invités chargée avec succès : ${guests.length} invités trouvés`);
+        if (isProduction) {
+          // En production, on simule une liste d'invités ou on utilise une API
+          console.log('🌐 Mode production détecté - Liste des invités non disponible');
+          setIsExcelLoaded(false);
+          setError('La vérification des invités n\'est pas disponible en ligne. Veuillez nous contacter directement.');
+        } else {
+          // En développement local, on essaie de charger le fichier Excel
+          const guests = await loadGuestListFromFile();
+          setInvitedGuests(guests);
+          setIsExcelLoaded(true);
+          console.log(`✅ Liste des invités chargée avec succès : ${guests.length} invités trouvés`);
+        }
       } catch (error) {
         console.error('❌ Erreur lors du chargement de la liste des invités:', error);
-        setError('Erreur lors du chargement de la liste des invités. Vérifiez que le fichier liste.xlsx existe.');
         setIsExcelLoaded(false);
+        setError('La vérification des invités n\'est pas disponible. Veuillez nous contacter directement.');
       } finally {
         setIsLoading(false);
       }
@@ -99,11 +109,11 @@ const RSVP: React.FC = () => {
         <div className="container">
           <div className="section-header">
             <h2>Confirmer ma présence</h2>
-            <p>Chargement de la liste des invités...</p>
+            <p>Initialisation du système de vérification...</p>
           </div>
           <div className="loading-spinner">
             <div className="spinner"></div>
-            <p>Lecture du fichier liste.xlsx...</p>
+            <p>Vérification de la disponibilité...</p>
           </div>
         </div>
       </section>
@@ -128,43 +138,67 @@ const RSVP: React.FC = () => {
 
         <div className="rsvp-content">
           <div className="rsvp-form">
-            <div className="guest-check-section">
-              <h3>🔍 Vérifier mon invitation</h3>
-              <p>Entrez votre nom pour vérifier votre invitation</p>
+                          <div className="guest-check-section">
+                <h3>🔍 Vérifier mon invitation</h3>
+                <p>Entrez votre nom pour vérifier votre invitation</p>
 
-              <div className="form-group">
-                <label htmlFor="firstName">Prénom *</label>
-                <input
-                  type="text"
-                  id="firstName"
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
-                  placeholder="Votre prénom"
-                  className={error && !firstName ? 'error' : ''}
-                  disabled={!isExcelLoaded}
-                />
-              </div>
+                {!isExcelLoaded && (
+                  <div className="offline-notice">
+                    <div className="notice-content">
+                      <h4>📱 Système de vérification hors ligne</h4>
+                      <p>La vérification automatique des invités n'est pas disponible en ligne pour des raisons de sécurité.</p>
+                      <p>Pour confirmer votre présence, veuillez nous contacter directement :</p>
+                      <div className="contact-methods">
+                        <div className="contact-method">
+                          <span className="contact-icon">📧</span>
+                          <span>Email : contact@joel-eunice-wedding.com</span>
+                        </div>
+                        <div className="contact-method">
+                          <span className="contact-icon">📱</span>
+                          <span>Téléphone : +243 XXX XXX XXX</span>
+                        </div>
+                        <div className="contact-method">
+                          <span className="contact-icon">💬</span>
+                          <span>WhatsApp : +243 XXX XXX XXX</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
 
-              <div className="form-group">
-                <label htmlFor="lastName">Nom *</label>
-                <input
-                  type="text"
-                  id="lastName"
-                  value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
-                  placeholder="Votre nom"
-                  className={error && !lastName ? 'error' : ''}
-                  disabled={!isExcelLoaded}
-                />
-              </div>
+                <div className="form-group">
+                  <label htmlFor="firstName">Prénom *</label>
+                  <input
+                    type="text"
+                    id="firstName"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                    placeholder="Votre prénom"
+                    className={error && !firstName ? 'error' : ''}
+                    disabled={!isExcelLoaded}
+                  />
+                </div>
 
-              <button 
-                className="btn btn-primary check-btn"
-                onClick={checkGuest}
-                disabled={isChecking || !isExcelLoaded}
-              >
-                {isChecking ? 'Vérification...' : 'Vérifier mon invitation'}
-              </button>
+                <div className="form-group">
+                  <label htmlFor="lastName">Nom *</label>
+                  <input
+                    type="text"
+                    id="lastName"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                    placeholder="Votre nom"
+                    className={error && !lastName ? 'error' : ''}
+                    disabled={!isExcelLoaded}
+                  />
+                </div>
+
+                <button 
+                  className="btn btn-primary check-btn"
+                  onClick={checkGuest}
+                  disabled={isChecking || !isExcelLoaded}
+                >
+                  {isChecking ? 'Vérification...' : 'Vérifier mon invitation'}
+                </button>
 
               {error && (
                 <div className="error-message">
