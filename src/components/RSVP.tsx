@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './RSVP.css';
-import { loadGuestListFromFile, findGuest, generateGuestCode, Guest } from '../utils/excelReader';
+import { findGuest, generateGuestCode, Guest } from '../utils/excelReader';
+import { loadGuestListFromData, findGuestInList } from '../utils/guestData';
 import { generateInvitationPDF } from '../utils/pdfGenerator';
 
 
@@ -25,18 +26,11 @@ const RSVP: React.FC = () => {
         // Vérifier si nous sommes en production (Vercel)
         const isProduction = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
         
-        if (isProduction) {
-          // En production, on simule une liste d'invités ou on utilise une API
-          console.log('🌐 Mode production détecté - Liste des invités non disponible');
-          setIsExcelLoaded(false);
-          setError('La vérification des invités n\'est pas disponible en ligne. Veuillez nous contacter directement.');
-        } else {
-          // En développement local, on essaie de charger le fichier Excel
-          const guests = await loadGuestListFromFile();
-          setInvitedGuests(guests);
-          setIsExcelLoaded(true);
-          console.log(`✅ Liste des invités chargée avec succès : ${guests.length} invités trouvés`);
-        }
+        // Charger la liste des invités depuis les données intégrées
+        const guests = await loadGuestListFromData();
+        setInvitedGuests(guests);
+        setIsExcelLoaded(true);
+        console.log(`✅ Liste des invités chargée avec succès : ${guests.length} invités trouvés`);
       } catch (error) {
         console.error('❌ Erreur lors du chargement de la liste des invités:', error);
         setIsExcelLoaded(false);
@@ -67,7 +61,7 @@ const RSVP: React.FC = () => {
 
     // Simulation d'une vérification asynchrone
     setTimeout(() => {
-      const foundGuest = findGuest(invitedGuests, firstName, lastName);
+      const foundGuest = findGuestInList(firstName, lastName);
 
       if (foundGuest) {
         setGuestFound(foundGuest);
@@ -142,29 +136,7 @@ const RSVP: React.FC = () => {
                 <h3>🔍 Vérifier mon invitation</h3>
                 <p>Entrez votre nom pour vérifier votre invitation</p>
 
-                {!isExcelLoaded && (
-                  <div className="offline-notice">
-                    <div className="notice-content">
-                      <h4>📱 Système de vérification hors ligne</h4>
-                      <p>La vérification automatique des invités n'est pas disponible en ligne pour des raisons de sécurité.</p>
-                      <p>Pour confirmer votre présence, veuillez nous contacter directement :</p>
-                      <div className="contact-methods">
-                        <div className="contact-method">
-                          <span className="contact-icon">📧</span>
-                          <span>Email : contact@joel-eunice-wedding.com</span>
-                        </div>
-                        <div className="contact-method">
-                          <span className="contact-icon">📱</span>
-                          <span>Téléphone : +243 XXX XXX XXX</span>
-                        </div>
-                        <div className="contact-method">
-                          <span className="contact-icon">💬</span>
-                          <span>WhatsApp : +243 XXX XXX XXX</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )}
+
 
                 <div className="form-group">
                   <label htmlFor="firstName">Prénom *</label>
