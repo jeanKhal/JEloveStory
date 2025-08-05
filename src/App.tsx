@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
 import RSVP from './components/RSVP';
+import DressCode from './components/DressCode';
 import Gallery from './components/Gallery';
 import Chatbot from './components/Chatbot';
 
@@ -14,6 +15,8 @@ function App() {
              <Hero />
              <About />
              <RSVP />
+             
+             <DressCode />
              
              <Gallery />
       
