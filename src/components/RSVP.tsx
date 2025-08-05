@@ -425,8 +425,8 @@ const RSVP: React.FC = () => {
                </div>
                <div className="timeline-content">
                  <div className="timeline-time">14:00</div>
-                 <h3>💒 Cérémonie Religieuse</h3>
-                 <p>Église Saint-Pierre, Kinshasa</p>
+                                   <h3>💒 Cérémonie Religieuse</h3>
+                  <p>KEMESHA, Kinshasa</p>
                  <div className="timeline-details">
                    <span>⏰ Durée : 1h30</span>
                    <span>👔 Tenue : Élégante</span>
