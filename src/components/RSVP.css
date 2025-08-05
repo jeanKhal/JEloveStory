@@ -1105,10 +1105,12 @@
    flex-direction: row-reverse;
  }
 
- .timeline-item:nth-child(1) { animation-delay: 0.1s; }
- .timeline-item:nth-child(2) { animation-delay: 0.3s; }
- .timeline-item:nth-child(3) { animation-delay: 0.5s; }
- .timeline-item:nth-child(4) { animation-delay: 0.7s; }
+   .timeline-item:nth-child(1) { animation-delay: 0.1s; }
+  .timeline-item:nth-child(2) { animation-delay: 0.2s; }
+  .timeline-item:nth-child(3) { animation-delay: 0.3s; }
+  .timeline-item:nth-child(4) { animation-delay: 0.4s; }
+  .timeline-item:nth-child(5) { animation-delay: 0.5s; }
+  .timeline-item:nth-child(6) { animation-delay: 0.6s; }
 
  .timeline-image {
    flex: 0 0 200px;

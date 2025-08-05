@@ -390,54 +390,97 @@ const RSVP: React.FC = () => {
              <h2>📅 Programme de la Journée</h2>
            </div>
 
-           <div className="program-timeline">
-             <div className="timeline-item">
-               <div className="timeline-image">
-                 <img src={image1} alt="Cérémonie religieuse" />
-               </div>
-               <div className="timeline-content">
-                 <div className="timeline-time">14:00</div>
-                                   <h3>💒 Cérémonie Religieuse</h3>
-                  <p>KEMESHA, Kinshasa</p>
-                 <div className="timeline-details">
-                   <span>⏰ Durée : 1h30</span>
-                   <span>👔 Tenue : Élégante</span>
-                 </div>
-               </div>
-             </div>
+                       <div className="program-timeline">
+              <div className="timeline-item">
+                <div className="timeline-image">
+                  <img src={image1} alt="Accueil des invités" />
+                </div>
+                <div className="timeline-content">
+                  <div className="timeline-time">11:00-11:30</div>
+                  <h3>👋 Accueil des invités</h3>
+                  <p>Arrivée au lieu de cérémonie – merci d'arriver à l'heure pour profiter pleinement de la journée !</p>
+                  <div className="timeline-details">
+                    <span>📍 KEMESHA, Kinshasa</span>
+                    <span>⏰ Durée : 30 min</span>
+                  </div>
+                </div>
+              </div>
 
-             <div className="timeline-item">
-               <div className="timeline-image">
-                 <img src={image2} alt="Cocktail de réception" />
-               </div>
-               <div className="timeline-content">
-                 <div className="timeline-time">16:00</div>
-                 <h3>🥂 Cocktail de Réception</h3>
-                 <p>Hôtel Rotana - Jardin</p>
-                 <div className="timeline-details">
-                   <span>⏰ Durée : 1h</span>
-                   <span>🍾 Apéritifs et canapés</span>
-                 </div>
-               </div>
-             </div>
+              <div className="timeline-item">
+                <div className="timeline-image">
+                  <img src={image2} alt="Bénédiction nuptiale" />
+                </div>
+                <div className="timeline-content">
+                  <div className="timeline-time">12:00</div>
+                  <h3>💒 Bénédiction Nuptiale</h3>
+                  <p>Prédication, Échange des vœux et union devant nos proches.</p>
+                  <div className="timeline-details">
+                    <span>📍 KEMESHA, Kinshasa</span>
+                    <span>⏰ Durée : 1h</span>
+                  </div>
+                </div>
+              </div>
 
-             <div className="timeline-item">
-               <div className="timeline-image">
-                 <img src={image3} alt="Dîner de mariage" />
-               </div>
-               <div className="timeline-content">
-                 <div className="timeline-time">18:00</div>
-                 <h3>🍽️ Dîner de Mariage</h3>
-                 <p>Hôtel Rotana - Salle de réception</p>
-                 <div className="timeline-details">
-                   <span>⏰ Durée : 3h</span>
-                   <span>🎵 Musique et danses</span>
-                 </div>
-               </div>
-             </div>
+              <div className="timeline-item">
+                <div className="timeline-image">
+                  <img src={image3} alt="Séances photos" />
+                </div>
+                <div className="timeline-content">
+                  <div className="timeline-time">13:00</div>
+                  <h3>📸 Séances Photos</h3>
+                  <p>L'occasion de prendre des photos et profiter du cadre.</p>
+                  <div className="timeline-details">
+                    <span>📍 KEMESHA, Kinshasa</span>
+                    <span>⏰ Durée : 30 min</span>
+                  </div>
+                </div>
+              </div>
 
+              <div className="timeline-item">
+                <div className="timeline-image">
+                  <img src={image1} alt="Cocktail et rafraîchissements" />
+                </div>
+                <div className="timeline-content">
+                  <div className="timeline-time">13:30</div>
+                  <h3>🥂 Cocktail & Rafraîchissements</h3>
+                  <p>Un moment de détente, de rires et de discussions autour de quelques douceurs et boissons fraîches afin de se préparer doucement pour la suite.</p>
+                  <div className="timeline-details">
+                    <span>📍 KEMESHA, Kinshasa</span>
+                    <span>⏰ Durée : 5h30</span>
+                  </div>
+                </div>
+              </div>
 
-           </div>
+              <div className="timeline-item">
+                <div className="timeline-image">
+                  <img src={image2} alt="Dîner dansant" />
+                </div>
+                <div className="timeline-content">
+                  <div className="timeline-time">19:00</div>
+                  <h3>🍽️ Dîner Dansant</h3>
+                  <p>Prenez place, ouvrez l'appétit, préparez vos chaussures de danse… La soirée s'annonce inoubliable 🎉</p>
+                  <div className="timeline-details">
+                    <span>📍 KEMESHA, Kinshasa</span>
+                    <span>⏰ Durée : 5h</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="timeline-item">
+                <div className="timeline-image">
+                  <img src={image3} alt="Ouverture du dancefloor" />
+                </div>
+                <div className="timeline-content">
+                  <div className="timeline-time">00:00</div>
+                  <h3>💃 Ouverture du Dancefloor</h3>
+                  <p>On dansera, on chantera, et on fermera cette journée comme on l'a commencée : dans la joie !</p>
+                  <div className="timeline-details">
+                    <span>📍 KEMESHA, Kinshasa</span>
+                    <span>⏰ Jusqu'au bout de la nuit</span>
+                  </div>
+                </div>
+              </div>
+            </div>
          </div>
        </div>
      </section>
