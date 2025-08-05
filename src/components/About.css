@@ -114,6 +114,35 @@
   transform: scale(1.05);
 }
 
+/* Section Nos moments préférés */
+.favorite-moments {
+  margin-top: 4rem;
+  padding: 3rem;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.05) 0%, rgba(232, 195, 158, 0.05) 100%);
+  border-radius: 20px;
+  border: 1px solid rgba(212, 175, 55, 0.1);
+  text-align: center;
+}
+
+.moments-header h3 {
+  font-family: var(--font-family-elegant);
+  font-size: 2rem;
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.moments-content p {
+  font-family: var(--font-family-modern);
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: var(--text-dark);
+  max-width: 800px;
+  margin: 0 auto;
+  font-style: italic;
+  opacity: 0.9;
+}
+
 
 
 .about-stats {
@@ -182,6 +211,19 @@
   .gallery-item img {
     height: 250px;
   }
+  
+  .favorite-moments {
+    margin-top: 2rem;
+    padding: 2rem;
+  }
+  
+  .moments-header h3 {
+    font-size: 1.6rem;
+  }
+  
+  .moments-content p {
+    font-size: 1.1rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -204,5 +246,18 @@
   
   .gallery-item img {
     height: 200px;
+  }
+  
+  .favorite-moments {
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+  }
+  
+  .moments-header h3 {
+    font-size: 1.4rem;
+  }
+  
+  .moments-content p {
+    font-size: 1rem;
   }
 } 

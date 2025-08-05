@@ -44,23 +44,35 @@ const About: React.FC = () => {
               </p>
             </div>
             
-            <div className="story-gallery">
-              <div className="gallery-grid">
-                <div className="gallery-item">
-                  <img src={slideImage1} alt="Joel & Eunice - Moment romantique" />
-                </div>
-                <div className="gallery-item">
-                  <img src={slideImage2} alt="Joel & Eunice - Portrait élégant" />
-                </div>
-                <div className="gallery-item">
-                  <img src={slideImage3} alt="Joel & Eunice - Cérémonie" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+                         <div className="story-gallery">
+               <div className="gallery-grid">
+                 <div className="gallery-item">
+                   <img src={slideImage1} alt="Joel & Eunice - Moment romantique" />
+                 </div>
+                 <div className="gallery-item">
+                   <img src={slideImage2} alt="Joel & Eunice - Portrait élégant" />
+                 </div>
+                 <div className="gallery-item">
+                   <img src={slideImage3} alt="Joel & Eunice - Cérémonie" />
+                 </div>
+               </div>
+             </div>
+           </div>
+           
+           {/* Section Nos moments préférés */}
+           <div className="favorite-moments">
+             <div className="moments-header">
+               <h3>Nos Moments Préférés</h3>
+             </div>
+             <div className="moments-content">
+               <p>
+                 Entre les soirées cinéma, les moments de partage, les découvertes, les expériences et les moments précieux en famille nous savourons chaque instant.
+               </p>
+             </div>
+           </div>
+         </div>
+       </div>
+     </section>
   );
 };
 
