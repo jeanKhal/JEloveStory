@@ -1,5 +1,9 @@
 import React from 'react';
 import './DressCode.css';
+import codecouleur1 from '../assets/codecouleur1.jpg';
+import codecouleur2 from '../assets/codecouleur2.jpg';
+import codecouleur3 from '../assets/codecouleur3.jpg';
+import codecouleur4 from '../assets/codecouleur4.jpg';
 
 const DressCode: React.FC = () => {
   return (
@@ -63,15 +67,38 @@ const DressCode: React.FC = () => {
             </div>
           </div>
 
-          <div className="dresscode-note">
-            <div className="note-content">
-              <h4>💡 Note importante</h4>
-              <p>
-                Nous vous remercions de respecter ce dress code pour honorer la solennité de ce moment sacré. 
-                Votre élégance contribuera à la beauté de cette célébration.
-              </p>
-            </div>
-          </div>
+                     <div className="dresscode-colors">
+             <h3>🎨 Palette de Couleurs</h3>
+             <p>Voici les couleurs que nous avons choisies pour notre journée spéciale</p>
+             <div className="color-palette">
+               <div className="color-item">
+                 <img src={codecouleur1} alt="Couleur 1" />
+                 <span className="color-name">Couleur 1</span>
+               </div>
+               <div className="color-item">
+                 <img src={codecouleur2} alt="Couleur 2" />
+                 <span className="color-name">Couleur 2</span>
+               </div>
+               <div className="color-item">
+                 <img src={codecouleur3} alt="Couleur 3" />
+                 <span className="color-name">Couleur 3</span>
+               </div>
+               <div className="color-item">
+                 <img src={codecouleur4} alt="Couleur 4" />
+                 <span className="color-name">Couleur 4</span>
+               </div>
+             </div>
+           </div>
+
+           <div className="dresscode-note">
+             <div className="note-content">
+               <h4>💡 Note importante</h4>
+               <p>
+                 Nous vous remercions de respecter ce dress code pour honorer la solennité de ce moment sacré. 
+                 Votre élégance contribuera à la beauté de cette célébration.
+               </p>
+             </div>
+           </div>
         </div>
       </div>
     </section>

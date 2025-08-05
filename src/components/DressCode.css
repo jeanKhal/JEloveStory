@@ -118,14 +118,87 @@
   text-align: center;
 }
 
-.item-text {
-  font-family: var(--font-family-modern);
-  font-size: 1rem;
-  color: var(--text-dark);
-  font-weight: 500;
-}
+ .item-text {
+   font-family: var(--font-family-modern);
+   font-size: 1rem;
+   color: var(--text-dark);
+   font-weight: 500;
+ }
 
-.dresscode-note {
+ /* Palette de Couleurs */
+ .dresscode-colors {
+   background: var(--white);
+   padding: 2rem;
+   border-radius: var(--border-radius);
+   box-shadow: var(--shadow);
+   margin-bottom: 2rem;
+   text-align: center;
+ }
+
+ .dresscode-colors h3 {
+   font-family: var(--font-family-elegant);
+   font-size: 1.8rem;
+   color: var(--text-dark);
+   margin-bottom: 0.5rem;
+   background: linear-gradient(135deg, #2c3e50, #34495e);
+   -webkit-background-clip: text;
+   -webkit-text-fill-color: transparent;
+   background-clip: text;
+ }
+
+ .dresscode-colors p {
+   font-family: var(--font-family-modern);
+   font-size: 1.1rem;
+   color: var(--text-secondary);
+   margin-bottom: 2rem;
+   font-style: italic;
+ }
+
+ .color-palette {
+   display: grid;
+   grid-template-columns: repeat(4, 1fr);
+   gap: 1.5rem;
+   max-width: 600px;
+   margin: 0 auto;
+ }
+
+ .color-item {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 0.8rem;
+   transition: transform 0.3s ease;
+ }
+
+ .color-item:hover {
+   transform: translateY(-5px);
+ }
+
+ .color-item img {
+   width: 100%;
+   max-width: 120px;
+   height: 120px;
+   object-fit: cover;
+   border-radius: 12px;
+   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+   border: 3px solid transparent;
+   transition: all 0.3s ease;
+ }
+
+ .color-item:hover img {
+   border-color: var(--accent-color);
+   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+ }
+
+ .color-name {
+   font-family: var(--font-family-modern);
+   font-size: 0.9rem;
+   color: var(--text-dark);
+   font-weight: 500;
+   text-align: center;
+ }
+
+ .dresscode-note {
   background: linear-gradient(135deg, #fff3e0, #ffe0b2);
   padding: 2rem;
   border-radius: var(--border-radius);
@@ -199,10 +272,36 @@
     font-size: 1.2rem;
   }
 
-  .note-content p {
-    font-size: 0.95rem;
-  }
-}
+     .note-content p {
+     font-size: 0.95rem;
+   }
+
+   .dresscode-colors {
+     padding: 1.5rem;
+   }
+
+   .dresscode-colors h3 {
+     font-size: 1.5rem;
+   }
+
+   .dresscode-colors p {
+     font-size: 1rem;
+   }
+
+   .color-palette {
+     grid-template-columns: repeat(2, 1fr);
+     gap: 1rem;
+   }
+
+   .color-item img {
+     max-width: 100px;
+     height: 100px;
+   }
+
+   .color-name {
+     font-size: 0.85rem;
+   }
+ }
 
 @media (max-width: 480px) {
   .dresscode .section-header h2 {
@@ -246,7 +345,33 @@
     font-size: 1.1rem;
   }
 
-  .note-content p {
-    font-size: 0.9rem;
-  }
-} 
+     .note-content p {
+     font-size: 0.9rem;
+   }
+
+   .dresscode-colors {
+     padding: 1.2rem;
+   }
+
+   .dresscode-colors h3 {
+     font-size: 1.3rem;
+   }
+
+   .dresscode-colors p {
+     font-size: 0.95rem;
+   }
+
+   .color-palette {
+     grid-template-columns: repeat(2, 1fr);
+     gap: 0.8rem;
+   }
+
+   .color-item img {
+     max-width: 80px;
+     height: 80px;
+   }
+
+   .color-name {
+     font-size: 0.8rem;
+   }
+ } 
