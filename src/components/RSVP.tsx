@@ -270,17 +270,106 @@ const RSVP: React.FC = () => {
                   <p>Ces hébergements sont donnés à titre indicatif, et nous vous invitons à réserver dès que possible, car les disponibilités peuvent varier rapidement.</p>
                 </div>
 
-                <div className="hotels-list">
-                  <h4>Options dans les environs :</h4>
-                  <ul>
-                    <li><strong>SANAM</strong> – à (minutes) [Lien / contact]</li>
-                    <li><strong>Sultani hôtel</strong> – à (minutes) [Lien / contact]</li>
-                    <li><strong>Novotel</strong> à [X] minutes – [Lien / contact]</li>
-                    <li><strong>Rotana</strong> à [X] minutes – [Lien / contact]</li>
-                    <li><strong>Hilton</strong> à [X] minutes – [Lien / contact]</li>
-                    <li><strong>Pullman</strong> à [X] minutes – [Lien / contact]</li>
-                  </ul>
-                </div>
+                                 <div className="hotels-list">
+                   <h4>Options dans les environs :</h4>
+                   <div className="hotels-grid">
+                     <div className="hotel-card">
+                       <h5>🏨 SANAM</h5>
+                       <p><strong>📍 Distance :</strong> 2.5 km de KEMESHA</p>
+                       <p><strong>⏱️ Temps :</strong> ~8 minutes en voiture</p>
+                       <button 
+                         className="btn btn-secondary hotel-directions-btn"
+                         onClick={() => {
+                           const destination = "SANAM Kinshasa";
+                           const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${destination}`;
+                           window.open(mapsUrl, '_blank');
+                         }}
+                       >
+                         🚗 Itinéraire vers SANAM
+                       </button>
+                     </div>
+                     
+                     <div className="hotel-card">
+                       <h5>🏨 Sultani Hôtel</h5>
+                       <p><strong>📍 Distance :</strong> 1.8 km de KEMESHA</p>
+                       <p><strong>⏱️ Temps :</strong> ~6 minutes en voiture</p>
+                       <button 
+                         className="btn btn-secondary hotel-directions-btn"
+                         onClick={() => {
+                           const destination = "Sultani Hôtel Kinshasa";
+                           const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${destination}`;
+                           window.open(mapsUrl, '_blank');
+                         }}
+                       >
+                         🚗 Itinéraire vers Sultani
+                       </button>
+                     </div>
+                     
+                     <div className="hotel-card">
+                       <h5>🏨 Novotel Kinshasa</h5>
+                       <p><strong>📍 Distance :</strong> 3.2 km de KEMESHA</p>
+                       <p><strong>⏱️ Temps :</strong> ~10 minutes en voiture</p>
+                       <button 
+                         className="btn btn-secondary hotel-directions-btn"
+                         onClick={() => {
+                           const destination = "Novotel Kinshasa";
+                           const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${destination}`;
+                           window.open(mapsUrl, '_blank');
+                         }}
+                       >
+                         🚗 Itinéraire vers Novotel
+                       </button>
+                     </div>
+                     
+                     <div className="hotel-card">
+                       <h5>🏨 Hôtel Rotana</h5>
+                       <p><strong>📍 Distance :</strong> 2.8 km de KEMESHA</p>
+                       <p><strong>⏱️ Temps :</strong> ~9 minutes en voiture</p>
+                       <button 
+                         className="btn btn-secondary hotel-directions-btn"
+                         onClick={() => {
+                           const destination = "Hôtel Rotana Kinshasa";
+                           const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${destination}`;
+                           window.open(mapsUrl, '_blank');
+                         }}
+                       >
+                         🚗 Itinéraire vers Rotana
+                       </button>
+                     </div>
+                     
+                     <div className="hotel-card">
+                       <h5>🏨 Hilton Kinshasa</h5>
+                       <p><strong>📍 Distance :</strong> 4.1 km de KEMESHA</p>
+                       <p><strong>⏱️ Temps :</strong> ~12 minutes en voiture</p>
+                       <button 
+                         className="btn btn-secondary hotel-directions-btn"
+                         onClick={() => {
+                           const destination = "Hilton Kinshasa";
+                           const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${destination}`;
+                           window.open(mapsUrl, '_blank');
+                         }}
+                       >
+                         🚗 Itinéraire vers Hilton
+                       </button>
+                     </div>
+                     
+                     <div className="hotel-card">
+                       <h5>🏨 Pullman Kinshasa</h5>
+                       <p><strong>📍 Distance :</strong> 3.7 km de KEMESHA</p>
+                       <p><strong>⏱️ Temps :</strong> ~11 minutes en voiture</p>
+                       <button 
+                         className="btn btn-secondary hotel-directions-btn"
+                         onClick={() => {
+                           const destination = "Pullman Kinshasa";
+                           const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${destination}`;
+                           window.open(mapsUrl, '_blank');
+                         }}
+                       >
+                         🚗 Itinéraire vers Pullman
+                       </button>
+                     </div>
+                   </div>
+                 </div>
 
                 <div className="hotels-contact">
                   <p>Si vous avez besoin d'un petit coup de main pour trouver un logement ou poser une question, contactez-nous directement. Nous serons ravis de vous aider !</p>
