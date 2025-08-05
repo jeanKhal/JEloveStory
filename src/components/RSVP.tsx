@@ -220,42 +220,42 @@ const RSVP: React.FC = () => {
 
           <div className="accommodation-content">
                          {/* Adresse et Itinéraire */}
-             <div className="venue-simple">
-               <h4>🏰 Hôtel Rotana Kinshasa</h4>
-               <p className="venue-address">
-                 <strong>📍 Adresse :</strong> Boulevard du 30 Juin, Kinshasa, RDC
-               </p>
+                           <div className="venue-simple">
+                <h4>🏰 KEMESHA</h4>
+                <p className="venue-address">
+                  <strong>📍 Adresse :</strong> KEMESHA, Kinshasa, RDC
+                </p>
                <button 
                  className="btn btn-primary venue-directions-btn"
-                 onClick={() => {
-                   // Coordonnées GPS de l'Hôtel Rotana Kinshasa
-                   const destination = "-4.4419,15.2663";
-                   const destinationName = "Hôtel Rotana Kinshasa";
-                   
-                   // Vérifier si la géolocalisation est supportée
-                   if (navigator.geolocation) {
-                     navigator.geolocation.getCurrentPosition(
-                       (position) => {
-                         const userLat = position.coords.latitude;
-                         const userLng = position.coords.longitude;
-                         const origin = `${userLat},${userLng}`;
-                         
-                         // Ouvrir Google Maps avec l'itinéraire
-                         const mapsUrl = `https://www.google.com/maps/dir/${origin}/${destinationName},+Boulevard+du+30+Juin,+Kinshasa,+RDC/@${destination},15z/`;
-                         window.open(mapsUrl, '_blank');
-                       },
-                       (error) => {
-                         // Si la géolocalisation échoue, ouvrir juste la destination
-                         const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${destinationName},+Boulevard+du+30+Juin,+Kinshasa,+RDC`;
-                         window.open(mapsUrl, '_blank');
-                       }
-                     );
-                   } else {
-                     // Fallback si la géolocalisation n'est pas supportée
-                     const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${destinationName},+Boulevard+du+30+Juin,+Kinshasa,+RDC`;
-                     window.open(mapsUrl, '_blank');
-                   }
-                 }}
+                                   onClick={() => {
+                    // Coordonnées GPS de KEMESHA
+                    const destination = "-4.4419,15.2663";
+                    const destinationName = "KEMESHA";
+                    
+                    // Vérifier si la géolocalisation est supportée
+                    if (navigator.geolocation) {
+                      navigator.geolocation.getCurrentPosition(
+                        (position) => {
+                          const userLat = position.coords.latitude;
+                          const userLng = position.coords.longitude;
+                          const origin = `${userLat},${userLng}`;
+                          
+                          // Ouvrir Google Maps avec l'itinéraire
+                          const mapsUrl = `https://www.google.com/maps/dir/${origin}/${destinationName},+Kinshasa,+RDC/@${destination},15z/`;
+                          window.open(mapsUrl, '_blank');
+                        },
+                        (error) => {
+                          // Si la géolocalisation échoue, ouvrir juste la destination
+                          const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${destinationName},+Kinshasa,+RDC`;
+                          window.open(mapsUrl, '_blank');
+                        }
+                      );
+                    } else {
+                      // Fallback si la géolocalisation n'est pas supportée
+                      const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${destinationName},+Kinshasa,+RDC`;
+                      window.open(mapsUrl, '_blank');
+                    }
+                  }}
                >
                  🚗 Obtenir l'itinéraire depuis ma position
                </button>
@@ -266,9 +266,9 @@ const RSVP: React.FC = () => {
                <h3>🏨 Logement à proximité recommandé</h3>
                
                                <div className="hotels-grid">
-                  <div className="hotel-card simple">
-                    <h4>🏨 Grand Hôtel Kinshasa</h4>
-                    <p><strong>📍 Distance :</strong> 0.5 km du Rotana</p>
+                                     <div className="hotel-card simple">
+                     <h4>🏨 Grand Hôtel Kinshasa</h4>
+                     <p><strong>📍 Distance :</strong> 0.5 km de KEMESHA</p>
                     <button 
                       className="btn btn-secondary hotel-directions-btn"
                       onClick={() => {
@@ -300,9 +300,9 @@ const RSVP: React.FC = () => {
                     </button>
                   </div>
 
-                  <div className="hotel-card simple">
-                    <h4>🏨 Hotel Memling</h4>
-                    <p><strong>📍 Distance :</strong> 1.2 km du Rotana</p>
+                                     <div className="hotel-card simple">
+                     <h4>🏨 Hotel Memling</h4>
+                     <p><strong>📍 Distance :</strong> 1.2 km de KEMESHA</p>
                     <button 
                       className="btn btn-secondary hotel-directions-btn"
                       onClick={() => {
@@ -334,9 +334,9 @@ const RSVP: React.FC = () => {
                     </button>
                   </div>
 
-                  <div className="hotel-card simple">
-                    <h4>🏨 Hotel Royal</h4>
-                    <p><strong>📍 Distance :</strong> 0.8 km du Rotana</p>
+                                     <div className="hotel-card simple">
+                     <h4>🏨 Hotel Royal</h4>
+                     <p><strong>📍 Distance :</strong> 0.8 km de KEMESHA</p>
                     <button 
                       className="btn btn-secondary hotel-directions-btn"
                       onClick={() => {
@@ -368,9 +368,9 @@ const RSVP: React.FC = () => {
                     </button>
                   </div>
 
-                  <div className="hotel-card simple">
-                    <h4>🏨 Hotel Sultani</h4>
-                    <p><strong>📍 Distance :</strong> 1.5 km du Rotana</p>
+                                     <div className="hotel-card simple">
+                     <h4>🏨 Hotel Sultani</h4>
+                     <p><strong>📍 Distance :</strong> 1.5 km de KEMESHA</p>
                     <button 
                       className="btn btn-secondary hotel-directions-btn"
                       onClick={() => {
