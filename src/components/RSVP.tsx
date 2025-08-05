@@ -119,6 +119,14 @@ const RSVP: React.FC = () => {
         <div className="section-header">
           <h2>Confirmer ma présence</h2>
           <p>Vérifiez votre invitation et confirmez votre présence</p>
+          <div className="rsvp-welcome-text">
+            <p>
+              Que vous soyez là pour danser, rire, pleurer de joie (ou tout ça à la fois), votre présence est ce qui rendra cette journée encore plus mémorable.
+            </p>
+            <p>
+              C'est de ce cadre que nous vous prions de bien vouloir confirmer votre présence à notre mariage.
+            </p>
+          </div>
         </div>
 
         <div className="rsvp-content">

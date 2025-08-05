@@ -18,6 +18,30 @@
   width: 100%;
 }
 
+.rsvp-welcome-text {
+  margin-top: 2rem;
+  padding: 2rem;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.05) 0%, rgba(232, 195, 158, 0.05) 100%);
+  border-radius: 15px;
+  border: 1px solid rgba(212, 175, 55, 0.1);
+  text-align: center;
+}
+
+.rsvp-welcome-text p {
+  font-family: var(--font-family-modern);
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--text-dark);
+  margin: 0 0 1rem 0;
+  font-style: italic;
+  opacity: 0.9;
+}
+
+.rsvp-welcome-text p:last-child {
+  margin-bottom: 0;
+  font-weight: 500;
+}
+
 .guest-check-section {
   margin-bottom: 0;
   padding-bottom: 0;
@@ -654,6 +678,15 @@
   .rsvp-form {
     padding: 1.5rem;
     margin: 0 1rem;
+  }
+  
+  .rsvp-welcome-text {
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+  }
+  
+  .rsvp-welcome-text p {
+    font-size: 1rem;
   }
   
   .action-buttons {
