@@ -1,40 +1,43 @@
 import { Guest } from './excelReader';
 
-// Liste des invités intégrée directement dans le code
-// Cette liste remplace le fichier Excel pour permettre la vérification en ligne
+// Liste des invités extraite du fichier Excel
 export const guestList: Guest[] = [
-  // Ajoutez ici la liste complète de vos invités
-  // Format: { firstName: 'Prénom', lastName: 'Nom' }
-  { firstName: 'Jean', lastName: 'Dupont' },
-  { firstName: 'Marie', lastName: 'Martin' },
-  { firstName: 'Pierre', lastName: 'Bernard' },
-  { firstName: 'Sophie', lastName: 'Petit' },
-  { firstName: 'Lucas', lastName: 'Robert' },
-  { firstName: 'Emma', lastName: 'Richard' },
-  { firstName: 'Thomas', lastName: 'Durand' },
-  { firstName: 'Julie', lastName: 'Moreau' },
-  { firstName: 'Nicolas', lastName: 'Simon' },
-  { firstName: 'Camille', lastName: 'Michel' },
-  { firstName: 'Alexandre', lastName: 'Leroy' },
-  { firstName: 'Sarah', lastName: 'Roux' },
-  { firstName: 'David', lastName: 'David' },
-  { firstName: 'Laura', lastName: 'Bertrand' },
-  { firstName: 'Antoine', lastName: 'Morel' },
-  // Ajoutez tous vos invités ici...
+  { firstName: 'FORTUNE', lastName: 'AKUZIBWE', invitationType: 'both' },
+  { firstName: 'ELIE', lastName: 'GUPA', invitationType: 'both' },
+  { firstName: 'DAVID', lastName: 'KABEYA', invitationType: 'both' },
+  { firstName: 'PIERRE', lastName: 'KASONGA', invitationType: 'both' },
+  { firstName: 'JOSUE', lastName: 'KATAMBA', invitationType: 'both' },
+  { firstName: 'KELLY', lastName: 'KATEMBELE', invitationType: 'both' }
 ];
 
 // Fonction pour charger la liste des invités depuis les données intégrées
 export const loadGuestListFromData = async (): Promise<Guest[]> => {
-  // Simulation d'un délai de chargement pour une meilleure UX
   await new Promise(resolve => setTimeout(resolve, 300));
-  
   return guestList;
 };
 
-// Fonction pour rechercher un invité (insensible à la casse)
+// Fonction pour rechercher un invité (insensible à la casse et aux espaces)
 export const findGuestInList = (firstName: string, lastName: string): Guest | undefined => {
+  const cleanFirstName = firstName.toLowerCase().trim();
+  const cleanLastName = lastName.toLowerCase().trim();
+  
   return guestList.find(guest => 
-    guest.firstName.toLowerCase() === firstName.toLowerCase() &&
-    guest.lastName.toLowerCase() === lastName.toLowerCase()
+    guest.firstName.toLowerCase().trim() === cleanFirstName &&
+    guest.lastName.toLowerCase().trim() === cleanLastName
   );
-}; 
+};
+
+// Fonction hybride qui essaie d'abord le fichier Excel, puis utilise les données intégrées
+export const loadGuestListHybrid = async (): Promise<Guest[]> => {
+  try {
+    const response = await fetch('/liste.xlsx');
+    if (response.ok) {
+      const { loadGuestListFromFile } = await import('./excelReader');
+      return await loadGuestListFromFile();
+    }
+  } catch (error) {
+    console.log('Fichier Excel non accessible, utilisation des données intégrées');
+  }
+  
+  return await loadGuestListFromData();
+};

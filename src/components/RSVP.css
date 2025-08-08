@@ -189,6 +189,55 @@
   font-size: 1rem;
 }
 
+/* Styles pour les types d'invitation */
+.invitation-type {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.invitation-type h4 {
+  font-family: var(--font-family-elegant);
+  font-size: 1.2rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.invitation-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.badge {
+  padding: 0.8rem 1.5rem;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.badge.benediction {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: 2px solid #667eea;
+}
+
+.badge.soiree {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+  border: 2px solid #f093fb;
+}
+
+.badge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
 .action-buttons {
   display: flex;
   gap: 1rem;
@@ -201,6 +250,22 @@
   min-width: 200px;
   font-size: 0.9rem;
   padding: 0.8rem 1.5rem;
+}
+
+.both-invitations {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+
+
+.both-invitations .btn {
+  width: 100%;
+  margin-bottom: 0;
+  flex: none;
 }
 
 /* Section Logement et Itinéraire */
@@ -806,6 +871,8 @@
     min-width: auto;
     width: 100%;
   }
+
+
   
   .accommodation-section {
     margin-top: 3rem;

@@ -37,20 +37,7 @@ const Hero: React.FC = () => {
             <div className="hero-date">29 Août 2025</div>
             <div className="hero-location">Kinshasa, RDC</div>
             
-            <div className="hero-welcome-text">
-              <p>
-                C'est avec une immense joie que nous vous accueillons ici, dans notre univers, pour célébrer une aventure qui nous tient à cœur : notre mariage!
-              </p>
-              <p>
-                Le 29 août 2025, sous le ciel de Kemesha, nous dirons "oui" entourés de votre présence!
-              </p>
-              <p>
-                Nous avons hâte de vivre cette journée à vos côtés, dans une ambiance bohème-chic, entre émotions, rires, et moments de joie.
-              </p>
-              <p>
-                À très vite pour écrire ce chapitre ensemble
-              </p>
-            </div>
+           
             
             <Countdown />
           </div>

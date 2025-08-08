@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './RSVP.css';
 import { findGuest, generateGuestCode, Guest } from '../utils/excelReader';
-import { loadGuestListFromData, findGuestInList } from '../utils/guestData';
+import { loadGuestListHybrid, findGuestInList } from '../utils/guestData';
 import { generateInvitationPDF } from '../utils/pdfGenerator';
 
 
@@ -16,18 +16,16 @@ const RSVP: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isExcelLoaded, setIsExcelLoaded] = useState(false);
 
-  // Charger automatiquement le fichier liste.xlsx au montage du composant
+
+  // Charger automatiquement la liste des invités au montage du composant
   useEffect(() => {
     const loadGuestList = async () => {
       try {
         setIsLoading(true);
         setError('');
         
-        // Vérifier si nous sommes en production (Vercel)
-        const isProduction = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
-        
-        // Charger la liste des invités depuis les données intégrées
-        const guests = await loadGuestListFromData();
+        // Charger la liste des invités (Excel en local, données intégrées en ligne)
+        const guests = await loadGuestListHybrid();
         setInvitedGuests(guests);
         setIsExcelLoaded(true);
         console.log(`✅ Liste des invités chargée avec succès : ${guests.length} invités trouvés`);
@@ -77,7 +75,7 @@ const RSVP: React.FC = () => {
   };
 
   // Fonction pour générer et télécharger l'invitation PDF
-  const generateInvitation = () => {
+  const generateInvitation = (invitationType: 'benediction' | 'soiree') => {
     if (!guestFound) return;
 
     setIsGenerating(true);
@@ -86,11 +84,12 @@ const RSVP: React.FC = () => {
     setTimeout(() => {
       const guestCode = generateGuestCode(guestFound.firstName, guestFound.lastName);
       
-      // Générer le PDF d'invitation
+      // Générer le PDF d'invitation avec le type spécifique
       generateInvitationPDF({
         firstName: guestFound.firstName,
         lastName: guestFound.lastName,
-        guestCode: guestCode
+        guestCode: guestCode,
+        invitationType: invitationType
       });
 
       setIsGenerating(false);
@@ -185,32 +184,83 @@ const RSVP: React.FC = () => {
                 </div>
               )}
 
-              {guestFound && (
-                <div className="guest-found">
-                  <div className="success-message">
-                    <span>✅ Invitation trouvée !</span>
-                  </div>
-                  
-                  <div className="guest-info">
-                    <h3>Bienvenue {guestFound.firstName} {guestFound.lastName}</h3>
-                    <p>Votre invitation a été vérifiée avec succès.</p>
-                    
-                    <div className="action-buttons">
-                      <button 
-                        className="btn btn-primary"
-                        onClick={generateInvitation}
-                        disabled={isGenerating}
-                      >
-                        {isGenerating ? 'Génération...' : '📄 Télécharger mon invitation PDF'}
-                      </button>
-                      
-                      <button className="btn btn-secondary">
-                        ✅ Confirmer ma présence
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              )}
+                             {guestFound && (
+                 <div className="guest-found">
+                   <div className="success-message">
+                     <span>✅ Invitation trouvée !</span>
+                   </div>
+                   
+                   <div className="guest-info">
+                     <h3>Bienvenue {guestFound.firstName} {guestFound.lastName}</h3>
+                     <p>Votre invitation a été vérifiée avec succès.</p>
+                     
+                     {/* Affichage du type d'invitation */}
+                     <div className="invitation-type">
+                       <h4>Vos invitations :</h4>
+                       <div className="invitation-badges">
+                         {guestFound.invitationType === 'benediction' && (
+                           <span className="badge benediction">⛪ Bénédiction Nuptiale</span>
+                         )}
+                         {guestFound.invitationType === 'soiree' && (
+                           <span className="badge soiree">🎉 Soirée Dansante</span>
+                         )}
+                         {guestFound.invitationType === 'both' && (
+                           <>
+                             <span className="badge benediction">⛪ Bénédiction Nuptiale</span>
+                             <span className="badge soiree">🎉 Soirée Dansante</span>
+                           </>
+                         )}
+                       </div>
+                     </div>
+                     
+                     <div className="action-buttons">
+                       {/* Boutons de téléchargement selon le type d'invitation */}
+                       {guestFound.invitationType === 'benediction' && (
+                         <button 
+                           className="btn btn-primary"
+                           onClick={() => generateInvitation('benediction')}
+                           disabled={isGenerating}
+                         >
+                           {isGenerating ? 'Génération...' : '⛪ Télécharger invitation Bénédiction'}
+                         </button>
+                       )}
+                       
+                       {guestFound.invitationType === 'soiree' && (
+                         <button 
+                           className="btn btn-primary"
+                           onClick={() => generateInvitation('soiree')}
+                           disabled={isGenerating}
+                         >
+                           {isGenerating ? 'Génération...' : '🎉 Télécharger invitation Soirée'}
+                         </button>
+                       )}
+                       
+                       {guestFound.invitationType === 'both' && (
+                         <div className="both-invitations">
+                           <button 
+                             className="btn btn-primary"
+                             onClick={() => generateInvitation('benediction')}
+                             disabled={isGenerating}
+                           >
+                             {isGenerating ? 'Génération...' : '⛪ Télécharger invitation Bénédiction'}
+                           </button>
+                           <button 
+                             className="btn btn-primary"
+                             onClick={() => generateInvitation('soiree')}
+                             disabled={isGenerating}
+                           >
+                             {isGenerating ? 'Génération...' : '🎉 Télécharger invitation Soirée'}
+                           </button>
+                         </div>
+                       )}
+                       
+                       <button className="btn btn-secondary">
+                         ✅ Confirmer ma présence
+                       </button>
+                     </div>
+                   </div>
+                 </div>
+               )}
             </div>
           </div>
         </div>

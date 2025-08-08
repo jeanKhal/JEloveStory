@@ -17,38 +17,23 @@ interface ImageItem {
   id: number;
   src: string;
   alt: string;
-  category: string;
 }
 
 const Gallery: React.FC = () => {
   const [selectedImage, setSelectedImage] = useState<ImageItem | null>(null);
-  const [activeFilter, setActiveFilter] = useState<string>('all');
 
   const images: ImageItem[] = [
-    { id: 1, src: image1, alt: "Joel & Eunice - Moment romantique", category: "romantic" },
-    { id: 2, src: image2, alt: "Joel & Eunice - Portrait élégant", category: "portrait" },
-    { id: 3, src: image3, alt: "Joel & Eunice - Cérémonie", category: "ceremony" },
-    { id: 4, src: image4, alt: "Joel & Eunice - Réception", category: "reception" },
-    { id: 5, src: image5, alt: "Joel & Eunice - Mariage", category: "wedding" },
-    { id: 6, src: image6, alt: "Joel & Eunice - Cérémonie religieuse", category: "ceremony" },
-    { id: 7, src: image7, alt: "Joel & Eunice - Dîner de mariage", category: "reception" },
-    { id: 8, src: image8, alt: "Joel & Eunice - Soirée dansante", category: "reception" },
-    { id: 9, src: image9, alt: "Joel & Eunice - Portrait officiel", category: "portrait" },
-    { id: 10, src: image10, alt: "Joel & Eunice - Moment intime", category: "romantic" }
+    { id: 1, src: image1, alt: "Joel & Eunice - Moment romantique" },
+    { id: 2, src: image2, alt: "Joel & Eunice - Portrait élégant" },
+    { id: 3, src: image3, alt: "Joel & Eunice - Cérémonie" },
+    { id: 4, src: image4, alt: "Joel & Eunice - Réception" },
+    { id: 5, src: image5, alt: "Joel & Eunice - Mariage" },
+    { id: 6, src: image6, alt: "Joel & Eunice - Cérémonie religieuse" },
+    { id: 7, src: image7, alt: "Joel & Eunice - Dîner de mariage" },
+    { id: 8, src: image8, alt: "Joel & Eunice - Soirée dansante" },
+    { id: 9, src: image9, alt: "Joel & Eunice - Portrait officiel" },
+    { id: 10, src: image10, alt: "Joel & Eunice - Moment intime" }
   ];
-
-  const filters = [
-    { id: 'all', label: 'Toutes les photos' },
-    { id: 'romantic', label: 'Moments romantiques' },
-    { id: 'portrait', label: 'Portraits' },
-    { id: 'ceremony', label: 'Cérémonies' },
-    { id: 'reception', label: 'Réceptions' },
-    { id: 'wedding', label: 'Mariage' }
-  ];
-
-  const filteredImages = activeFilter === 'all' 
-    ? images 
-    : images.filter(img => img.category === activeFilter);
 
   const openModal = (image: ImageItem) => {
     setSelectedImage(image);
@@ -60,21 +45,19 @@ const Gallery: React.FC = () => {
 
   const nextImage = () => {
     if (selectedImage) {
-      const currentIndex = filteredImages.findIndex(img => img.id === selectedImage.id);
-      const nextIndex = (currentIndex + 1) % filteredImages.length;
-      setSelectedImage(filteredImages[nextIndex]);
+      const currentIndex = images.findIndex(img => img.id === selectedImage.id);
+      const nextIndex = (currentIndex + 1) % images.length;
+      setSelectedImage(images[nextIndex]);
     }
   };
 
   const prevImage = () => {
     if (selectedImage) {
-      const currentIndex = filteredImages.findIndex(img => img.id === selectedImage.id);
-      const prevIndex = currentIndex === 0 ? filteredImages.length - 1 : currentIndex - 1;
-      setSelectedImage(filteredImages[prevIndex]);
+      const currentIndex = images.findIndex(img => img.id === selectedImage.id);
+      const prevIndex = currentIndex === 0 ? images.length - 1 : currentIndex - 1;
+      setSelectedImage(images[prevIndex]);
     }
   };
-
-
 
   return (
     <section id="gallery" className="gallery">
@@ -84,22 +67,9 @@ const Gallery: React.FC = () => {
           <p>Découvrez les plus beaux moments de notre histoire d'amour</p>
         </div>
 
-        {/* Filtres */}
-        <div className="gallery-filters">
-          {filters.map(filter => (
-            <button
-              key={filter.id}
-              className={`filter-btn ${activeFilter === filter.id ? 'active' : ''}`}
-              onClick={() => setActiveFilter(filter.id)}
-            >
-              {filter.label}
-            </button>
-          ))}
-        </div>
-
         {/* Grille de photos */}
         <div className="gallery-grid">
-          {filteredImages.map((image) => (
+          {images.map((image) => (
             <div
               key={image.id}
               className="gallery-item"
@@ -107,12 +77,6 @@ const Gallery: React.FC = () => {
             >
               <div className="image-container">
                 <img src={image.src} alt={image.alt} />
-                <div className="image-overlay">
-                  <div className="overlay-content">
-                    <span className="zoom-icon">🔍</span>
-                    <p className="image-caption">{image.alt}</p>
-                  </div>
-                </div>
               </div>
             </div>
           ))}
@@ -131,8 +95,8 @@ const Gallery: React.FC = () => {
               </div>
               
               <div className="modal-info">
-                <h3>{selectedImage.alt}</h3>
-                <p>Photo {filteredImages.findIndex(img => img.id === selectedImage.id) + 1} sur {filteredImages.length}</p>
+                <h3>Joel Eunice Wedding</h3>
+                <p>Photo {images.findIndex(img => img.id === selectedImage.id) + 1} sur {images.length}</p>
               </div>
               
               <button className="modal-nav prev" onClick={prevImage}>

@@ -5,6 +5,7 @@ import * as XLSX from 'xlsx';
 export interface Guest {
   firstName: string;
   lastName: string;
+  invitationType: 'benediction' | 'soiree' | 'both'; // Type d'invitation
 }
 
 // Fonction pour charger le fichier Excel depuis le dossier public
@@ -35,10 +36,30 @@ export const loadGuestListFromFile = async (): Promise<Guest[]> => {
     
     const guests: Guest[] = rows
       .filter(row => row[1] && row[2]) // Filtrer les lignes vides (colonne B et C)
-      .map(row => ({
-        firstName: String(row[1] || '').trim(), // Colonne B = Prénom
-        lastName: String(row[2] || '').trim(),  // Colonne C = Nom
-      }))
+      .map(row => {
+        const firstName = String(row[1] || '').trim(); // Colonne B = Prénom
+        const lastName = String(row[2] || '').trim();  // Colonne C = Nom
+        
+        // Déterminer le type d'invitation (colonne D ou logique par défaut)
+        let invitationType: 'benediction' | 'soiree' | 'both' = 'both'; // Par défaut, invité aux deux
+        
+        if (row[3]) {
+          const typeValue = String(row[3]).toLowerCase().trim();
+          if (typeValue.includes('bénédiction') || typeValue.includes('benediction') || typeValue === 'b') {
+            invitationType = 'benediction';
+          } else if (typeValue.includes('soirée') || typeValue.includes('soiree') || typeValue === 's') {
+            invitationType = 'soiree';
+          } else if (typeValue.includes('les deux') || typeValue.includes('both') || typeValue === 'x') {
+            invitationType = 'both';
+          }
+        }
+        
+        return {
+          firstName,
+          lastName,
+          invitationType
+        };
+      })
       .filter(guest => guest.firstName && guest.lastName); // Filtrer les invités sans nom
     
     return guests;
@@ -70,10 +91,30 @@ export const readGuestListFromExcel = async (file: File): Promise<Guest[]> => {
         
         const guests: Guest[] = rows
           .filter(row => row[1] && row[2]) // Filtrer les lignes vides (colonne B et C)
-          .map(row => ({
-            firstName: String(row[1] || '').trim(), // Colonne B = Prénom
-            lastName: String(row[2] || '').trim(),  // Colonne C = Nom
-          }))
+          .map(row => {
+            const firstName = String(row[1] || '').trim(); // Colonne B = Prénom
+            const lastName = String(row[2] || '').trim();  // Colonne C = Nom
+            
+            // Déterminer le type d'invitation (colonne D ou logique par défaut)
+            let invitationType: 'benediction' | 'soiree' | 'both' = 'both'; // Par défaut, invité aux deux
+            
+            if (row[3]) {
+              const typeValue = String(row[3]).toLowerCase().trim();
+              if (typeValue.includes('bénédiction') || typeValue.includes('benediction') || typeValue === 'b') {
+                invitationType = 'benediction';
+              } else if (typeValue.includes('soirée') || typeValue.includes('soiree') || typeValue === 's') {
+                invitationType = 'soiree';
+              } else if (typeValue.includes('les deux') || typeValue.includes('both') || typeValue === 'x') {
+                invitationType = 'both';
+              }
+            }
+            
+            return {
+              firstName,
+              lastName,
+              invitationType
+            };
+          })
           .filter(guest => guest.firstName && guest.lastName); // Filtrer les invités sans nom
         
         resolve(guests);
@@ -100,29 +141,32 @@ export const readGuestList = async (): Promise<Guest[]> => {
   
   // Données simulées (remplaceraient les données du fichier Excel)
   return [
-    { firstName: 'Jean', lastName: 'Dupont' },
-    { firstName: 'Marie', lastName: 'Martin' },
-    { firstName: 'Pierre', lastName: 'Bernard' },
-    { firstName: 'Sophie', lastName: 'Petit' },
-    { firstName: 'Lucas', lastName: 'Robert' },
-    { firstName: 'Emma', lastName: 'Richard' },
-    { firstName: 'Thomas', lastName: 'Durand' },
-    { firstName: 'Julie', lastName: 'Moreau' },
-    { firstName: 'Nicolas', lastName: 'Simon' },
-    { firstName: 'Camille', lastName: 'Michel' },
-    { firstName: 'Alexandre', lastName: 'Leroy' },
-    { firstName: 'Sarah', lastName: 'Roux' },
-    { firstName: 'David', lastName: 'David' },
-    { firstName: 'Laura', lastName: 'Bertrand' },
-    { firstName: 'Antoine', lastName: 'Morel' },
+    { firstName: 'Jean', lastName: 'Dupont', invitationType: 'both' },
+    { firstName: 'Marie', lastName: 'Martin', invitationType: 'benediction' },
+    { firstName: 'Pierre', lastName: 'Bernard', invitationType: 'soiree' },
+    { firstName: 'Sophie', lastName: 'Petit', invitationType: 'both' },
+    { firstName: 'Lucas', lastName: 'Robert', invitationType: 'benediction' },
+    { firstName: 'Emma', lastName: 'Richard', invitationType: 'soiree' },
+    { firstName: 'Thomas', lastName: 'Durand', invitationType: 'both' },
+    { firstName: 'Julie', lastName: 'Moreau', invitationType: 'benediction' },
+    { firstName: 'Nicolas', lastName: 'Simon', invitationType: 'soiree' },
+    { firstName: 'Camille', lastName: 'Michel', invitationType: 'both' },
+    { firstName: 'Alexandre', lastName: 'Leroy', invitationType: 'benediction' },
+    { firstName: 'Sarah', lastName: 'Roux', invitationType: 'soiree' },
+    { firstName: 'David', lastName: 'David', invitationType: 'both' },
+    { firstName: 'Laura', lastName: 'Bertrand', invitationType: 'benediction' },
+    { firstName: 'Antoine', lastName: 'Morel', invitationType: 'soiree' },
   ];
 };
 
-// Fonction pour rechercher un invité (insensible à la casse)
+// Fonction pour rechercher un invité (insensible à la casse et aux espaces)
 export const findGuest = (guests: Guest[], firstName: string, lastName: string): Guest | undefined => {
+  const cleanFirstName = firstName.toLowerCase().trim();
+  const cleanLastName = lastName.toLowerCase().trim();
+  
   return guests.find(guest => 
-    guest.firstName.toLowerCase() === firstName.toLowerCase() &&
-    guest.lastName.toLowerCase() === lastName.toLowerCase()
+    guest.firstName.toLowerCase().trim() === cleanFirstName &&
+    guest.lastName.toLowerCase().trim() === cleanLastName
   );
 };
 

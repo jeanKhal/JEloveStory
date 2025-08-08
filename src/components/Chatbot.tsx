@@ -80,9 +80,11 @@ const Chatbot: React.FC = () => {
         if (row && row[1] && row[2]) {
           const guestFirstName = row[1].toString().toLowerCase().trim();
           const guestLastName = row[2].toString().toLowerCase().trim();
+          const inputFirstName = firstName.toLowerCase().trim();
+          const inputLastName = lastName.toLowerCase().trim();
           
-          if (guestFirstName === firstName.toLowerCase().trim() && 
-              guestLastName === lastName.toLowerCase().trim()) {
+          if (guestFirstName === inputFirstName && 
+              guestLastName === inputLastName) {
             return true;
           }
         }
@@ -110,9 +112,11 @@ const Chatbot: React.FC = () => {
         if (row && row[1] && row[2]) {
           const guestFirstName = row[1].toString().toLowerCase().trim();
           const guestLastName = row[2].toString().toLowerCase().trim();
+          const inputFirstName = firstName.toLowerCase().trim();
+          const inputLastName = lastName.toLowerCase().trim();
           
-          if (guestFirstName === firstName.toLowerCase().trim() && 
-              guestLastName === lastName.toLowerCase().trim()) {
+          if (guestFirstName === inputFirstName && 
+              guestLastName === inputLastName) {
             guestRowIndex = i;
             break;
           }
