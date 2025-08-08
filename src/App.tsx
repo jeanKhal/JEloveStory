@@ -9,7 +9,7 @@ import DressCode from './components/DressCode';
 import Gallery from './components/Gallery';
 import Chatbot from './components/Chatbot';
 import Welcome from './components/Welcome';
-import Invitation from './components/Invitation';
+import Validation from './components/Validation';
 import { findGuestByCode } from './utils/guestData';
 
 // Composant pour la page d'accueil
@@ -42,21 +42,12 @@ const WelcomePage: React.FC = () => {
   );
 };
 
-// Composant pour la page d'invitation avec paramètre de route
-const InvitationPage: React.FC = () => {
-  const { code, type } = useParams<{ code: string; type: string }>();
-  
-  // Trouver l'invité par son code
-  const guest = code ? findGuestByCode(code) : null;
-  
-  return (
-    <Invitation 
-      guestName={guest ? `${guest.firstName} ${guest.lastName}` : undefined}
-      invitationType={type as 'benediction' | 'soiree'}
-      guestCode={code}
-    />
-  );
+// Composant pour la page de validation d'authenticité
+const ValidationPage: React.FC = () => {
+  return <Validation />;
 };
+
+
 
 function App() {
   return (
@@ -64,7 +55,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/welcome/:code" element={<WelcomePage />} />
-        <Route path="/invitation/:type/:code" element={<InvitationPage />} />
+        <Route path="/validate/:guestCode/:invitationType/:token" element={<ValidationPage />} />
       </Routes>
     </div>
   );

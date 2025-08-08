@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import './RSVP.css';
 import { findGuest, generateGuestCode, Guest } from '../utils/excelReader';
 import { loadGuestListHybrid, findGuestInList } from '../utils/guestData';
+import { generateInvitationHTML } from '../utils/pdfGenerator';
 
 
 const RSVP: React.FC = () => {
-  const navigate = useNavigate();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [isChecking, setIsChecking] = useState(false);
@@ -75,8 +74,8 @@ const RSVP: React.FC = () => {
     }, 1000);
   };
 
-  // Fonction pour afficher l'invitation
-  const showInvitation = (invitationType: 'benediction' | 'soiree') => {
+  // Fonction pour télécharger l'invitation PDF
+  const downloadInvitation = async (invitationType: 'benediction' | 'soiree') => {
     if (!guestFound) return;
 
     setIsGenerating(true);
@@ -84,11 +83,16 @@ const RSVP: React.FC = () => {
     try {
       const guestCode = generateGuestCode(guestFound.firstName, guestFound.lastName);
       
-      // Naviguer vers la page d'invitation
-      navigate(`/invitation/${invitationType}/${guestCode}`);
+      // Générer et télécharger l'invitation HTML
+      await generateInvitationHTML({
+        firstName: guestFound.firstName,
+        lastName: guestFound.lastName,
+        guestCode: guestCode,
+        invitationType: invitationType
+      });
     } catch (error) {
-      console.error('Erreur lors de l\'affichage de l\'invitation:', error);
-      setError('Erreur lors de l\'affichage de l\'invitation. Veuillez réessayer.');
+      console.error('Erreur lors de la génération du PDF:', error);
+      setError('Erreur lors de la génération de l\'invitation. Veuillez réessayer.');
     } finally {
       setIsGenerating(false);
     }
@@ -215,44 +219,44 @@ const RSVP: React.FC = () => {
                      
                      <div className="action-buttons">
                        {/* Boutons de téléchargement selon le type d'invitation */}
-                       {guestFound.invitationType === 'benediction' && (
-                         <button 
-                           className="btn btn-primary"
-                           onClick={() => showInvitation('benediction')}
-                           disabled={isGenerating}
-                         >
-                           {isGenerating ? 'Chargement...' : '⛪ Voir invitation Bénédiction'}
-                         </button>
-                       )}
-                       
-                       {guestFound.invitationType === 'soiree' && (
-                         <button 
-                           className="btn btn-primary"
-                           onClick={() => showInvitation('soiree')}
-                           disabled={isGenerating}
-                         >
-                           {isGenerating ? 'Chargement...' : '🎉 Voir invitation Soirée'}
-                         </button>
-                       )}
-                       
-                       {guestFound.invitationType === 'both' && (
-                         <div className="both-invitations">
-                           <button 
-                             className="btn btn-primary"
-                             onClick={() => showInvitation('benediction')}
-                             disabled={isGenerating}
-                           >
-                             {isGenerating ? 'Chargement...' : '⛪ Voir invitation Bénédiction'}
-                           </button>
-                           <button 
-                             className="btn btn-primary"
-                             onClick={() => showInvitation('soiree')}
-                             disabled={isGenerating}
-                           >
-                             {isGenerating ? 'Chargement...' : '🎉 Voir invitation Soirée'}
-                           </button>
-                         </div>
-                       )}
+                                               {guestFound.invitationType === 'benediction' && (
+                          <button 
+                            className="btn btn-primary"
+                            onClick={() => downloadInvitation('benediction')}
+                            disabled={isGenerating}
+                          >
+                            {isGenerating ? 'Génération...' : '⛪ Télécharger invitation Bénédiction'}
+                          </button>
+                        )}
+                        
+                        {guestFound.invitationType === 'soiree' && (
+                          <button 
+                            className="btn btn-primary"
+                            onClick={() => downloadInvitation('soiree')}
+                            disabled={isGenerating}
+                          >
+                            {isGenerating ? 'Génération...' : '🎉 Télécharger invitation Soirée'}
+                          </button>
+                        )}
+                        
+                        {guestFound.invitationType === 'both' && (
+                          <div className="both-invitations">
+                            <button 
+                              className="btn btn-primary"
+                              onClick={() => downloadInvitation('benediction')}
+                              disabled={isGenerating}
+                            >
+                              {isGenerating ? 'Génération...' : '⛪ Télécharger invitation Bénédiction'}
+                            </button>
+                            <button 
+                              className="btn btn-primary"
+                              onClick={() => downloadInvitation('soiree')}
+                              disabled={isGenerating}
+                            >
+                              {isGenerating ? 'Génération...' : '🎉 Télécharger invitation Soirée'}
+                            </button>
+                          </div>
+                        )}
                        
                        <button className="btn btn-secondary">
                          ✅ Confirmer ma présence

@@ -36,6 +36,40 @@ export const findGuestByCode = (guestCode: string): Guest | undefined => {
   });
 };
 
+// Fonction pour valider l'authenticité d'une invitation
+export const validateInvitation = (guestCode: string, invitationType: 'benediction' | 'soiree'): { isValid: boolean; guest?: Guest; message: string } => {
+  const guest = findGuestByCode(guestCode);
+  
+  if (!guest) {
+    return {
+      isValid: false,
+      message: 'Code d\'invitation invalide. Cette invitation n\'est pas reconnue.'
+    };
+  }
+  
+  if (guest.invitationType === 'both' || guest.invitationType === invitationType) {
+    return {
+      isValid: true,
+      guest,
+      message: `Invitation authentique pour ${guest.firstName} ${guest.lastName}`
+    };
+  } else {
+    return {
+      isValid: false,
+      guest,
+      message: `Ce code d'invitation ne correspond pas au type d'événement demandé.`
+    };
+  }
+};
+
+// Fonction pour générer un token d'authentification sécurisé
+export const generateAuthToken = (guestCode: string, invitationType: 'benediction' | 'soiree'): string => {
+  const timestamp = Date.now();
+  const data = `${guestCode}-${invitationType}-${timestamp}`;
+  // Simple hash pour l'exemple (en production, utiliser une méthode plus sécurisée)
+  return btoa(data).replace(/[^a-zA-Z0-9]/g, '');
+};
+
 // Fonction hybride qui essaie d'abord le fichier Excel, puis utilise les données intégrées
 export const loadGuestListHybrid = async (): Promise<Guest[]> => {
   try {
