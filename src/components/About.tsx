@@ -1,10 +1,38 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './About.css';
 import slideImage1 from '../assets/_MT_0194.jpeg';
 import slideImage2 from '../assets/_MT_0204.jpeg';
 import slideImage3 from '../assets/_MT_0221.jpeg';
 
 const About: React.FC = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  
+  const slides = [
+    { src: slideImage1, alt: "Joel & Eunice - Moment romantique" },
+    { src: slideImage2, alt: "Joel & Eunice - Portrait élégant" },
+    { src: slideImage3, alt: "Joel & Eunice - Cérémonie" }
+  ];
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % slides.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+  };
+
+  const goToSlide = (index: number) => {
+    setCurrentSlide(index);
+  };
+
+  // Auto-advance slides every 5 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      nextSlide();
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <section id="about" className="about">
@@ -44,35 +72,57 @@ const About: React.FC = () => {
               </p>
             </div>
             
-                         <div className="story-gallery">
-               <div className="gallery-grid">
-                 <div className="gallery-item">
-                   <img src={slideImage1} alt="Joel & Eunice - Moment romantique" />
-                 </div>
-                 <div className="gallery-item">
-                   <img src={slideImage2} alt="Joel & Eunice - Portrait élégant" />
-                 </div>
-                 <div className="gallery-item">
-                   <img src={slideImage3} alt="Joel & Eunice - Cérémonie" />
-                 </div>
-               </div>
-             </div>
-           </div>
-           
-           {/* Section Nos moments préférés */}
-           <div className="favorite-moments">
-             <div className="moments-header">
-               <h3>Nos Moments Préférés</h3>
-             </div>
-             <div className="moments-content">
-               <p>
-                 Entre les soirées cinéma, les moments de partage, les découvertes, les expériences et les moments précieux en famille nous savourons chaque instant.
-               </p>
-             </div>
-           </div>
-         </div>
-       </div>
-     </section>
+            <div className="story-gallery">
+              <div className="slider-container">
+                <div className="slider-wrapper">
+                  <div 
+                    className="slider-track"
+                    style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+                  >
+                    {slides.map((slide, index) => (
+                      <div key={index} className="slider-slide">
+                        <img src={slide.src} alt={slide.alt} />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                
+                {/* Navigation arrows */}
+                <button className="slider-nav prev" onClick={prevSlide}>
+                  ‹
+                </button>
+                <button className="slider-nav next" onClick={nextSlide}>
+                  ›
+                </button>
+                
+                {/* Dots indicator */}
+                <div className="slider-dots">
+                  {slides.map((_, index) => (
+                    <button
+                      key={index}
+                      className={`slider-dot ${index === currentSlide ? 'active' : ''}`}
+                      onClick={() => goToSlide(index)}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Section Nos moments préférés */}
+          <div className="favorite-moments">
+            <div className="moments-header">
+              <h3>Nos Moments Préférés</h3>
+            </div>
+            <div className="moments-content">
+              <p>
+                Entre les soirées cinéma, les moments de partage, les découvertes, les expériences et les moments précieux en famille nous savourons chaque instant.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 };
 

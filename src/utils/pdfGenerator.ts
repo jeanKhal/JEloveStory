@@ -485,31 +485,21 @@ export const generateInvitationPDF = async (data: InvitationData): Promise<void>
   const blob = new Blob([htmlContent], { type: 'text/html' });
   const url = URL.createObjectURL(blob);
 
-  // Ouvrir dans une nouvelle fenêtre pour impression
-  const printWindow = window.open(url, '_blank');
+  // Créer un lien de téléchargement
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = `${fileName}.html`;
+  link.style.display = 'none';
   
-  if (printWindow) {
-    printWindow.onload = () => {
-      // Attendre que la page soit chargée puis imprimer
-      setTimeout(() => {
-        printWindow.print();
-        // Fermer la fenêtre après impression
-        setTimeout(() => {
-          printWindow.close();
-          URL.revokeObjectURL(url);
-        }, 1000);
-      }, 500);
-    };
-  } else {
-    // Fallback si la fenêtre ne peut pas être ouverte
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = `${fileName}.html`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+  // Ajouter le lien au DOM, cliquer dessus, puis le supprimer
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  
+  // Nettoyer l'URL après un délai
+  setTimeout(() => {
     URL.revokeObjectURL(url);
-  }
+  }, 1000);
 };
 
 // Fonction alternative pour générer un PDF simple (fallback)
