@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './RSVP.css';
 import { findGuest, generateGuestCode, Guest } from '../utils/excelReader';
 import { loadGuestListHybrid, findGuestInList } from '../utils/guestData';
-import { generateInvitationPDF } from '../utils/pdfGenerator';
 
 
 const RSVP: React.FC = () => {
+  const navigate = useNavigate();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [isChecking, setIsChecking] = useState(false);
@@ -74,8 +75,8 @@ const RSVP: React.FC = () => {
     }, 1000);
   };
 
-  // Fonction pour générer et télécharger l'invitation PDF
-  const generateInvitation = async (invitationType: 'benediction' | 'soiree') => {
+  // Fonction pour afficher l'invitation
+  const showInvitation = (invitationType: 'benediction' | 'soiree') => {
     if (!guestFound) return;
 
     setIsGenerating(true);
@@ -83,20 +84,17 @@ const RSVP: React.FC = () => {
     try {
       const guestCode = generateGuestCode(guestFound.firstName, guestFound.lastName);
       
-      // Générer le PDF d'invitation avec le type spécifique
-      await generateInvitationPDF({
-        firstName: guestFound.firstName,
-        lastName: guestFound.lastName,
-        guestCode: guestCode,
-        invitationType: invitationType
-      });
+      // Naviguer vers la page d'invitation
+      navigate(`/invitation/${invitationType}/${guestCode}`);
     } catch (error) {
-      console.error('Erreur lors de la génération du PDF:', error);
-      setError('Erreur lors de la génération de l\'invitation. Veuillez réessayer.');
+      console.error('Erreur lors de l\'affichage de l\'invitation:', error);
+      setError('Erreur lors de l\'affichage de l\'invitation. Veuillez réessayer.');
     } finally {
       setIsGenerating(false);
     }
   };
+
+
 
   if (isLoading) {
     return (
@@ -220,20 +218,20 @@ const RSVP: React.FC = () => {
                        {guestFound.invitationType === 'benediction' && (
                          <button 
                            className="btn btn-primary"
-                           onClick={() => generateInvitation('benediction')}
+                           onClick={() => showInvitation('benediction')}
                            disabled={isGenerating}
                          >
-                           {isGenerating ? 'Génération...' : '⛪ Télécharger invitation Bénédiction'}
+                           {isGenerating ? 'Chargement...' : '⛪ Voir invitation Bénédiction'}
                          </button>
                        )}
                        
                        {guestFound.invitationType === 'soiree' && (
                          <button 
                            className="btn btn-primary"
-                           onClick={() => generateInvitation('soiree')}
+                           onClick={() => showInvitation('soiree')}
                            disabled={isGenerating}
                          >
-                           {isGenerating ? 'Génération...' : '🎉 Télécharger invitation Soirée'}
+                           {isGenerating ? 'Chargement...' : '🎉 Voir invitation Soirée'}
                          </button>
                        )}
                        
@@ -241,17 +239,17 @@ const RSVP: React.FC = () => {
                          <div className="both-invitations">
                            <button 
                              className="btn btn-primary"
-                             onClick={() => generateInvitation('benediction')}
+                             onClick={() => showInvitation('benediction')}
                              disabled={isGenerating}
                            >
-                             {isGenerating ? 'Génération...' : '⛪ Télécharger invitation Bénédiction'}
+                             {isGenerating ? 'Chargement...' : '⛪ Voir invitation Bénédiction'}
                            </button>
                            <button 
                              className="btn btn-primary"
-                             onClick={() => generateInvitation('soiree')}
+                             onClick={() => showInvitation('soiree')}
                              disabled={isGenerating}
                            >
-                             {isGenerating ? 'Génération...' : '🎉 Télécharger invitation Soirée'}
+                             {isGenerating ? 'Chargement...' : '🎉 Voir invitation Soirée'}
                            </button>
                          </div>
                        )}
