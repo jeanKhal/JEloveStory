@@ -1,5 +1,6 @@
 // Utilitaire pour générer des PDF d'invitation
 // Utilise les APIs natives du navigateur
+import QRCode from 'qrcode';
 
 export interface InvitationData {
   firstName: string;
@@ -9,27 +10,54 @@ export interface InvitationData {
 }
 
 // Fonction pour générer un QR code avec image en arrière-plan
-const generateQRCodeWithImage = (guestCode: string): string => {
-  // Utiliser une API de QR code avec logo intégré
-  const qrData = `JOEL-EUNICE-WEDDING-${guestCode}`;
-  const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(qrData)}&format=png&margin=0&qzone=2&ecc=M`;
-  
-  return `
-    <div class="qr-container">
-      <div class="qr-code">
-        <img src="${qrUrl}" alt="QR Code" class="qr-image" />
-                 <div class="qr-overlay">
-           <div class="qr-logo">
-             <div class="logo-circle"></div>
-           </div>
-         </div>
+const generateQRCodeWithImage = async (guestCode: string): Promise<string> => {
+  try {
+    // Générer le QR code localement
+    const qrData = `JOEL-EUNICE-WEDDING-${guestCode}`;
+    const qrDataUrl = await QRCode.toDataURL(qrData, {
+      width: 200,
+      margin: 0,
+      color: {
+        dark: '#2c2c2c',
+        light: '#f8f4e6'
+      }
+    });
+    
+    return `
+      <div class="qr-container">
+        <div class="qr-code">
+          <img src="${qrDataUrl}" alt="QR Code" class="qr-image" />
+          <div class="qr-overlay">
+            <div class="qr-logo">
+              <div class="logo-circle"></div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  `;
+    `;
+  } catch (error) {
+    console.error('Erreur lors de la génération du QR code:', error);
+    // Fallback vers l'API externe
+    const qrData = `JOEL-EUNICE-WEDDING-${guestCode}`;
+    const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(qrData)}&format=png&margin=0&qzone=2&ecc=M`;
+    
+    return `
+      <div class="qr-container">
+        <div class="qr-code">
+          <img src="${qrUrl}" alt="QR Code" class="qr-image" />
+          <div class="qr-overlay">
+            <div class="qr-logo">
+              <div class="logo-circle"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
 };
 
 // Fonction pour générer un PDF d'invitation
-export const generateInvitationPDF = (data: InvitationData): void => {
+export const generateInvitationPDF = async (data: InvitationData): Promise<void> => {
   // Déterminer le contenu selon le type d'invitation
   const invitationType = data.invitationType || 'both';
   
@@ -442,7 +470,7 @@ export const generateInvitationPDF = (data: InvitationData): void => {
            `}
          </div>
         
-        ${generateQRCodeWithImage(data.guestCode)}
+                 ${await generateQRCodeWithImage(data.guestCode)}
         
         <div class="footer">
           <p style="margin-bottom: 10px; font-weight: 600;">Pour toute question, veuillez contacter les organisateurs</p>

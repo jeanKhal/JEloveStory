@@ -89,6 +89,9 @@
   color: var(--text-dark);
   transition: var(--transition);
   box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 .form-group input:focus {
@@ -967,7 +970,12 @@
   
   .form-group input {
     padding: 0.8rem;
-    font-size: 0.9rem;
+    font-size: 16px; /* Évite le zoom sur iOS */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 6px;
+    background-clip: padding-box;
   }
 
 

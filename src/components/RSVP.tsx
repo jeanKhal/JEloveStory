@@ -75,25 +75,27 @@ const RSVP: React.FC = () => {
   };
 
   // Fonction pour générer et télécharger l'invitation PDF
-  const generateInvitation = (invitationType: 'benediction' | 'soiree') => {
+  const generateInvitation = async (invitationType: 'benediction' | 'soiree') => {
     if (!guestFound) return;
 
     setIsGenerating(true);
 
-    // Simulation de génération d'invitation
-    setTimeout(() => {
+    try {
       const guestCode = generateGuestCode(guestFound.firstName, guestFound.lastName);
       
       // Générer le PDF d'invitation avec le type spécifique
-      generateInvitationPDF({
+      await generateInvitationPDF({
         firstName: guestFound.firstName,
         lastName: guestFound.lastName,
         guestCode: guestCode,
         invitationType: invitationType
       });
-
+    } catch (error) {
+      console.error('Erreur lors de la génération du PDF:', error);
+      setError('Erreur lors de la génération de l\'invitation. Veuillez réessayer.');
+    } finally {
       setIsGenerating(false);
-    }, 1500);
+    }
   };
 
   if (isLoading) {
