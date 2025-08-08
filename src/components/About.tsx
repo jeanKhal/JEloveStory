@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './About.css';
 import slideImage1 from '../assets/_MT_0194.jpeg';
 import slideImage2 from '../assets/_MT_0204.jpeg';
@@ -13,9 +13,9 @@ const About: React.FC = () => {
     { src: slideImage3, alt: "Joel & Eunice - Cérémonie" }
   ];
 
-  const nextSlide = () => {
+  const nextSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev + 1) % slides.length);
-  };
+  }, [slides.length]);
 
   const prevSlide = () => {
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
@@ -32,7 +32,7 @@ const About: React.FC = () => {
     }, 5000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [nextSlide]);
 
   return (
     <section id="about" className="about">
