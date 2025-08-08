@@ -15,7 +15,7 @@ export interface InvitationData {
 const generateQRCodeWithImage = async (guestCode: string): Promise<string> => {
   try {
     // Générer le QR code localement avec URL de bienvenue
-    const qrData = `${window.location.origin}/welcome?code=${guestCode}`;
+    const qrData = `${window.location.origin}/welcome/${guestCode}`;
     const qrDataUrl = await QRCode.toDataURL(qrData, {
       width: 200,
       margin: 0,
@@ -40,7 +40,7 @@ const generateQRCodeWithImage = async (guestCode: string): Promise<string> => {
   } catch (error) {
     console.error('Erreur lors de la génération du QR code:', error);
     // Fallback vers l'API externe
-    const qrData = `${window.location.origin}/welcome?code=${guestCode}`;
+    const qrData = `${window.location.origin}/welcome/${guestCode}`;
     const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(qrData)}&format=png&margin=0&qzone=2&ecc=M`;
     
     return `

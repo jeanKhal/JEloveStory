@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, useSearchParams } from 'react-router-dom';
+import { Routes, Route, useParams } from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -26,13 +26,12 @@ const HomePage: React.FC = () => {
   );
 };
 
-// Composant pour la page de bienvenue
+// Composant pour la page de bienvenue avec paramètre de route
 const WelcomePage: React.FC = () => {
-  const [searchParams] = useSearchParams();
-  const guestCode = searchParams.get('code');
+  const { code } = useParams<{ code: string }>();
   
   // Trouver l'invité par son code
-  const guest = guestCode ? findGuestByCode(guestCode) : null;
+  const guest = code ? findGuestByCode(code) : null;
   
   return (
     <Welcome 
@@ -44,14 +43,12 @@ const WelcomePage: React.FC = () => {
 
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/welcome" element={<WelcomePage />} />
-        </Routes>
-      </div>
-    </Router>
+    <div className="App">
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/welcome/:code" element={<WelcomePage />} />
+      </Routes>
+    </div>
   );
 }
 
