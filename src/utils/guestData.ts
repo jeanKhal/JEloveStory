@@ -27,6 +27,15 @@ export const findGuestInList = (firstName: string, lastName: string): Guest | un
   );
 };
 
+// Fonction pour trouver un invité par son code d'invité
+export const findGuestByCode = (guestCode: string): Guest | undefined => {
+  // Générer le code d'invité pour chaque invité et comparer
+  return guestList.find(guest => {
+    const generatedCode = `${guest.firstName.toLowerCase().replace(/\s+/g, '')}${guest.lastName.toLowerCase().replace(/\s+/g, '')}`;
+    return generatedCode === guestCode.toLowerCase();
+  });
+};
+
 // Fonction hybride qui essaie d'abord le fichier Excel, puis utilise les données intégrées
 export const loadGuestListHybrid = async (): Promise<Guest[]> => {
   try {

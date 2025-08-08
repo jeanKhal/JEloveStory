@@ -1,6 +1,8 @@
 // Utilitaire pour générer des PDF d'invitation
-// Utilise les APIs natives du navigateur
+// Utilise jsPDF pour créer de vrais fichiers PDF
 import QRCode from 'qrcode';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 export interface InvitationData {
   firstName: string;
@@ -12,8 +14,8 @@ export interface InvitationData {
 // Fonction pour générer un QR code avec image en arrière-plan
 const generateQRCodeWithImage = async (guestCode: string): Promise<string> => {
   try {
-    // Générer le QR code localement
-    const qrData = `JOEL-EUNICE-WEDDING-${guestCode}`;
+    // Générer le QR code localement avec URL de bienvenue
+    const qrData = `${window.location.origin}/welcome?code=${guestCode}`;
     const qrDataUrl = await QRCode.toDataURL(qrData, {
       width: 200,
       margin: 0,
@@ -38,7 +40,7 @@ const generateQRCodeWithImage = async (guestCode: string): Promise<string> => {
   } catch (error) {
     console.error('Erreur lors de la génération du QR code:', error);
     // Fallback vers l'API externe
-    const qrData = `JOEL-EUNICE-WEDDING-${guestCode}`;
+    const qrData = `${window.location.origin}/welcome?code=${guestCode}`;
     const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(qrData)}&format=png&margin=0&qzone=2&ecc=M`;
     
     return `
@@ -191,8 +193,6 @@ export const generateInvitationPDF = async (data: InvitationData): Promise<void>
           position: relative;
         }
         
-
-        
         .title {
           font-family: 'Playfair Display', serif;
           font-size: 2.5rem;
@@ -282,55 +282,53 @@ export const generateInvitationPDF = async (data: InvitationData): Promise<void>
           box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
         
-                 .qr-overlay {
-           position: absolute;
-           top: 50%;
-           left: 50%;
-           transform: translate(-50%, -50%);
-           width: 60px;
-           height: 60px;
-           background: white;
-           border-radius: 50%;
-           display: flex;
-           align-items: center;
-           justify-content: center;
-           box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-           border: 2px solid #d4af37;
-         }
-         
-         .qr-logo {
-           width: 50px;
-           height: 50px;
-           position: relative;
-           display: flex;
-           align-items: center;
-           justify-content: center;
-           border-radius: 50%;
-           overflow: hidden;
-         }
-         
-                   .logo-circle {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #d4af37 0%, #f4d03f 50%, #d4af37 100%);
-            border-radius: 50%;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
-          }
-          
-          .logo-circle::before {
-            content: "J&E";
-            font-family: 'Dancing Script', cursive;
-            font-size: 18px;
-            font-weight: 700;
-            color: white;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-          }
+        .qr-overlay {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 60px;
+          height: 60px;
+          background: white;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+          border: 2px solid #d4af37;
+        }
         
-
+        .qr-logo {
+          width: 50px;
+          height: 50px;
+          position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50%;
+          overflow: hidden;
+        }
+        
+        .logo-circle {
+          width: 50px;
+          height: 50px;
+          background: linear-gradient(135deg, #d4af37 0%, #f4d03f 50%, #d4af37 100%);
+          border-radius: 50%;
+          position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .logo-circle::before {
+          content: "J&E";
+          font-family: 'Dancing Script', cursive;
+          font-size: 18px;
+          font-weight: 700;
+          color: white;
+          text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
         
         .footer {
           text-align: center;
@@ -346,93 +344,6 @@ export const generateInvitationPDF = async (data: InvitationData): Promise<void>
           margin: 30px 0;
           text-align: center;
         }
-        
-        @media print {
-          body {
-            background: #f8f4e6;
-            padding: 0;
-            margin: 0;
-          }
-          
-          .invitation-container {
-            box-shadow: none;
-            border: 2px solid #d4af37;
-            margin: 20px;
-            page-break-inside: avoid;
-          }
-          
-          .qr-image {
-            box-shadow: none;
-            border: 2px solid #d4af37;
-          }
-        }
-        
-        @media (max-width: 768px) {
-          .invitation-container {
-            margin: 10px;
-          }
-          
-          .header {
-            padding: 40px 20px 30px;
-          }
-          
-
-          
-          .title {
-            font-size: 2rem;
-          }
-          
-          .subtitle {
-            font-size: 2.5rem;
-          }
-          
-          .content {
-            padding: 0 30px 40px;
-          }
-          
-          .message {
-            font-size: 1.1rem;
-          }
-          
-          .note-box {
-            padding: 15px;
-            margin: 15px 0;
-          }
-          
-          .qr-image {
-            width: 120px;
-            height: 120px;
-          }
-          
-          .qr-overlay {
-            width: 45px;
-            height: 45px;
-          }
-          
-          .qr-logo {
-            width: 35px;
-            height: 35px;
-          }
-          
-          .logo-circle {
-            width: 35px;
-            height: 35px;
-          }
-          
-          .logo-circle::before {
-            font-size: 14px;
-          }
-          
-
-          
-
-          
-          .floral-ornament-top,
-          .floral-ornament-bottom {
-            width: 80px;
-            height: 60px;
-          }
-        }
       </style>
     </head>
     <body>
@@ -441,36 +352,36 @@ export const generateInvitationPDF = async (data: InvitationData): Promise<void>
         <div class="floral-ornament-top"></div>
         <div class="floral-ornament-bottom"></div>
         
-                 <div class="header">
-           ${title ? `
-           <h1 class="title">${title}</h1>
-           <p class="subtitle">${subtitle}</p>
-           ` : `
-           <p class="subtitle">${subtitle}</p>
-           `}
-         </div>
+        <div class="header">
+          ${title ? `
+          <h1 class="title">${title}</h1>
+          <p class="subtitle">${subtitle}</p>
+          ` : `
+          <p class="subtitle">${subtitle}</p>
+          `}
+        </div>
         
-                 <div class="content">
-           ${invitationType === 'benediction' ? `
-           <p class="greeting">Cher(e) ${data.firstName} ${data.lastName},</p>
-           
-           <p class="message">
-             ${message}
-           </p>
-           ` : `
-           <p class="greeting">Cher(e) ${data.firstName} ${data.lastName},</p>
-           
-           <p class="message">
-             ${message}
-           </p>
-           
-           <div class="ornament">❦</div>
-           
-           <p class="signature">Avec toute notre affection,<br>Joel & Eunice</p>
-           `}
-         </div>
+        <div class="content">
+          ${invitationType === 'benediction' ? `
+          <p class="greeting">Cher(e) ${data.firstName} ${data.lastName},</p>
+          
+          <p class="message">
+            ${message}
+          </p>
+          ` : `
+          <p class="greeting">Cher(e) ${data.firstName} ${data.lastName},</p>
+          
+          <p class="message">
+            ${message}
+          </p>
+          
+          <div class="ornament">❦</div>
+          
+          <p class="signature">Avec toute notre affection,<br>Joel & Eunice</p>
+          `}
+        </div>
         
-                 ${await generateQRCodeWithImage(data.guestCode)}
+        ${await generateQRCodeWithImage(data.guestCode)}
         
         <div class="footer">
           <p style="margin-bottom: 10px; font-weight: 600;">Pour toute question, veuillez contacter les organisateurs</p>
@@ -481,25 +392,73 @@ export const generateInvitationPDF = async (data: InvitationData): Promise<void>
     </html>
   `;
 
-  // Créer un blob avec le contenu HTML
-  const blob = new Blob([htmlContent], { type: 'text/html' });
-  const url = URL.createObjectURL(blob);
+  // Créer un élément temporaire pour le rendu
+  const tempDiv = document.createElement('div');
+  tempDiv.innerHTML = htmlContent;
+  tempDiv.style.position = 'absolute';
+  tempDiv.style.left = '-9999px';
+  tempDiv.style.top = '0';
+  tempDiv.style.width = '800px';
+  tempDiv.style.background = '#f8f4e6';
+  document.body.appendChild(tempDiv);
 
-  // Créer un lien de téléchargement
-  const link = document.createElement('a');
-  link.href = url;
-  link.download = `${fileName}.html`;
-  link.style.display = 'none';
-  
-  // Ajouter le lien au DOM, cliquer dessus, puis le supprimer
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-  
-  // Nettoyer l'URL après un délai
-  setTimeout(() => {
-    URL.revokeObjectURL(url);
-  }, 1000);
+  try {
+    // Attendre que les polices soient chargées
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
+    // Convertir en canvas
+    const canvas = await html2canvas(tempDiv, {
+      width: 800,
+      height: tempDiv.scrollHeight,
+      scale: 2,
+      useCORS: true,
+      allowTaint: true,
+      backgroundColor: '#f8f4e6'
+    });
+
+    // Créer le PDF
+    const imgData = canvas.toDataURL('image/png');
+    const pdf = new jsPDF('p', 'mm', 'a4');
+    
+    const imgWidth = 210; // A4 width in mm
+    const pageHeight = 295; // A4 height in mm
+    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+    let heightLeft = imgHeight;
+
+    let position = 0;
+
+    // Ajouter la première page
+    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+    heightLeft -= pageHeight;
+
+    // Ajouter des pages supplémentaires si nécessaire
+    while (heightLeft >= 0) {
+      position = heightLeft - imgHeight;
+      pdf.addPage();
+      pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+      heightLeft -= pageHeight;
+    }
+
+    // Télécharger le PDF
+    pdf.save(`${fileName}.pdf`);
+
+  } catch (error) {
+    console.error('Erreur lors de la génération du PDF:', error);
+    // Fallback vers HTML si la génération PDF échoue
+    const blob = new Blob([htmlContent], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `${fileName}.html`;
+    link.style.display = 'none';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  } finally {
+    // Nettoyer l'élément temporaire
+    document.body.removeChild(tempDiv);
+  }
 };
 
 // Fonction alternative pour générer un PDF simple (fallback)
