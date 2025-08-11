@@ -25,10 +25,12 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "set DISABLE_ESLINT_PLUGIN=true && set GENERATE_SOURCEMAP=false && set NODE_OPTIONS=--max-old-space-size=4096 && react-scripts build",
+    "prebuild": "node optimize-images.js",
+    "build": "node build-static.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "extract-guests": "node extract-guests.js"
+    "extract-guests": "node extract-guests.js",
+    "optimize-images": "node optimize-images.js"
   },
   "eslintConfig": {
     "extends": [
