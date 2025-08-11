@@ -5,17 +5,42 @@
 
 /* Variables CSS pour la cohérence des couleurs et espacements */
 :root {
+  /* Couleurs principales */
   --primary-color: #d4af37;
   --secondary-color: #f8f4e6;
   --accent-color: #d4af37;
+  
+  /* Couleurs de texte */
   --text-color: #333;
   --light-text: #666;
+  --text-muted: #999;
+  
+  /* Couleurs de fond */
   --background-color: #fff;
   --light-background: #f8f4e6;
+  --dark-background: #2c2c2c;
+  
+  /* Couleurs d'accentuation */
+  --gold-light: #f4e4a6;
+  --gold-dark: #b8941f;
+  --cream-light: #fefcf7;
+  --cream-dark: #e8dcc0;
+  
+  /* Couleurs de bordure et ombre */
   --border-color: #ddd;
+  --border-light: #eee;
+  --border-dark: #ccc;
   --shadow-color: rgba(0, 0, 0, 0.1);
   --shadow-hover: rgba(0, 0, 0, 0.15);
+  --shadow-light: rgba(0, 0, 0, 0.05);
+  
+  /* Couleurs utilitaires */
   --white: #ffffff;
+  --black: #000000;
+  --success: #27ae60;
+  --warning: #f39c12;
+  --error: #e74c3c;
+  --info: #3498db;
   
   --font-primary: 'Playfair Display', serif;
   --font-secondary: 'Inter', sans-serif;
@@ -181,18 +206,36 @@ input:focus, textarea:focus, select:focus {
 
 /* Styles pour les messages */
 .error-message {
-  color: #dc3545;
-  background-color: #f8d7da;
-  border: 1px solid #f5c6cb;
+  color: var(--error);
+  background-color: rgba(231, 76, 60, 0.1);
+  border: 1px solid var(--error);
   border-radius: var(--border-radius);
   padding: 15px;
   margin: 15px 0;
 }
 
 .success-message {
-  color: #155724;
-  background-color: #d4edda;
-  border: 1px solid #c3e6cb;
+  color: var(--success);
+  background-color: rgba(39, 174, 96, 0.1);
+  border: 1px solid var(--success);
+  border-radius: var(--border-radius);
+  padding: 15px;
+  margin: 15px 0;
+}
+
+.warning-message {
+  color: var(--warning);
+  background-color: rgba(243, 156, 18, 0.1);
+  border: 1px solid var(--warning);
+  border-radius: var(--border-radius);
+  padding: 15px;
+  margin: 15px 0;
+}
+
+.info-message {
+  color: var(--info);
+  background-color: rgba(52, 152, 219, 0.1);
+  border: 1px solid var(--info);
   border-radius: var(--border-radius);
   padding: 15px;
   margin: 15px 0;
@@ -323,15 +366,52 @@ input:focus, textarea:focus, select:focus {
 .font-bold { font-weight: 700; }
 
 /* Styles pour les couleurs */
+/* Classes de couleurs de texte */
 .text-primary { color: var(--primary-color); }
 .text-secondary { color: var(--secondary-color); }
 .text-accent { color: var(--accent-color); }
 .text-light { color: var(--light-text); }
+.text-muted { color: var(--text-muted); }
+.text-success { color: var(--success); }
+.text-warning { color: var(--warning); }
+.text-error { color: var(--error); }
+.text-info { color: var(--info); }
+.text-gold-light { color: var(--gold-light); }
+.text-gold-dark { color: var(--gold-dark); }
+.text-cream-light { color: var(--cream-light); }
+.text-cream-dark { color: var(--cream-dark); }
 
+/* Classes de couleurs de fond */
 .bg-primary { background-color: var(--primary-color); }
 .bg-secondary { background-color: var(--secondary-color); }
 .bg-accent { background-color: var(--accent-color); }
 .bg-light { background-color: var(--light-background); }
+.bg-dark { background-color: var(--dark-background); }
+.bg-success { background-color: var(--success); }
+.bg-warning { background-color: var(--warning); }
+.bg-error { background-color: var(--error); }
+.bg-info { background-color: var(--info); }
+.bg-gold-light { background-color: var(--gold-light); }
+.bg-gold-dark { background-color: var(--gold-dark); }
+.bg-cream-light { background-color: var(--cream-light); }
+.bg-cream-dark { background-color: var(--cream-dark); }
+
+/* Classes de bordures */
+.border-primary { border-color: var(--primary-color); }
+.border-secondary { border-color: var(--secondary-color); }
+.border-light { border-color: var(--border-light); }
+.border-dark { border-color: var(--border-dark); }
+.border-success { border-color: var(--success); }
+.border-warning { border-color: var(--warning); }
+.border-error { border-color: var(--error); }
+.border-info { border-color: var(--info); }
+.border-gold-light { border-color: var(--gold-light); }
+.border-gold-dark { border-color: var(--gold-dark); }
+
+/* Classes d'ombres */
+.shadow-light { box-shadow: 0 2px 4px var(--shadow-light); }
+.shadow-medium { box-shadow: 0 4px 6px var(--shadow-color); }
+.shadow-heavy { box-shadow: 0 8px 15px var(--shadow-hover); }
 
 /* Styles pour l'affichage */
 .hidden { display: none; }
