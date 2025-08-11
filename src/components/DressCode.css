@@ -156,7 +156,7 @@
 
  .color-palette {
    display: grid;
-   grid-template-columns: repeat(4, 1fr);
+   grid-template-columns: repeat(2, 1fr);
    gap: 1.5rem;
    max-width: 600px;
    margin: 0 auto;
@@ -174,10 +174,11 @@
    transform: translateY(-5px);
  }
 
- .color-item img {
+ .color-item img,
+ .color-image {
    width: 100%;
-   max-width: 120px;
-   height: 120px;
+   max-width: 150px;
+   height: 150px;
    object-fit: cover;
    border-radius: 12px;
    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
@@ -185,9 +186,11 @@
    transition: all 0.3s ease;
  }
 
- .color-item:hover img {
+ .color-item:hover img,
+ .color-item:hover .color-image {
    border-color: var(--accent-color);
    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+   transform: scale(1.05);
  }
 
  .color-name {
@@ -288,15 +291,16 @@
      font-size: 1rem;
    }
 
-   .color-palette {
-     grid-template-columns: repeat(2, 1fr);
-     gap: 1rem;
-   }
+       .color-palette {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
 
-   .color-item img {
-     max-width: 100px;
-     height: 100px;
-   }
+    .color-item img,
+    .color-item .color-image {
+      max-width: 120px;
+      height: 120px;
+    }
 
    .color-name {
      font-size: 0.85rem;
@@ -366,10 +370,11 @@
      gap: 0.8rem;
    }
 
-   .color-item img {
-     max-width: 80px;
-     height: 80px;
-   }
+       .color-item img,
+    .color-item .color-image {
+      max-width: 100px;
+      height: 100px;
+    }
 
    .color-name {
      font-size: 0.8rem;

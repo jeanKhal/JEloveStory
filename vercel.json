@@ -8,23 +8,7 @@
         "distDir": "build",
         "maxLambdaSize": "10mb",
         "installCommand": "npm ci --only=production",
-        "buildCommand": "npm run build",
-        "includeFiles": [
-          "src/**/*",
-          "public/**/*",
-          "package.json",
-          "tsconfig.json"
-        ],
-        "excludeFiles": [
-          "src/assets/_MT_*.jpeg",
-          "src/IMAGES/_MT_*.jpeg",
-          "src/assets/icon.png",
-          "src/IMAGES/icon.png",
-          "src/assets/histoire.JPG",
-          "src/IMAGES/histoire.JPG",
-          "*.xlsx",
-          "*.xls"
-        ]
+        "buildCommand": "npm run build"
       }
     }
   ],

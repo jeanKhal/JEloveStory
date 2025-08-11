@@ -1,9 +1,12 @@
 import React from 'react';
 import './DressCode.css';
-import codecouleur1 from '../assets/codecouleur1.jpg';
-import codecouleur2 from '../assets/codecouleur2.jpg';
-import codecouleur3 from '../assets/codecouleur3.jpg';
-import codecouleur4 from '../assets/codecouleur4.jpg';
+// Images des couleurs du dress code
+const dressCodeColors = [
+  { name: 'Couleur 1', image: '/images/codecouleur1.jpg' },
+  { name: 'Couleur 2', image: '/images/codecouleru2.jpg' },
+  { name: 'Couleur 3', image: '/images/codecouleur3.jpg' },
+  { name: 'Couleur 4', image: '/images/codecouleur4.jpg' }
+];
 
 const DressCode: React.FC = () => {
   return (
@@ -70,24 +73,18 @@ const DressCode: React.FC = () => {
                      <div className="dresscode-colors">
              <h3>🎨 Palette de Couleurs</h3>
              <p>Voici les couleurs que nous avons choisies pour notre journée spéciale</p>
-             <div className="color-palette">
-               <div className="color-item">
-                 <img src={codecouleur1} alt="Couleur 1" />
-                 <span className="color-name">Couleur 1</span>
+                                                       <div className="color-palette">
+                 {dressCodeColors.map((colorItem, index) => (
+                   <div key={index} className="color-item">
+                     <img 
+                       src={colorItem.image} 
+                       alt={colorItem.name}
+                       className="color-image"
+                     />
+                     <span className="color-name">{colorItem.name}</span>
+                   </div>
+                 ))}
                </div>
-               <div className="color-item">
-                 <img src={codecouleur2} alt="Couleur 2" />
-                 <span className="color-name">Couleur 2</span>
-               </div>
-               <div className="color-item">
-                 <img src={codecouleur3} alt="Couleur 3" />
-                 <span className="color-name">Couleur 3</span>
-               </div>
-               <div className="color-item">
-                 <img src={codecouleur4} alt="Couleur 4" />
-                 <span className="color-name">Couleur 4</span>
-               </div>
-             </div>
            </div>
 
            <div className="dresscode-note">

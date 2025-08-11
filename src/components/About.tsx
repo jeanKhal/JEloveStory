@@ -1,6 +1,7 @@
 import React from 'react';
 import './About.css';
-import storyImage from '../assets/histoire.JPG';
+// Image pour l'histoire du couple
+const storyImage = '/images/_MT_0021.jpeg';
 
 const About: React.FC = () => {
 

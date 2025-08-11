@@ -1,7 +1,8 @@
 import React from 'react';
 import './Hero.css';
 import Countdown from './Countdown';
-import heroImage from '../assets/1.jpeg';
+// Image hero locale
+const heroImage = '/images/1.jpeg';
 
 const Hero: React.FC = () => {
   // Supprimer l'animation de visibilité pour améliorer les performances
