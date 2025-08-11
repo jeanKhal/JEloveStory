@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect, Suspense, lazy } from 'react';
 import { Routes, Route, useParams } from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
+import Program from './components/Program';
 import RSVP from './components/RSVP';
 import DressCode from './components/DressCode';
 import Gallery from './components/Gallery';
@@ -12,14 +13,30 @@ import Welcome from './components/Welcome';
 import Validation from './components/Validation';
 import { findGuestByCode } from './utils/guestData';
 
-// Composant pour la page d'accueil
+// Composant de chargement optimisé
+const LoadingSpinner: React.FC = () => (
+  <div className="loading-spinner">
+    <div className="spinner"></div>
+    <p>Chargement...</p>
+  </div>
+);
+
+// Composant pour la page d'accueil optimisé
 const HomePage: React.FC = () => {
+  // Scroll automatique vers le haut au chargement de la page
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
       <Navbar />
       <Hero />
       <About />
-      <RSVP />
+      <Program />
+      <Suspense fallback={<LoadingSpinner />}>
+        <RSVP />
+      </Suspense>
       <DressCode />
       <Gallery />
       <Chatbot />
@@ -35,19 +52,23 @@ const WelcomePage: React.FC = () => {
   const guest = code ? findGuestByCode(code) : null;
   
   return (
-    <Welcome 
-      guestName={guest ? `${guest.firstName} ${guest.lastName}` : undefined}
-      invitationType={guest?.invitationType}
-    />
+    <Suspense fallback={<LoadingSpinner />}>
+      <Welcome 
+        guestName={guest ? `${guest.firstName} ${guest.lastName}` : undefined}
+        invitationType={guest?.invitationType}
+      />
+    </Suspense>
   );
 };
 
 // Composant pour la page de validation d'authenticité
 const ValidationPage: React.FC = () => {
-  return <Validation />;
+  return (
+    <Suspense fallback={<LoadingSpinner />}>
+      <Validation />
+    </Suspense>
+  );
 };
-
-
 
 function App() {
   return (

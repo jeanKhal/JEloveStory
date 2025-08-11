@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import './RSVP.css';
 import { findGuest, generateGuestCode, Guest } from '../utils/excelReader';
 import { loadGuestListHybrid, findGuestInList } from '../utils/guestData';
 import { generateInvitationHTML } from '../utils/pdfGenerator';
-
 
 const RSVP: React.FC = () => {
   const [firstName, setFirstName] = useState('');
@@ -16,8 +15,7 @@ const RSVP: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isExcelLoaded, setIsExcelLoaded] = useState(false);
 
-
-  // Charger automatiquement la liste des invités au montage du composant
+  // Optimisation : Charger la liste des invités avec un délai réduit
   useEffect(() => {
     const loadGuestList = async () => {
       try {
@@ -38,11 +36,13 @@ const RSVP: React.FC = () => {
       }
     };
 
-    loadGuestList();
+    // Réduire le délai de chargement
+    const timer = setTimeout(loadGuestList, 100);
+    return () => clearTimeout(timer);
   }, []);
 
-  // Fonction pour vérifier l'invité (insensible à la casse)
-  const checkGuest = () => {
+  // Optimisation : Fonction mémorisée pour vérifier l'invité
+  const checkGuest = useCallback(() => {
     if (!firstName.trim() || !lastName.trim()) {
       setError('Veuillez remplir tous les champs');
       return;
@@ -57,7 +57,7 @@ const RSVP: React.FC = () => {
     setError('');
     setGuestFound(null);
 
-    // Simulation d'une vérification asynchrone
+    // Réduire le timeout de vérification
     setTimeout(() => {
       const foundGuest = findGuestInList(firstName, lastName);
 
@@ -71,11 +71,11 @@ const RSVP: React.FC = () => {
         console.log(`❌ Invité non trouvé : ${firstName} ${lastName}`);
       }
       setIsChecking(false);
-    }, 1000);
-  };
+    }, 300); // Réduit de 1000ms à 300ms
+  }, [firstName, lastName, isExcelLoaded, invitedGuests.length]);
 
-  // Fonction pour télécharger l'invitation PDF
-  const downloadInvitation = async (invitationType: 'benediction' | 'soiree') => {
+  // Optimisation : Fonction mémorisée pour télécharger l'invitation
+  const downloadInvitation = useCallback(async (invitationType: 'benediction' | 'soiree') => {
     if (!guestFound) return;
 
     setIsGenerating(true);
@@ -96,9 +96,91 @@ const RSVP: React.FC = () => {
     } finally {
       setIsGenerating(false);
     }
-  };
+  }, [guestFound]);
 
+  // Optimisation : Mémoriser les boutons d'action
+  const actionButtons = useMemo(() => {
+    if (!guestFound) return null;
 
+    const buttons = [];
+    
+    if (guestFound.invitationType === 'benediction') {
+      buttons.push(
+        <button 
+          key="benediction"
+          className="btn btn-primary"
+          onClick={() => downloadInvitation('benediction')}
+          disabled={isGenerating}
+        >
+          {isGenerating ? 'Génération...' : '⛪ Télécharger invitation Bénédiction'}
+        </button>
+      );
+    }
+    
+    if (guestFound.invitationType === 'soiree') {
+      buttons.push(
+        <button 
+          key="soiree"
+          className="btn btn-primary"
+          onClick={() => downloadInvitation('soiree')}
+          disabled={isGenerating}
+        >
+          {isGenerating ? 'Génération...' : '🎉 Télécharger invitation Soirée'}
+        </button>
+      );
+    }
+    
+    if (guestFound.invitationType === 'both') {
+      buttons.push(
+        <div key="both" className="both-invitations">
+          <button 
+            className="btn btn-primary"
+            onClick={() => downloadInvitation('benediction')}
+            disabled={isGenerating}
+          >
+            {isGenerating ? 'Génération...' : '⛪ Télécharger invitation Bénédiction'}
+          </button>
+          <button 
+            className="btn btn-primary"
+            onClick={() => downloadInvitation('soiree')}
+            disabled={isGenerating}
+          >
+            {isGenerating ? 'Génération...' : '🎉 Télécharger invitation Soirée'}
+          </button>
+        </div>
+      );
+    }
+    
+    buttons.push(
+      <button key="confirm" className="btn btn-secondary">
+        ✅ Confirmer ma présence
+      </button>
+    );
+    
+    return buttons;
+  }, [guestFound, isGenerating, downloadInvitation]);
+
+  // Optimisation : Mémoriser les badges d'invitation
+  const invitationBadges = useMemo(() => {
+    if (!guestFound) return null;
+
+    const badges = [];
+    
+    if (guestFound.invitationType === 'benediction') {
+      badges.push(<span key="benediction" className="badge benediction">⛪ Bénédiction Nuptiale</span>);
+    }
+    if (guestFound.invitationType === 'soiree') {
+      badges.push(<span key="soiree" className="badge soiree">🎉 Soirée Dansante</span>);
+    }
+    if (guestFound.invitationType === 'both') {
+      badges.push(
+        <span key="benediction" className="badge benediction">⛪ Bénédiction Nuptiale</span>,
+        <span key="soiree" className="badge soiree">🎉 Soirée Dansante</span>
+      );
+    }
+    
+    return badges;
+  }, [guestFound]);
 
   if (isLoading) {
     return (
@@ -202,65 +284,12 @@ const RSVP: React.FC = () => {
                      <div className="invitation-type">
                        <h4>Vos invitations :</h4>
                        <div className="invitation-badges">
-                         {guestFound.invitationType === 'benediction' && (
-                           <span className="badge benediction">⛪ Bénédiction Nuptiale</span>
-                         )}
-                         {guestFound.invitationType === 'soiree' && (
-                           <span className="badge soiree">🎉 Soirée Dansante</span>
-                         )}
-                         {guestFound.invitationType === 'both' && (
-                           <>
-                             <span className="badge benediction">⛪ Bénédiction Nuptiale</span>
-                             <span className="badge soiree">🎉 Soirée Dansante</span>
-                           </>
-                         )}
+                         {invitationBadges}
                        </div>
                      </div>
                      
                      <div className="action-buttons">
-                       {/* Boutons de téléchargement selon le type d'invitation */}
-                                               {guestFound.invitationType === 'benediction' && (
-                          <button 
-                            className="btn btn-primary"
-                            onClick={() => downloadInvitation('benediction')}
-                            disabled={isGenerating}
-                          >
-                            {isGenerating ? 'Génération...' : '⛪ Télécharger invitation Bénédiction'}
-                          </button>
-                        )}
-                        
-                        {guestFound.invitationType === 'soiree' && (
-                          <button 
-                            className="btn btn-primary"
-                            onClick={() => downloadInvitation('soiree')}
-                            disabled={isGenerating}
-                          >
-                            {isGenerating ? 'Génération...' : '🎉 Télécharger invitation Soirée'}
-                          </button>
-                        )}
-                        
-                        {guestFound.invitationType === 'both' && (
-                          <div className="both-invitations">
-                            <button 
-                              className="btn btn-primary"
-                              onClick={() => downloadInvitation('benediction')}
-                              disabled={isGenerating}
-                            >
-                              {isGenerating ? 'Génération...' : '⛪ Télécharger invitation Bénédiction'}
-                            </button>
-                            <button 
-                              className="btn btn-primary"
-                              onClick={() => downloadInvitation('soiree')}
-                              disabled={isGenerating}
-                            >
-                              {isGenerating ? 'Génération...' : '🎉 Télécharger invitation Soirée'}
-                            </button>
-                          </div>
-                        )}
-                       
-                       <button className="btn btn-secondary">
-                         ✅ Confirmer ma présence
-                       </button>
+                       {actionButtons}
                      </div>
                    </div>
                  </div>
@@ -425,6 +454,38 @@ const RSVP: React.FC = () => {
                          🚗 Itinéraire vers Pullman
                        </button>
                      </div>
+                     
+                                           <div className="hotel-card">
+                        <h5>🏨 Sanash</h5>
+                        <p><strong>📍 Distance :</strong> ~2.0 km de KEMESHA</p>
+                        <p><strong>⏱️ Temps :</strong> ~7 minutes en voiture</p>
+                        <button 
+                          className="btn btn-secondary hotel-directions-btn"
+                          onClick={() => {
+                            const destination = "Sanash Kinshasa";
+                            const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${destination}`;
+                            window.open(mapsUrl, '_blank');
+                          }}
+                        >
+                          🚗 Itinéraire vers Sanash
+                        </button>
+                      </div>
+                     
+                                           <div className="hotel-card">
+                        <h5>🏨 Robem Tower</h5>
+                        <p><strong>📍 Distance :</strong> ~2.2 km de KEMESHA</p>
+                        <p><strong>⏱️ Temps :</strong> ~8 minutes en voiture</p>
+                        <button 
+                          className="btn btn-secondary hotel-directions-btn"
+                          onClick={() => {
+                            const destination = "Robem Tower Kinshasa";
+                            const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${destination}`;
+                            window.open(mapsUrl, '_blank');
+                          }}
+                        >
+                          🚗 Itinéraire vers Robem Tower
+                        </button>
+                      </div>
                    </div>
                  </div>
 

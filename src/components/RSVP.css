@@ -829,16 +829,26 @@
 
 
 
-/* Responsive */
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .rsvp-form {
+    max-width: 600px;
+  }
+  
+  .hotels-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+}
+
 @media (max-width: 1024px) {
   .rsvp-form {
     padding: 2rem;
   }
   
-     .venue-simple {
-     max-width: 100%;
-     padding: 0 1rem;
-   }
+  .venue-simple {
+    max-width: 100%;
+    padding: 0 1rem;
+  }
   
   .hotels-grid {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -978,8 +988,6 @@
     background-clip: padding-box;
   }
 
-
-  
   .check-btn {
     padding: 0.8rem;
     font-size: 0.9rem;
@@ -999,53 +1007,53 @@
     padding: 0 0.5rem;
   }
   
-     .wedding-venue {
-     padding: 1rem;
-   }
+  .wedding-venue {
+    padding: 1rem;
+  }
    
-   .wedding-venue h3 {
-     font-size: 1.5rem;
-   }
+  .wedding-venue h3 {
+    font-size: 1.5rem;
+  }
    
-   .venue-simple {
-     padding: 0 0.5rem;
-   }
+  .venue-simple {
+    padding: 0 0.5rem;
+  }
    
-   .venue-directions-btn {
-     padding: 0.8rem 1.5rem;
-     font-size: 0.9rem;
-   }
+  .venue-directions-btn {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem;
+  }
   
   .hotel-card {
     padding: 1rem;
   }
   
-     .hotel-card h4 {
-     padding-right: 60px;
-     font-size: 1.1rem;
-   }
+  .hotel-card h4 {
+    padding-right: 60px;
+    font-size: 1.1rem;
+  }
    
-   .hotels-list .hotels-grid {
-     grid-template-columns: 1fr;
-     gap: 0.8rem;
-   }
+  .hotels-list .hotels-grid {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
    
-   .hotels-list .hotel-card {
-     padding: 1rem;
-   }
+  .hotels-list .hotel-card {
+    padding: 1rem;
+  }
    
-   .hotels-list .hotel-card h5 {
-     font-size: 1rem;
-   }
+  .hotels-list .hotel-card h5 {
+    font-size: 1rem;
+  }
    
-   .hotels-list .hotel-card p {
-     font-size: 0.8rem;
-   }
+  .hotels-list .hotel-card p {
+    font-size: 0.8rem;
+  }
    
-   .hotels-list .hotel-directions-btn {
-     font-size: 0.8rem;
-     padding: 0.4rem 0.8rem;
-   }
+  .hotels-list .hotel-directions-btn {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+  }
   
   .hotel-badge {
     font-size: 0.7rem;
@@ -1066,6 +1074,47 @@
   
   .tip-item {
     padding: 1rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .rsvp-form {
+    padding: 0.8rem;
+    margin: 0 0.3rem;
+  }
+  
+  .form-group input {
+    padding: 0.6rem;
+    font-size: 16px;
+  }
+  
+  .check-btn {
+    padding: 0.6rem;
+    font-size: 0.85rem;
+  }
+  
+  .accommodation-section .section-header h2 {
+    font-size: 1.6rem;
+  }
+  
+  .hotel-card {
+    padding: 0.8rem;
+  }
+  
+  .hotel-card h4 {
+    padding-right: 50px;
+    font-size: 1rem;
+  }
+}
+
+/* Support pour les écrans très larges */
+@media (min-width: 1400px) {
+  .rsvp-form {
+    max-width: 700px;
+  }
+  
+  .hotels-grid {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   }
 }
 

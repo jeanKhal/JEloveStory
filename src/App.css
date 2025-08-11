@@ -1,45 +1,182 @@
+/* ===== APP STYLES OPTIMIZED ===== */
+
 .App {
   text-align: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Sections placeholder */
+/* Optimisations pour les sections placeholder */
 .section-placeholder {
   padding: 5rem 0;
-  background: var(--white);
+  background: var(--background-color);
+  position: relative;
+  overflow: hidden;
 }
 
 .section-placeholder:nth-child(even) {
-  background: var(--secondary-color);
+  background: var(--light-background);
 }
 
+/* Optimisations pour les sections "coming soon" */
 .coming-soon {
-  background: var(--white);
+  background: var(--background-color);
   padding: 3rem;
-  border-radius: var(--border-radius);
+  border-radius: var(--border-radius-large);
   box-shadow: var(--shadow);
   max-width: 600px;
   margin: 0 auto;
   border: 2px dashed var(--primary-color);
+  position: relative;
+  transition: var(--transition);
+}
+
+.coming-soon:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
 }
 
 .coming-soon h3 {
-  font-family: var(--font-family);
+  font-family: var(--font-primary);
   font-size: 2rem;
   color: var(--primary-color);
   margin-bottom: 1rem;
   font-weight: 600;
+  line-height: 1.2;
 }
 
 .coming-soon p {
-  color: var(--text-light);
+  color: var(--light-text);
   font-size: 1.1rem;
   line-height: 1.6;
+  margin: 0;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
+/* Optimisations pour les spinners de chargement */
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  min-height: 200px;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-spinner p {
+  color: var(--light-text);
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* Optimisations pour les transitions */
+.fade-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms ease-in, transform 300ms ease-out;
+}
+
+.fade-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 300ms ease-in, transform 300ms ease-out;
+}
+
+/* Optimisations pour les erreurs de chargement */
+.error-boundary {
+  padding: 40px 20px;
+  text-align: center;
+  background: #f8d7da;
+  border: 1px solid #f5c6cb;
+  border-radius: var(--border-radius);
+  margin: 20px;
+}
+
+.error-boundary h3 {
+  color: #721c24;
+  margin-bottom: 15px;
+}
+
+.error-boundary p {
+  color: #721c24;
+  margin-bottom: 20px;
+}
+
+.error-boundary button {
+  background: #721c24;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.error-boundary button:hover {
+  background: #5a1a1e;
+}
+
+/* ===== RESPONSIVE BREAKPOINTS ===== */
+
+/* Très petits écrans (320px et moins) */
+@media (max-width: 320px) {
   .section-placeholder {
     padding: 3rem 0;
+  }
+  
+  .coming-soon {
+    padding: 1.5rem;
+    margin: 0 0.5rem;
+  }
+  
+  .coming-soon h3 {
+    font-size: 1.3rem;
+  }
+  
+  .coming-soon p {
+    font-size: 0.9rem;
+  }
+  
+  .loading-spinner {
+    padding: 40px 10px;
+    min-height: 150px;
+  }
+  
+  .spinner {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* Petits écrans (480px et moins) */
+@media (max-width: 480px) {
+  .section-placeholder {
+    padding: 3.5rem 0;
   }
   
   .coming-soon {
@@ -49,5 +186,198 @@
   
   .coming-soon h3 {
     font-size: 1.5rem;
+  }
+  
+  .loading-spinner {
+    padding: 50px 15px;
+    min-height: 180px;
+  }
+}
+
+/* Tablettes (768px et moins) */
+@media (max-width: 768px) {
+  .section-placeholder {
+    padding: 4rem 0;
+  }
+  
+  .coming-soon {
+    padding: 2.5rem;
+    margin: 0 1.5rem;
+  }
+  
+  .coming-soon h3 {
+    font-size: 1.8rem;
+  }
+  
+  .loading-spinner {
+    padding: 60px 20px;
+    min-height: 200px;
+  }
+}
+
+/* Écrans moyens (1024px et moins) */
+@media (max-width: 1024px) {
+  .coming-soon {
+    max-width: 500px;
+  }
+}
+
+/* Écrans larges (1200px et moins) */
+@media (max-width: 1200px) {
+  .coming-soon {
+    max-width: 550px;
+  }
+}
+
+/* Très grands écrans (1400px et plus) */
+@media (min-width: 1400px) {
+  .section-placeholder {
+    padding: 6rem 0;
+  }
+  
+  .coming-soon {
+    padding: 4rem;
+    max-width: 700px;
+  }
+  
+  .coming-soon h3 {
+    font-size: 2.5rem;
+  }
+  
+  .coming-soon p {
+    font-size: 1.2rem;
+  }
+  
+  .loading-spinner {
+    padding: 80px 30px;
+    min-height: 250px;
+  }
+  
+  .spinner {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+/* Écrans ultra-larges (1920px et plus) */
+@media (min-width: 1920px) {
+  .section-placeholder {
+    padding: 8rem 0;
+  }
+  
+  .coming-soon {
+    padding: 5rem;
+    max-width: 800px;
+  }
+  
+  .coming-soon h3 {
+    font-size: 3rem;
+  }
+  
+  .coming-soon p {
+    font-size: 1.3rem;
+  }
+  
+  .loading-spinner {
+    padding: 100px 40px;
+    min-height: 300px;
+  }
+  
+  .spinner {
+    width: 70px;
+    height: 70px;
+  }
+}
+
+/* ===== TOUCH DEVICE OPTIMIZATIONS ===== */
+
+/* Optimisations pour les appareils tactiles */
+@media (hover: none) and (pointer: coarse) {
+  .coming-soon {
+    padding: 2.5rem;
+  }
+  
+  .coming-soon:hover {
+    transform: none;
+  }
+  
+  .error-boundary button {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 12px 24px;
+  }
+}
+
+/* ===== HIGH DENSITY SCREENS ===== */
+
+/* Optimisations pour les écrans haute densité */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .spinner {
+    border-width: 3px;
+  }
+}
+
+/* ===== PRINT STYLES ===== */
+
+@media print {
+  .section-placeholder {
+    padding: 2rem 0;
+    page-break-inside: avoid;
+  }
+  
+  .coming-soon {
+    border: 1px solid #000;
+    box-shadow: none;
+    padding: 2rem;
+  }
+  
+  .loading-spinner {
+    display: none;
+  }
+}
+
+/* ===== ACCESSIBILITY IMPROVEMENTS ===== */
+
+/* Améliorer le focus visible */
+.coming-soon:focus-within {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.error-boundary button:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* Améliorer le contraste pour les utilisateurs malvoyants */
+@media (prefers-contrast: high) {
+  .coming-soon {
+    border: 2px solid #000;
+  }
+  
+  .error-boundary {
+    border: 2px solid #000;
+  }
+}
+
+/* Améliorer la réduction de mouvement */
+@media (prefers-reduced-motion: reduce) {
+  .coming-soon {
+    transition: none;
+  }
+  
+  .coming-soon:hover {
+    transform: none;
+  }
+  
+  .spinner {
+    animation: none;
+  }
+  
+  .fade-enter,
+  .fade-enter-active,
+  .fade-exit,
+  .fade-exit-active {
+    transition: none;
   }
 } 

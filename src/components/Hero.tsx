@@ -21,7 +21,11 @@ const Hero: React.FC = () => {
   return (
     <section id="home" className={`hero ${isVisible ? 'visible' : ''}`}>
       <div className="hero-background">
-        <img src={heroImage} alt="Joel & Eunice" className="hero-image" />
+        <img 
+          src={heroImage} 
+          alt="Joel & Eunice" 
+          className="hero-image"
+        />
         <div className="hero-overlay"></div>
       </div>
       
@@ -36,8 +40,6 @@ const Hero: React.FC = () => {
             <p className="hero-subtitle">Se marient</p>
             <div className="hero-date">29 Août 2025</div>
             <div className="hero-location">Kinshasa, RDC</div>
-            
-           
             
             <Countdown />
           </div>
@@ -59,9 +61,7 @@ const Hero: React.FC = () => {
         </div>
       </div>
       
-      <div className="scroll-indicator" onClick={() => scrollToSection('about')}>
-        <div className="scroll-arrow"></div>
-      </div>
+      {/* Navigation elements removed */}
     </section>
   );
 };

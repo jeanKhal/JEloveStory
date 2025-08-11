@@ -10,9 +10,15 @@ export const guestList: Guest[] = [
   { firstName: 'KELLY', lastName: 'KATEMBELE', invitationType: 'both' }
 ];
 
+// Cache pour les résultats
+let guestListCache: Guest[] | null = null;
+let lastLoadTime = 0;
+const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
+
 // Fonction pour charger la liste des invités depuis les données intégrées
 export const loadGuestListFromData = async (): Promise<Guest[]> => {
-  await new Promise(resolve => setTimeout(resolve, 300));
+  // Réduire le délai artificiel
+  await new Promise(resolve => setTimeout(resolve, 50));
   return guestList;
 };
 
@@ -70,17 +76,47 @@ export const generateAuthToken = (guestCode: string, invitationType: 'benedictio
   return btoa(data).replace(/[^a-zA-Z0-9]/g, '');
 };
 
-// Fonction hybride qui essaie d'abord le fichier Excel, puis utilise les données intégrées
+// Fonction hybride optimisée avec cache
 export const loadGuestListHybrid = async (): Promise<Guest[]> => {
+  const now = Date.now();
+  
+  // Vérifier le cache
+  if (guestListCache && (now - lastLoadTime) < CACHE_DURATION) {
+    return guestListCache;
+  }
+  
   try {
-    const response = await fetch('/liste.xlsx');
+    // Essayer le fichier Excel avec un timeout court
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 2000); // 2 secondes max
+    
+    const response = await fetch('/liste.xlsx', { 
+      signal: controller.signal,
+      cache: 'force-cache' // Utiliser le cache du navigateur
+    });
+    
+    clearTimeout(timeoutId);
+    
     if (response.ok) {
       const { loadGuestListFromFile } = await import('./excelReader');
-      return await loadGuestListFromFile();
+      const result = await loadGuestListFromFile();
+      
+      // Mettre en cache
+      guestListCache = result;
+      lastLoadTime = now;
+      
+      return result;
     }
   } catch (error) {
     console.log('Fichier Excel non accessible, utilisation des données intégrées');
   }
   
-  return await loadGuestListFromData();
+  // Utiliser les données intégrées
+  const result = await loadGuestListFromData();
+  
+  // Mettre en cache
+  guestListCache = result;
+  lastLoadTime = now;
+  
+  return result;
 };

@@ -11,8 +11,18 @@ export interface InvitationData {
   invitationType: 'benediction' | 'soiree';
 }
 
-// Fonction pour générer un QR code avec image en arrière-plan
+// Cache pour les QR codes
+const qrCodeCache = new Map<string, string>();
+
+// Fonction pour générer un QR code avec image en arrière-plan (optimisée)
 const generateQRCodeWithImage = async (guestCode: string, invitationType: 'benediction' | 'soiree'): Promise<string> => {
+  const cacheKey = `${guestCode}-${invitationType}`;
+  
+  // Vérifier le cache
+  if (qrCodeCache.has(cacheKey)) {
+    return qrCodeCache.get(cacheKey)!;
+  }
+  
   try {
     // Générer un token d'authentification sécurisé
     const { generateAuthToken } = await import('./guestData');
@@ -22,13 +32,16 @@ const generateQRCodeWithImage = async (guestCode: string, invitationType: 'bened
     const validationUrl = `${window.location.origin}/validate/${guestCode}/${invitationType}/${authToken}`;
     
     const qrDataUrl = await QRCode.toDataURL(validationUrl, {
-      width: 200,
+      width: 150, // Réduire la taille pour améliorer les performances
       margin: 0,
       color: {
         dark: '#2c2c2c',
         light: '#f8f4e6'
       }
     });
+    
+    // Mettre en cache
+    qrCodeCache.set(cacheKey, qrDataUrl);
     
     return qrDataUrl;
   } catch (error) {
@@ -37,13 +50,16 @@ const generateQRCodeWithImage = async (guestCode: string, invitationType: 'bened
     const { generateAuthToken } = await import('./guestData');
     const authToken = generateAuthToken(guestCode, invitationType);
     const validationUrl = `${window.location.origin}/validate/${guestCode}/${invitationType}/${authToken}`;
-    const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(validationUrl)}&format=png&margin=0&qzone=2&ecc=M`;
+    const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(validationUrl)}&format=png&margin=0&qzone=2&ecc=M`;
+    
+    // Mettre en cache
+    qrCodeCache.set(cacheKey, qrUrl);
     
     return qrUrl;
   }
 };
 
-// Fonction pour générer une invitation HTML élégante
+// Fonction pour générer une invitation HTML élégante (optimisée)
 export const generateInvitationHTML = async (data: InvitationData): Promise<void> => {
   // Déterminer le contenu selon le type d'invitation
   const invitationType = data.invitationType;
@@ -87,7 +103,7 @@ export const generateInvitationHTML = async (data: InvitationData): Promise<void
     fileName = `Invitation_Soiree_${data.firstName}_${data.lastName}`;
   }
 
-  // Générer le QR code
+  // Générer le QR code de manière asynchrone
   const qrCodeUrl = await generateQRCodeWithImage(data.guestCode, invitationType);
 
   // Créer le contenu HTML de l'invitation
