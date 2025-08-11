@@ -1,20 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './Hero.css';
 import Countdown from './Countdown';
 import heroImage from '../assets/1.jpeg';
 
 const Hero: React.FC = () => {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setIsVisible(true), 100);
-    return () => clearTimeout(timer);
-  }, []);
+  // Supprimer l'animation de visibilité pour améliorer les performances
+  const isVisible = true;
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: 'auto' });
     }
   };
 
@@ -25,6 +21,8 @@ const Hero: React.FC = () => {
           src={heroImage} 
           alt="Joel & Eunice" 
           className="hero-image"
+          loading="eager"
+          decoding="async"
         />
         <div className="hero-overlay"></div>
       </div>

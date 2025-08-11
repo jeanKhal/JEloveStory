@@ -48,6 +48,8 @@ const About: React.FC = () => {
                    src={storyImage} 
                    alt="Joel & Eunice - Notre Histoire" 
                    className="story-image"
+                   loading="lazy"
+                   decoding="async"
                  />
                </div>
             </div>

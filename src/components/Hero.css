@@ -51,9 +51,9 @@
   color: var(--white);
   max-width: 700px;
   padding: 0 2rem;
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.8s ease;
+  opacity: 1;
+  transform: translateY(0);
+  transition: none;
   margin-top: 20px; /* Positive margin to push content down from navbar */
 }
 

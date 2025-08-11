@@ -15,7 +15,7 @@ const RSVP: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isExcelLoaded, setIsExcelLoaded] = useState(false);
 
-  // Optimisation : Charger la liste des invités avec un délai réduit
+  // Optimisation : Charger la liste des invités immédiatement
   useEffect(() => {
     const loadGuestList = async () => {
       try {
@@ -36,9 +36,8 @@ const RSVP: React.FC = () => {
       }
     };
 
-    // Réduire le délai de chargement
-    const timer = setTimeout(loadGuestList, 100);
-    return () => clearTimeout(timer);
+    // Charger immédiatement sans délai
+    loadGuestList();
   }, []);
 
   // Optimisation : Fonction mémorisée pour vérifier l'invité
@@ -57,21 +56,19 @@ const RSVP: React.FC = () => {
     setError('');
     setGuestFound(null);
 
-    // Réduire le timeout de vérification
-    setTimeout(() => {
-      const foundGuest = findGuestInList(firstName, lastName);
+    // Vérification immédiate sans délai
+    const foundGuest = findGuestInList(firstName, lastName);
 
-      if (foundGuest) {
-        setGuestFound(foundGuest);
-        setError('');
-        console.log(`✅ Invité trouvé : ${foundGuest.firstName} ${foundGuest.lastName}`);
-      } else {
-        setError('Désolé, votre nom ne figure pas sur notre liste d\'invités. Veuillez contacter les organisateurs.');
-        setGuestFound(null);
-        console.log(`❌ Invité non trouvé : ${firstName} ${lastName}`);
-      }
-      setIsChecking(false);
-    }, 300); // Réduit de 1000ms à 300ms
+    if (foundGuest) {
+      setGuestFound(foundGuest);
+      setError('');
+      console.log(`✅ Invité trouvé : ${foundGuest.firstName} ${foundGuest.lastName}`);
+    } else {
+      setError('Désolé, votre nom ne figure pas sur notre liste d\'invités. Veuillez contacter les organisateurs.');
+      setGuestFound(null);
+      console.log(`❌ Invité non trouvé : ${firstName} ${lastName}`);
+    }
+    setIsChecking(false);
   }, [firstName, lastName, isExcelLoaded, invitedGuests.length]);
 
   // Optimisation : Fonction mémorisée pour télécharger l'invitation

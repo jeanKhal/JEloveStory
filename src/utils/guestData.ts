@@ -17,8 +17,7 @@ const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
 
 // Fonction pour charger la liste des invités depuis les données intégrées
 export const loadGuestListFromData = async (): Promise<Guest[]> => {
-  // Réduire le délai artificiel
-  await new Promise(resolve => setTimeout(resolve, 50));
+  // Supprimer complètement le délai artificiel
   return guestList;
 };
 
@@ -86,9 +85,9 @@ export const loadGuestListHybrid = async (): Promise<Guest[]> => {
   }
   
   try {
-    // Essayer le fichier Excel avec un timeout court
+    // Essayer le fichier Excel avec un timeout très court
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 2000); // 2 secondes max
+    const timeoutId = setTimeout(() => controller.abort(), 500); // 500ms max
     
     const response = await fetch('/liste.xlsx', { 
       signal: controller.signal,
