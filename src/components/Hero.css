@@ -5,7 +5,7 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  padding-top: 120px; /* Increased padding for distance from navbar */
+  padding-top: 200px; /* Much more padding to completely avoid navbar covering content */
   box-sizing: border-box;
 }
 
@@ -54,7 +54,7 @@
   opacity: 1;
   transform: translateY(0);
   transition: none;
-  margin-top: 20px; /* Positive margin to push content down from navbar */
+  margin-top: 60px; /* Much more margin to push content down from navbar */
 }
 
 .hero.visible .hero-content {
@@ -190,13 +190,13 @@
 @media (max-width: 768px) {
   .hero {
     height: 100vh; /* Standard height on mobile */
-    padding-top: 100px; /* Reduced padding on mobile */
+    padding-top: 140px; /* Increased padding on mobile */
   }
   
   .hero-content {
     padding: 0 1rem;
     max-width: 100%;
-    margin-top: 10px; /* Positive margin for distance from navbar on mobile */
+    margin-top: 30px; /* Increased margin for distance from navbar on mobile */
   }
   
   .hero-title .and {
@@ -233,7 +233,7 @@
 
 @media (max-width: 480px) {
   .hero {
-    padding-top: 90px; /* Reduced padding on very small screens */
+    padding-top: 120px; /* Increased padding on very small screens */
   }
   
   .hero-content {

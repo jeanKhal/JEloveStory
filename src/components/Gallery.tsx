@@ -5,13 +5,6 @@ import './Gallery.css';
 const image1 = '/images/_MT_0021.jpeg';
 const image2 = '/images/_MT_0042.jpeg';
 const image3 = '/images/_MT_0117.jpeg';
-const image4 = '/images/_MT_0125.jpeg';
-const image5 = '/images/_MT_0194.jpeg';
-const image6 = '/images/_MT_0204.jpeg';
-const image7 = '/images/_MT_0221.jpeg';
-const image8 = '/images/_MT_0236.jpeg';
-const image9 = '/images/_MT_0251.jpeg';
-const image10 = '/images/_MT_0320.jpeg';
 
 interface ImageItem {
   id: number;
@@ -25,14 +18,7 @@ const Gallery: React.FC = () => {
   const images: ImageItem[] = [
     { id: 1, src: image1, alt: "Joel & Eunice - Moment romantique" },
     { id: 2, src: image2, alt: "Joel & Eunice - Portrait élégant" },
-    { id: 3, src: image3, alt: "Joel & Eunice - Cérémonie" },
-    { id: 4, src: image4, alt: "Joel & Eunice - Réception" },
-    { id: 5, src: image5, alt: "Joel & Eunice - Mariage" },
-    { id: 6, src: image6, alt: "Joel & Eunice - Cérémonie religieuse" },
-    { id: 7, src: image7, alt: "Joel & Eunice - Dîner de mariage" },
-    { id: 8, src: image8, alt: "Joel & Eunice - Soirée dansante" },
-    { id: 9, src: image9, alt: "Joel & Eunice - Portrait officiel" },
-    { id: 10, src: image10, alt: "Joel & Eunice - Moment intime" }
+    { id: 3, src: image3, alt: "Joel & Eunice - Cérémonie" }
   ];
 
   const openModal = (image: ImageItem) => {

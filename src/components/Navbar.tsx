@@ -38,6 +38,7 @@ const Navbar: React.FC = () => {
           <button onClick={() => scrollToSection('about')} className="nav-link">Notre Histoire</button>
           <button onClick={() => scrollToSection('dresscode')} className="nav-link">Dress Code</button>
           <button onClick={() => scrollToSection('gallery')} className="nav-link">Galerie</button>
+          <button onClick={() => scrollToSection('program')} className="nav-link">Marche</button>
           <button onClick={() => scrollToSection('rsvp')} className="nav-link">RSVP</button>
         </div>
 

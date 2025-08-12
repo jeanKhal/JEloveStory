@@ -4,9 +4,9 @@
   left: 0;
   right: 0;
   z-index: 1000;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   transition: var(--transition);
   padding: 1rem 0;
 }
@@ -26,8 +26,9 @@
 .navbar-brand {
   cursor: pointer;
   transition: var(--transition);
-  padding: 0.5rem;
+  padding: 0.5rem 0.5rem 0.8rem 0.5rem;
   border-radius: 8px;
+  margin-right: 2rem;
 }
 
 .navbar-brand:hover {
@@ -41,6 +42,7 @@
   font-size: 1.5rem;
   font-weight: 700;
   margin: 0;
+  margin-bottom: 0.3rem;
   letter-spacing: 0.05em;
   transition: var(--transition);
 }
@@ -138,6 +140,15 @@
 }
 
 @media (max-width: 768px) {
+  .navbar-brand {
+    margin-right: 1rem;
+    padding: 0.4rem 0.4rem 0.6rem 0.4rem;
+  }
+  
+  .navbar-brand h2 {
+    margin-bottom: 0.2rem;
+  }
+  
   .navbar-menu {
     position: fixed;
     top: 100%;
@@ -185,8 +196,14 @@
     padding: 0.4rem 0;
   }
   
+  .navbar-brand {
+    margin-right: 0.5rem;
+    padding: 0.3rem 0.3rem 0.5rem 0.3rem;
+  }
+  
   .navbar-brand h2 {
     font-size: 1.1rem;
+    margin-bottom: 0.15rem;
   }
   
   .navbar-menu {
