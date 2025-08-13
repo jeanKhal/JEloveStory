@@ -5,8 +5,7 @@
       "src": "package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "build",
-        "buildCommand": "npm run build:unix"
+        "distDir": "build"
       }
     }
   ],
@@ -29,6 +28,8 @@
     }
   ],
   "env": {
-    "CI": "false"
+    "CI": "false",
+    "GENERATE_SOURCEMAP": "false",
+    "NODE_OPTIONS": "--max-old-space-size=8192"
   }
 }
