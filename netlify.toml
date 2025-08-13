@@ -10,7 +10,7 @@
 
 # Configuration de l'environnement
 [build.environment]
-  NODE_VERSION = "20"
+  NODE_VERSION = "18.20.0"
   NPM_FLAGS = "--legacy-peer-deps --max-old-space-size=4096"
   CI = "false"
 
